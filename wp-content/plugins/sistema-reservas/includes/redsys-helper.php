@@ -11,28 +11,33 @@ function generar_formulario_redsys($reserva_data) {
     
     $miObj = new RedsysAPI();
 
-    // ✅ CONFIGURACIÓN PARA PRUEBAS
+    // CONFIGURACIÓN
     if (is_production_environment()) {
-        // PRODUCCIÓN (cuando esté listo)
         $clave = 'Q+2780shKFbG3vkPXS2+kY6RWQLQnWD9';
         $codigo_comercio = '014591697';
         $terminal = '001';
-        $redsys_url = 'https://sis.redsys.es/sis/realizarPago';
         error_log('🟢 USANDO CONFIGURACIÓN DE PRODUCCIÓN');
     } else {
-        // PRUEBAS
         $clave = 'sq7HjrUOBfKmC576ILgskD5srU870gJ7';
-        $codigo_comercio = '999008881'; // ✅ CÓDIGO DE COMERCIO DE PRUEBAS
+        $codigo_comercio = '999008881';
         $terminal = '001';
-        $redsys_url = 'https://sis-t.redsys.es:25443/sis/realizarPago';
         error_log('🟡 USANDO CONFIGURACIÓN DE PRUEBAS');
     }
     
+    // ✅ DETECTAR SI ES VISITA O RESERVA NORMAL
+    $is_visita = isset($reserva_data['is_visita']) && $reserva_data['is_visita'] === true;
+    
+    // Obtener precio
     $total_price = null;
-    if (isset($reserva_data['total_price'])) {
-        $total_price = $reserva_data['total_price'];
-    } elseif (isset($reserva_data['precio_final'])) {
-        $total_price = $reserva_data['precio_final'];
+    if ($is_visita) {
+        $total_price = $reserva_data['precio_total'];
+        error_log('✅ Es una VISITA GUIADA, precio: ' . $total_price . '€');
+    } else {
+        if (isset($reserva_data['total_price'])) {
+            $total_price = $reserva_data['total_price'];
+        } elseif (isset($reserva_data['precio_final'])) {
+            $total_price = $reserva_data['precio_final'];
+        }
     }
     
     if ($total_price) {
@@ -63,10 +68,20 @@ function generar_formulario_redsys($reserva_data) {
     
     $base_url = home_url();
     $miObj->setParameter("DS_MERCHANT_MERCHANTURL", $base_url . '/wp-admin/admin-ajax.php?action=redsys_notification');
-    $miObj->setParameter("DS_MERCHANT_URLOK", $base_url . '/confirmacion-reserva/?status=ok&order=' . $pedido);
-    $miObj->setParameter("DS_MERCHANT_URLKO", $base_url . '/error-pago/?status=ko&order=' . $pedido);
     
-    $descripcion = "Reserva Medina Azahara - " . ($reserva_data['fecha'] ?? date('Y-m-d'));
+    // ✅ URLs DIFERENTES SEGÚN TIPO
+    if ($is_visita) {
+        $miObj->setParameter("DS_MERCHANT_URLOK", $base_url . '/confirmacion-reserva-visita/?status=ok&order=' . $pedido);
+        $miObj->setParameter("DS_MERCHANT_URLKO", $base_url . '/error-pago/?status=ko&order=' . $pedido);
+        error_log('✅ URLs configuradas para VISITA GUIADA');
+    } else {
+        $miObj->setParameter("DS_MERCHANT_URLOK", $base_url . '/confirmacion-reserva/?status=ok&order=' . $pedido);
+        $miObj->setParameter("DS_MERCHANT_URLKO", $base_url . '/error-pago/?status=ko&order=' . $pedido);
+    }
+    
+    $descripcion = $is_visita 
+        ? "Visita Guiada Medina Azahara - " . ($reserva_data['fecha'] ?? date('Y-m-d'))
+        : "Reserva Medina Azahara - " . ($reserva_data['fecha'] ?? date('Y-m-d'));
     $miObj->setParameter("DS_MERCHANT_PRODUCTDESCRIPTION", $descripcion);
     
     if (isset($reserva_data['nombre']) && isset($reserva_data['apellidos'])) {
@@ -83,43 +98,28 @@ function generar_formulario_redsys($reserva_data) {
 
     error_log("URL de Redsys: " . $redsys_url);
     error_log("Pedido: " . $pedido);
-    error_log("Importe: " . $importe);
+    error_log("Importe: " . $importe . " céntimos");
+    error_log("Tipo: " . ($is_visita ? 'VISITA GUIADA' : 'RESERVA BUS'));
 
-    // ✅ NUEVO ENFOQUE: SCRIPT QUE SE EJECUTA INMEDIATAMENTE
-    $html = '
-    <div id="redsys-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:99999;">
-        <div style="background:white;padding:30px;border-radius:10px;text-align:center;max-width:400px;">
-            <h3 style="margin:0 0 20px 0;color:#333;">Redirigiendo al banco...</h3>
-            <div style="margin:20px 0;">⏳ Por favor, espere...</div>
-            <p style="font-size:14px;color:#666;margin:20px 0 0 0;">Será redirigido automáticamente a la pasarela de pago segura.</p>
-        </div>
-    </div>
-    <form id="formulario_redsys" action="' . $redsys_url . '" method="POST">
-        <input type="hidden" name="Ds_SignatureVersion" value="' . $version . '">
-        <input type="hidden" name="Ds_MerchantParameters" value="' . $params . '">
-        <input type="hidden" name="Ds_Signature" value="' . $signature . '">
-    </form>
-    <script>
-        console.log("🏦 Ejecutando redirección inmediata a Redsys...");
-        console.log("URL destino: ' . $redsys_url . '");
-        console.log("Pedido: ' . $pedido . '");
-        console.log("Importe: ' . $importe . ' céntimos");
-        
-        // ✅ EJECUTAR INMEDIATAMENTE SIN TIMEOUT
-        (function() {
-            var form = document.getElementById("formulario_redsys");
-            if (form) {
-                console.log("✅ Formulario encontrado, enviando...");
-                form.submit();
-            } else {
-                console.error("❌ No se encontró el formulario");
-                alert("Error: No se pudo inicializar el pago. Refresca la página e inténtalo de nuevo.");
-                // Eliminar overlay en caso de error
-                var overlay = document.getElementById("redsys-overlay");
-                if (overlay) overlay.remove();
-            }
-        })();
-    </script>';
+    // ✅ FORMULARIO LIMPIO SIN CARACTERES ESPECIALES
+    $html = '<div id="redsys-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:99999;">';
+    $html .= '<div style="background:white;padding:30px;border-radius:10px;text-align:center;max-width:400px;">';
+    $html .= '<h3 style="margin:0 0 20px 0;color:#333;">Redirigiendo al banco...</h3>';
+    $html .= '<div style="margin:20px 0;">Por favor, espere...</div>';
+    $html .= '<p style="font-size:14px;color:#666;margin:20px 0 0 0;">Sera redirigido automaticamente a la pasarela de pago segura.</p>';
+    $html .= '</div></div>';
+    $html .= '<form id="formulario_redsys" action="' . $redsys_url . '" method="POST" style="display:none;">';
+    $html .= '<input type="hidden" name="Ds_SignatureVersion" value="' . $version . '">';
+    $html .= '<input type="hidden" name="Ds_MerchantParameters" value="' . $params . '">';
+    $html .= '<input type="hidden" name="Ds_Signature" value="' . $signature . '">';
+    $html .= '</form>';
+    $html .= '<script type="text/javascript">';
+    $html .= 'console.log("Iniciando redireccion a Redsys...");';
+    $html .= 'setTimeout(function() {';
+    $html .= 'var form = document.getElementById("formulario_redsys");';
+    $html .= 'if(form) { console.log("Formulario encontrado, enviando..."); form.submit(); } else { console.error("Formulario no encontrado"); alert("Error inicializando pago"); }';
+    $html .= '}, 1000);';
+    $html .= '</script>';
 
     guardar_datos_pedido($pedido, $reserva_data);
     return $html;
@@ -127,7 +127,7 @@ function generar_formulario_redsys($reserva_data) {
 
 function is_production_environment() {
     // ✅ CAMBIAR A TRUE PARA ACTIVAR PRODUCCIÓN
-    return true; // ← CAMBIO: false = PRUEBAS, true = PRODUCCIÓN
+    return false; // ← CAMBIO: false = PRUEBAS, true = PRODUCCIÓN
 }
 
 
