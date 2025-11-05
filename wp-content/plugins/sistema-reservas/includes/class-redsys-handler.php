@@ -224,6 +224,61 @@ function process_successful_payment($order_id, $params) {
 }
 
 
+function recuperar_datos_pedido($order_id) {
+    error_log('=== RECUPERANDO DATOS DEL PEDIDO ===');
+    error_log("Order ID: $order_id");
+    
+    // Inicializar sesión si no está activa
+    if (!session_id()) {
+        session_start();
+    }
+    
+    // ✅ MÉTODO 1: Buscar en sesión
+    if (isset($_SESSION['pending_orders'][$order_id])) {
+        error_log('✅ Datos encontrados en sesión');
+        return $_SESSION['pending_orders'][$order_id];
+    }
+    
+    // ✅ MÉTODO 2: Buscar en transient
+    $data = get_transient('redsys_order_' . $order_id);
+    if ($data) {
+        error_log('✅ Datos encontrados en transient');
+        return $data;
+    }
+    
+    // ✅ MÉTODO 3: Buscar en options temporales
+    $data = get_option('pending_order_' . $order_id);
+    if ($data) {
+        error_log('✅ Datos encontrados en options');
+        return $data;
+    }
+    
+    error_log('❌ No se encontraron datos para el pedido: ' . $order_id);
+    return null;
+}
+
+function send_lost_payment_alert($order_id, $params, $reservation_data = null) {
+    error_log('=== ALERTA: PAGO SIN PROCESAR ===');
+    error_log("Order ID: $order_id");
+    error_log("Params: " . print_r($params, true));
+    error_log("Reservation data: " . print_r($reservation_data, true));
+    
+    // Enviar email de alerta al administrador
+    $admin_email = get_option('admin_email');
+    $subject = "⚠️ ALERTA: Pago recibido sin procesar - Order: $order_id";
+    
+    $message = "Se recibió un pago exitoso de Redsys pero no se pudo procesar la reserva.\n\n";
+    $message .= "Order ID: $order_id\n";
+    $message .= "Código autorización: " . ($params['Ds_AuthorisationCode'] ?? 'N/A') . "\n";
+    $message .= "Fecha: " . date('Y-m-d H:i:s') . "\n\n";
+    $message .= "Por favor, revisa los logs del servidor y contacta con el cliente si es necesario.";
+    
+    wp_mail($admin_email, $subject, $message);
+    
+    error_log('📧 Email de alerta enviado a: ' . $admin_email);
+}
+
+
 function process_visita_payment($order_id, $reservation_data, $params) {
     global $wpdb;
     $table_visitas = $wpdb->prefix . 'reservas_visitas';

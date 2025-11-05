@@ -279,6 +279,8 @@ function calculateTotalPrice() {
 
     if (adultos + ninos + ninosMenores === 0) {
         jQuery('#total-visita').text('0,00€');
+        // ✅ LIMPIAR PRECIO CALCULADO
+        window.precioCalculado = null;
         return;
     }
 
@@ -295,21 +297,31 @@ function calculateTotalPrice() {
             ninos_menores: ninosMenores
         },
         success: function(response) {
+            console.log('📊 Respuesta del servidor para precio:', response);
+            
             if (response.success) {
                 const precio = response.data;
                 jQuery('#total-visita').text(formatPrice(precio.precio_final));
                 
-                // ✅ GUARDAR PRECIO VALIDADO CON FIRMA
-                window.precioCalculado = precio;
-                console.log('✅ Precio calculado con firma:', precio);
+                // ✅ GUARDAR PRECIO VALIDADO CON FIRMA GLOBALMENTE
+                window.precioCalculado = {
+                    precio_final: precio.precio_final,
+                    firma: precio.firma,
+                    firma_data: precio.firma_data,
+                    timestamp: precio.timestamp
+                };
+                
+                console.log('✅ Precio calculado con firma guardado:', window.precioCalculado);
             } else {
-                console.error('Error calculando precio:', response);
+                console.error('❌ Error calculando precio:', response);
                 jQuery('#total-visita').text('0,00€');
+                window.precioCalculado = null;
             }
         },
         error: function(error) {
-            console.error('Error AJAX:', error);
+            console.error('❌ Error AJAX calculando precio:', error);
             jQuery('#total-visita').text('0,00€');
+            window.precioCalculado = null;
         }
     });
 }
@@ -375,11 +387,9 @@ function autoFillPersonasFromBusReservation() {
     }
 }
 
-/**
- * Procesar reserva de visita
- */
 function processVisitaReservation() {
-    console.log('=== PROCESANDO RESERVA DE VISITA CON REDSYS ===');
+    console.log('=== PROCESANDO RESERVA DE VISITA ===');
+    console.log('🔍 Verificando window.precioCalculado:', window.precioCalculado);
 
     // Validar política de privacidad
     const privacyCheckbox = document.getElementById('privacy-policy-visita');
@@ -433,12 +443,75 @@ function processVisitaReservation() {
     }
 
     // ✅ VERIFICAR QUE TENEMOS PRECIO VALIDADO CON FIRMA
-    if (!window.precioCalculado || !window.precioCalculado.firma) {
-        alert('Error: Precio no validado. Por favor, vuelve a seleccionar el número de personas.');
+    console.log('🔍 Verificando precio calculado...');
+    console.log('window.precioCalculado existe:', !!window.precioCalculado);
+    
+    if (window.precioCalculado) {
+        console.log('Contenido de window.precioCalculado:', window.precioCalculado);
+        console.log('Tiene firma:', !!window.precioCalculado.firma);
+        console.log('Tiene firma_data:', !!window.precioCalculado.firma_data);
+    }
+
+    if (!window.precioCalculado || !window.precioCalculado.firma || !window.precioCalculado.firma_data) {
+        console.error('❌ Precio no validado. Recalculando...');
+        
+        // ✅ INTENTAR RECALCULAR EL PRECIO
+        alert('Recalculando precio... Por favor, espera un momento.');
+        
+        jQuery.ajax({
+            url: reservasVisitaAjax.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'calculate_visita_price_secure',
+                nonce: reservasVisitaAjax.nonce,
+                service_id: serviceData.id,
+                adultos: adultos,
+                ninos: ninos,
+                ninos_menores: ninosMenores
+            },
+            success: function(response) {
+                if (response.success) {
+                    window.precioCalculado = {
+                        precio_final: response.data.precio_final,
+                        firma: response.data.firma,
+                        firma_data: response.data.firma_data,
+                        timestamp: response.data.timestamp
+                    };
+                    
+                    console.log('✅ Precio recalculado correctamente');
+                    
+                    // ✅ INTENTAR PROCESAR DE NUEVO
+                    processVisitaReservationWithPrice();
+                } else {
+                    alert('Error recalculando el precio. Por favor, cambia el número de personas y vuelve a intentarlo.');
+                }
+            },
+            error: function() {
+                alert('Error de conexión al recalcular el precio. Por favor, recarga la página.');
+            }
+        });
+        
         return;
     }
 
     console.log('✅ Precio validado con firma');
+
+    processVisitaReservationWithPrice();
+}
+
+// ✅ NUEVA FUNCIÓN AUXILIAR PARA PROCESAR LA RESERVA
+function processVisitaReservationWithPrice() {
+    console.log('=== PROCESANDO CON PRECIO VALIDADO ===');
+    
+    const adultos = parseInt(jQuery('#adultos-visita').val()) || 0;
+    const ninos = parseInt(jQuery('#ninos-visita').val()) || 0;
+    const ninosMenores = parseInt(jQuery('#ninos-menores-visita').val()) || 0;
+    const idiomaSeleccionado = jQuery('#idioma-visita').val() || 'español';
+    
+    const nombre = jQuery('[name="nombre"]').val().trim();
+    const apellidos = jQuery('[name="apellidos"]').val().trim();
+    const email = jQuery('[name="email"]').val().trim();
+    const telefono = jQuery('[name="telefono"]').val().trim();
 
     // ✅ PREPARAR DATOS PARA REDSYS
     const reservationData = {
@@ -459,7 +532,7 @@ function processVisitaReservation() {
         precio_calculado: window.precioCalculado
     };
 
-    console.log('📤 Datos a enviar a Redsys:', reservationData);
+    console.log('📤 Datos a enviar:', reservationData);
 
     // Deshabilitar botón
     const processBtn = jQuery('.complete-btn');
@@ -479,13 +552,15 @@ function processVisitaReservation() {
                 // Insertar y ejecutar formulario
                 document.body.insertAdjacentHTML('beforeend', response.data);
             } else {
-                console.error('❌ Error:', response.data);
+                console.error('❌ Error en la respuesta:', response.data);
                 alert('Error: ' + (response.data || 'Error desconocido'));
                 processBtn.prop('disabled', false).text(originalText);
             }
         },
         error: function(xhr, status, error) {
             console.error('❌ Error AJAX:', error);
+            console.error('Status:', status);
+            console.error('Response:', xhr.responseText);
             alert('Error de conexión. Por favor, inténtalo de nuevo.');
             processBtn.prop('disabled', false).text(originalText);
         }
