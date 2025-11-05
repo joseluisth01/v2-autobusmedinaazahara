@@ -1,0 +1,10 @@
+{
+    "require": {
+        "tecnickcom/tcpdf": "^6.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "SistemaReservas\\": "includes/"
+        }
+    }
+}

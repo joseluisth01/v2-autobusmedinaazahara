@@ -1,0 +1,92 @@
+$white: #FFFFFF
+$black: #000000
+$background-invert: #000000
+$color-invert: #ffffff
+$text-black: #000000
+$primary: #2E2D2C
+$green:#404521
+$green2: #867B2F
+$blue: #7879B7
+$blue2: #7879B7
+$purple: #7879B7
+$purple20: #F0F0F8
+$purple50: rgba(120, 121, 183, 0.50)
+$yellow: #FBD6BD
+$yellow50: rgba(251, 214, 189, 0.50)
+$brown: #87764E
+$red: #E25252
+$orange: #F8AE4B
+$gradient: linear-gradient(90deg, rgba(0,91,153,1) 0%, rgba(11,157,218,1) 100%)
+$grey: #4F4E4E
+$lightgrey: #D0D0D0
+$text: #000000
+$grey2: #CAC9C9
+.titular_block
+    .container
+        display: flex
+        flex-wrap: wrap
+        justify-content: center
+    .subtitular
+        font-size: 28px
+        font-weight: 400
+        line-height: normal
+        width: 100%
+        text-align: center
+        color: $green2
+        text-align: center
+        p,h1,h2,h3,h4
+            text-align: center
+    .titular
+        font-size: 40px
+        line-height: normal
+        font-weight: 700
+        width: 100%
+        text-align: center
+        text-transform: uppercase
+        margin-bottom: 15px
+        p,h1,h2,h3,h4
+            text-align: center
+        p,h1,h2,h3,h4
+            font-size: 35px
+            line-height: normal
+            color: $green
+    &.green
+        .titular,.subtitular
+            p,h1,h2,h3,h4
+                color: $green
+    &.blue
+        .titular
+            color: $blue2
+            p,h1,h2,h3,h4
+                color: $blue2
+        .subtitular
+            color: $blue
+            p,h1,h2,h3,h4
+                color: $blue
+    &.yellow
+        .titular,.subtitular
+            p,h1,h2,h3,h4
+                color: $yellow
+    &.red
+        .titular,.subtitular
+            p,h1,h2,h3,h4
+                color: $red
+    &.green2
+        .titular,.subtitular
+            p,h1,h2,h3,h4
+                color: $green2
+    &.purple
+        .titular
+            color: $purple
+            p,h1,h2,h3,h4
+                color: $purple
+        .subtitular
+            color: $purple50
+            p,h1,h2,h3,h4
+                color: $purple50
+    &.fondo_azul
+        background: $blue
+        padding: 15px 0
+        .titular,.subtitular
+            p,h1,h2,h3,h4
+                color: $white

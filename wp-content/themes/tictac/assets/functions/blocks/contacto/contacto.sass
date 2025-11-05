@@ -1,0 +1,103 @@
+
+$white: #FFFFFF
+$black: #000000
+$background-invert: #000000
+$color-invert: #ffffff
+$text-black: #000000
+$primary: #2E2D2C
+$green:#404521
+$green2: #867B2F
+$blue: #7879B7
+$blue2: #7879B7
+$purple: #7879B7
+$purple20: #F0F0F8
+$purple50: rgba(120, 121, 183, 0.50)
+$yellow: #FBD6BD
+$yellow50: rgba(251, 214, 189, 0.50)
+$brown: #87764E
+$red: #E25252
+$orange: #F8AE4B
+$gradient: linear-gradient(90deg, rgba(0,91,153,1) 0%, rgba(11,157,218,1) 100%)
+$grey: #4F4E4E
+$lightgrey: #D0D0D0
+$text: #565790
+$grey2: #CAC9C9
+.contacto_block
+    .tab-buttons
+        max-width: 1010px
+        margin: 0 auto
+    .container
+        width: 100%
+        border-radius: 8px
+    .titulo
+        font-size: 20px
+        font-weight: 500
+        padding: 5px 15px
+        color: $purple
+        width: 100%
+        margin: 0 auto
+        text-align: center
+    .link
+        width: 100%
+        max-width: 277px
+        margin: 0 auto
+        text-align: center
+        margin-bottom: 15px
+        svg
+            margin-right: 5px
+        a
+            font-size: 16px
+            font-weight: 300
+            color: $green
+    iframe
+        width: 100%
+        height: 275px
+    .tab-btn
+        border: none
+        color: $purple
+        background-color: $purple50
+        border-radius: 20px 20px 0px 0px
+        padding: 5px 12px
+        cursor: pointer
+        transition: background-color 0.3s ease
+    .tab-btn:hover
+        background-color: $purple
+        .titulo
+            color: $white
+    .tab-btn.active
+        background-color: $purple
+        color: $white
+        .titulo
+            color: $white
+    .content
+        display: none
+    .content-info
+        width: 100%
+        max-width: 1010px
+        margin: 0 auto
+    .content.show
+        display: flex
+        gap: 14px
+    .tab-contents
+        position: relative
+        .bg-contacto
+            position: absolute
+            left: 0
+            top: 0
+            width: 100%
+            height: 100%
+            z-index: -1
+    .content svg
+        width: 50%
+        height: 200px
+    .redes_contacto
+        background-color: $purple
+        padding: 25px 20px
+        display: flex
+        justify-content: center
+        border-bottom-left-radius: 20px
+        border-bottom-right-radius: 20px
+
+body .contacto_block .wpcf7 form
+    margin: 25px 0
+    max-width: 600px

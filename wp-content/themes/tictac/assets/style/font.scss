@@ -1,0 +1,123 @@
+@import 'colors.sass';
+
+$fonts-path: '../fonts/';
+$h1: 36px;
+$h1-line: 1.2;
+$h2: 30px;
+$h2-line: 1.2;
+$h3: 24px;
+$h3-line: 1.2;
+$titulo-destacado: 32px;
+$titulo-destacado-line: 1.5;
+$bold: 700;
+$primary: #333;
+$md: 768px;
+
+
+
+body {
+  h1 {
+
+  }
+
+  .h1 {
+    font-family: 'manhaj' !important;
+    font-weight: 400;
+    font-size: 95px;
+    line-height: 62px;
+    letter-spacing: 0%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+  }
+
+  h2 {
+
+  }
+
+  .h2 {
+    font-family: 'Duran-Medium' !important;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 45px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  h3 {
+
+
+  }
+
+
+}
+
+
+@font-face {
+  font-family: 'Catchy-Mager';
+  src: url($fonts-path + 'Catchy-Mager.woff') format('woff'),
+    url($fonts-path + 'Catchy-Mager.ttf') format('truetype'),
+    url($fonts-path + 'Catchy-Mager.otf') format('opentype');
+  font-weight: 100 !important;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Duran-Bold';
+  src: url($fonts-path + 'BrutalType-Bold.woff') format('woff'),
+    url($fonts-path + 'BrutalType-Bold.ttf') format('truetype'),
+    url($fonts-path + 'BrutalType-Bold.otf') format('opentype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Duran-Extrabold';
+  src: url($fonts-path + 'BrutalType-ExtraBold.woff') format('woff'),
+    url($fonts-path + 'BrutalType-ExtraBold.ttf') format('truetype'),
+    url($fonts-path + 'BrutalType-ExtraBold.otf') format('opentype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Duran-Medium';
+  src: url($fonts-path + 'BrutalType-Medium.woff') format('woff'),
+    url($fonts-path + 'BrutalType-Medium.ttf') format('truetype'),
+    url($fonts-path + 'BrutalType-Medium.otf') format('opentype');
+  font-style: normal;
+  letter-spacing: 5%;
+}
+
+@font-face {
+  font-family: 'Duran-Regular';
+  src: url($fonts-path + 'BrutalType.woff') format('woff'),
+    url($fonts-path + 'BrutalType.ttf') format('truetype'),
+    url($fonts-path + 'BrutalType.otf') format('opentype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'manhaj';
+  src: url($fonts-path + 'manhaj.woff') format('woff'),
+    url($fonts-path + 'manhaj.ttf') format('truetype'),
+    url($fonts-path + 'manhaj.otf') format('opentype');
+  font-style: normal;
+  font-display: swap;
+}
+
+.icon {
+  font-family: 'custom' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

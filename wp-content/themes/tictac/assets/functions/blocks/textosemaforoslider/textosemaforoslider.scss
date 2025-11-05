@@ -1,0 +1,214 @@
+.textosemaforoslider {
+            box-shadow: 0px 0px 15px 0px #2E2D2C33;
+            backdrop-filter: blur(3px);
+            border-radius: 20px;
+            padding: 50px !important;
+            margin-top: 50px;
+        }
+
+        .textosemaforoslider-content {
+            text-align: center;
+        }
+
+        .textosemaforoslider .divrayas{
+            height: 200px;
+        }
+
+        .textosemaforoslider-titulo {
+            color: #871727;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            font-family: 'manhaj' !important;
+        }
+
+        .textosemaforoslider-parrafo-inicial,
+        .textosemaforoslider-parrafo-final {
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2E2D2C;
+        }
+
+        .textosemaforoslider-parrafo-inicial p,
+        .textosemaforoslider-parrafo-final p {
+            margin-bottom: 20px;
+        }
+
+        .textosemaforoslider-slider-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .textosemaforoslider-slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .textosemaforoslider-track {
+            display: flex;
+            transition: transform 0.8s ease-in-out;
+            width: 100%;
+        }
+
+        .textosemaforoslider-slide {
+            flex: 0 0 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .slide-titulo {
+            color: #DB7461;
+            font-size: 30px;
+            margin-bottom: 50px;
+    margin-top: 30px;
+            text-align: center;
+            font-family: 'Duran-Medium' !important;
+            letter-spacing: 2px;
+        }
+
+        .slide-semaforo {
+            margin-bottom: 30px;
+        }
+
+        .semaforo-contenedor {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .semaforo-item {
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            transition: all 0.5s ease;
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .semaforo-textos {
+            flex: 1;
+        }
+
+
+        .divrayas {
+            border: 4px dashed #B7B7B7;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-top: 0px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.5s ease;
+        }
+
+        .semaforo-parrafo-paso {
+            font-family: 'Duran-Medium' !important;
+            line-height: 1.4;
+            color: #000000 !important;
+            margin: 0;
+            transition: all 0.5s ease;
+            font-size: 14px !important;
+            text-align: center !important;
+            letter-spacing: 1px;
+        }
+
+        /* Estados activos del semáforo */
+        .semaforo-item.active {
+            transform: scale(1.02);
+        }
+
+        .semaforo-item.active .semaforo-titulo-paso {
+            background-color: #DB7461 !important;
+            color: #2E2D2C !important;
+        }
+
+        .semaforo-item.active .semaforo-parrafo-paso {
+            color: white !important;
+        }
+
+        .semaforo-item.active .divrayas {
+            background-color: #871727 !important;
+            border: none !important;
+        }
+
+        /* Navegación del slider */
+        .textosemaforoslider-navigation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none; /* Permite click en el contenido de abajo */
+            z-index: 10;
+            height: 80px; /* Altura aprox del título H3 */
+        }
+
+        .nav-btn {
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: all; /* Permite click en los botones */
+            margin: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none !important;
+        }
+
+        .nav-btn:hover {
+            background-color: #DB7461;
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .textosemaforoslider {
+                padding: 40px 15px !important;
+            }
+
+            .textosemaforoslider-titulo {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+
+            .slide-titulo {
+                font-size: 25px;
+                margin-bottom: 20px;
+            }
+
+            .semaforo-contenedor {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .semaforo-item {
+                min-width: 100%;
+            }
+
+            .semaforo-titulo-paso {
+                font-size: 14px;
+                height: 35px;
+            }
+
+            .divrayas {
+                padding: 15px;
+            }
+
+            .semaforo-parrafo-paso {
+                font-size: 12px !important;
+            }
+        }

@@ -1,0 +1,108 @@
+        .slidergrande {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-top: 60px;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            padding: 30px;
+        }
+
+        .slidergrande-slider-container {
+            position: relative;
+        }
+
+        .slidergrande-slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .slidergrande-track {
+            display: flex;
+            transition: transform 0.8s ease-in-out;
+            width: 100%;
+        }
+
+        .slidergrande-slide {
+            flex: 0 0 33.333%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .slidergrande-slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .slidergrande-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .slidergrande-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slidergrande-dot:hover {
+            background-color: #DB7461;
+            transform: scale(1.1);
+        }
+
+        .slidergrande-dot.active {
+            background-color: #DB7461;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 800px) {
+    .slidergrande-slide {
+        flex: 0 0 100%;
+    }
+
+    .slidergrande-slide img {
+        height: 300px;
+    }
+}
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            
+            .slidergrande-slide img {
+                height: 300px;
+                border-radius: 10px;
+            }
+            
+            .slidergrande-pagination {
+                gap: 8px;
+                margin-top: 20px;
+            }
+            
+            .slidergrande-dot {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slidergrande-slide {
+                flex: 0 0 100%;
+                padding: 0 5px;
+            }
+            
+            .slidergrande-slide img {
+                height: 250px;
+            }
+        }

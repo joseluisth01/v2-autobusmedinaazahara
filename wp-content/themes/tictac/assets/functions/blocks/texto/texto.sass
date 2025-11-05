@@ -1,0 +1,83 @@
+$white: #FFFFFF
+$black: #010101
+$background-invert: #000000
+$color-invert: #ffffff
+$text-black: #1f1f1f
+$primary: #010101
+$green:#072B24
+$green2: #072B24
+$blue: #0B9DDA
+$blue2: #005C9A
+$yellow: #FAC349
+$brown: #87764E
+$red: #E52520
+$gradient: linear-gradient(90deg, rgba(0,91,153,1) 0%, rgba(11,157,218,1) 100%)
+$grey: #d9d9d9
+$lightgrey: #D0D0D0
+$text: #010101
+$grey2: #CAC9C9
+.bloque_seo
+    width: 100%
+    margin: 0 auto
+    text-align: center
+    display: flex
+    justify-content: center
+    .border_seo
+        width: 100%
+        height: 30px
+        border-bottom: 3px solid #7879B7
+        margin-bottom: 15px
+    .open
+        width: 100%
+        display: flex
+        justify-content: center
+        transition: all .2s linear
+        .closed,.opened
+            font-size: 40px
+            line-height: 40px
+            font-weight: 400
+            cursor: pointer
+        .opened
+            display: none
+        &.change
+            transform: rotate(180deg)
+            .opened
+                display: block
+            .closed
+                display: none
+    .content
+        display: flex
+        flex-wrap: wrap
+        justify-content: center
+        text-align: center
+        width: 100%
+    .titulo,.subtitulo
+        margin-bottom: 10px
+    .seoclosed
+        transition: all .3s linear
+        max-height: 1000px
+        overflow: hidden
+        
+    .texto
+        width: 100%
+        p:first-child,h1:first-child,h1:first-child,h3:first-child
+            margin-top: 0
+        .wpcf7 form
+            max-width: 100%
+            .wpcf7-submit
+                border: 1px solid #D0D0D0
+                background: #D0D0D0
+                color: #2E2D2C
+                &:hover
+                    background: #2E2D2C
+                    color: #D0D0D0
+    .seoclosed.closed
+        max-height: 0
+    h2, .h2, .subtitulo, .subtitulo p, .subtitulo h2, .subtitulo h1
+        font-weight: 400
+    &:not(.white)
+        padding: 25px 0
+        .titulo, .titulo p, .titulo h1, .titulo h2, .titulo h3,
+        h2, .h2, .subtitulo, .subtitulo p, .subtitulo h2, .subtitulo h1
+            color: #D0D0D0
+        

@@ -1,0 +1,206 @@
+
+$white: #FFFFFF
+$black: #000000
+$background-invert: #000000
+$color-invert: #ffffff
+$text-black: #000000
+$primary: #2E2D2C
+$green:#404521
+$green2: #867B2F
+$blue: #7879B7
+$blue2: #7879B7
+$purple: #7879B7
+$purple20: #F0F0F8
+$purple50: rgba(120, 121, 183, 0.50)
+$yellow: #FBD6BD
+$yellow50: rgba(251, 214, 189, 0.50)
+$brown: #87764E
+$red: #E25252
+$orange: #F8AE4B
+$gradient: linear-gradient(90deg, rgba(0,91,153,1) 0%, rgba(11,157,218,1) 100%)
+$grey: #4F4E4E
+$lightgrey: #D0D0D0
+$text: #565790
+$grey2: #CAC9C9
+
+
+.texto_imagen2
+    width: 100%
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    position: relative
+    height: auto
+    color: #ffffff
+    overflow: hidden
+    margin-top: 30px
+    
+    &.inv
+        .container
+            flex-direction: row-reverse
+    
+    &.white
+        color: #000000
+        p
+            color: #000000
+    
+    .container
+        display: flex
+        justify-content: space-between
+        position: relative
+        height: auto
+        gap: 20px
+        padding-top: 10px
+        padding-bottom: 10px
+    
+    .texto
+        width: 50%
+        display: flex
+        flex-wrap: wrap
+        align-content: normal
+        text-align: center
+        box-shadow: 0px 0px 6px 0px #00000059
+        border-radius: 20px
+        
+        .contenido-texto
+            padding-left: 40px
+            padding-right: 40px
+        
+        p
+            color: black !important
+            width: 100%
+        
+        img
+            display: block
+            width: 50%
+            max-width: 250px
+            margin: 0 auto
+            object-fit: contain
+        
+        ol,ul
+            color: $primary
+        
+        .titulo
+            margin-bottom: 10px
+            width: 100%
+            font-weight: 500
+            text-align: center
+            border-top-left-radius: 20px
+            border-top-right-radius: 20px
+            height: 100px
+
+            h2
+                height: 100%
+                display: flex
+                align-items: center
+                justify-content: center
+                font-family: 'Duran-Regular'
+                font-size: 28px
+                letter-spacing: 0.25em
+                line-height: 110% !important
+
+        & > p
+            width: 100%
+            text-align: center
+            a:not(.btn)
+                color: $yellow
+                transition: all .2s linear
+                font-weight: 600
+                &:hover
+                    color: $primary
+        
+        .enlace
+            margin-top: 10px
+            width: 100%
+            a
+                width: 100%
+        
+        .enlaces
+            display: flex
+            width: 80%
+            gap: 10px
+            margin: 0 auto
+            flex-wrap: wrap
+            justify-content: center
+            
+            .enlace a
+                background: #009CDD !important
+                border-radius: 5px !important
+                color: #ffffff !important
+                box-shadow: 0px 2.5px 2.5px 0px #00000080
+
+    .imagenes-container
+        width: 48%
+        display: flex
+        flex-direction: column
+        gap: 10px
+        
+        .imagen-principal
+            width: 100%
+            
+            img
+                width: 100%
+                height: 250px
+                object-fit: cover
+                position: relative
+                border-radius: 20px
+                box-shadow: 0px 0px 6px 0px #00000059
+        
+        .imagenes-adicionales
+            display: flex
+            gap: 10px
+            height: 140px
+            
+            .imagen-secundaria, .imagen-terciaria
+                width: 50%
+                
+                img
+                    width: 100%
+                    height: 100%
+                    object-fit: cover
+                    border-radius: 20px
+                    box-shadow: 0px 0px 6px 0px #00000059
+
+@media (max-width: 1600px)
+    .texto_imagen
+        .texto
+            padding: 20px
+            height: 100%
+            align-items: center
+
+@media (max-width: 1000px)
+    .texto_imagen
+        height: auto
+        
+        .container
+            flex-direction: column !important
+        
+        .texto
+            width: 100%
+            padding: 0
+            margin-bottom: 20px
+            
+            .titulo
+                margin-top: 0
+        
+        .imagenes-container
+            width: 100%
+            
+            .imagen-principal img
+                height: 300px
+            
+            .imagenes-adicionales
+                height: 150px
+
+@media (max-width: 767px)
+    .texto_imagen
+        .imagenes-container
+            .imagenes-adicionales
+                flex-direction: column
+                height: auto
+                
+                .imagen-secundaria, .imagen-terciaria
+                    width: 100%
+                    
+                    img
+                        height: 200px

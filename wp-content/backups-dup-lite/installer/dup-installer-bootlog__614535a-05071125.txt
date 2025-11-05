@@ -1,0 +1,28 @@
+[Nov 5 07:15:37] 
+[Nov 5 07:15:37] ==DUPLICATOR INSTALLER BOOTSTRAP v1.5.12==
+[Nov 5 07:15:37] ----------------------------------------------------
+[Nov 5 07:15:37] Installer bootstrap start
+[Nov 5 07:15:37] Manual extract found so not going to extract dup-installer dir
+[Nov 5 07:15:37] EXTRACT dup-installer dir
+[Nov 5 07:15:37] NOTICE: Didn't need to extract the installer.
+[Nov 5 07:15:37] Set permissions of dup-installer<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/addons<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/assets<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/classes<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/ctrls<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/favicon<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/libs<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/original_files_[HASH]<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/src<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/templates<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/vendor<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/.user.ini<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/dup-archive__[HASH].txt<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/dup-database__[HASH].sql<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/dup-installer-csrf__[HASH].txt<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/dup-scan__[HASH].json<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/dup-scanned-dirs__[HASH].txt<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/dup-scanned-files__[HASH].txt<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/index.php<br/>
+[Nov 5 07:15:37] Set permissions of dup-installer/main.installer.php<br/>
+[Nov 5 07:15:37] DONE: No detected errors so redirecting to the main installer. Main Installer URI = https://v2.autobusmedinaazahara.com/dup-installer/main.installer.php

@@ -1,0 +1,189 @@
+@import 'colors.sass'
+
+$fonts-path: '../fonts/'
+$h1: 36px
+$h1-line: 1.2
+$h2: 30px
+$h2-line: 1.2
+$h3: 24px
+$h3-line: 1.2
+$titulo-destacado: 32px
+$titulo-destacado-line: 1.5
+$bold: 700
+$primary: #333
+$md: 768px
+
+body
+  .titulo,
+  .titulo p,
+  .titulo,
+  h1,
+  .h1,
+  .titulo h1,
+  .titulo h2
+    font-size: $h1
+    line-height: $h1-line
+    width: 100%
+    font-weight: $bold
+    margin: 0
+    color: $primary
+    font-family: 'TitilliumWeb-Bold'
+
+  h2,
+  .h2,
+  .subtitulo,
+  .subtitulo p,
+  .subtitulo h2,
+  .subtitulo h1
+    font-size: $h2
+    line-height: $h2-line
+    width: 100%
+    font-weight: $bold
+    margin: 0
+    font-family: 'TitilliumWeb-Regular'
+
+  h3,
+  .h3
+    font-size: $h3
+    line-height: $h3-line
+    width: 100%
+    font-weight: $bold
+    margin: 0
+    font-family: 'TitilliumWeb-Regular'
+
+  .titulo-destacado
+    font-size: $titulo-destacado
+    line-height: $titulo-destacado-line
+    font-weight: $bold
+    text-transform: uppercase
+    font-family: 'TitilliumWeb-Regular'
+
+@media (min-width: $md)
+  body
+    .titulo,
+    .titulo p,
+    .titulo,
+    h1,
+    .h1,
+    .titulo h1,
+    .titulo h2
+      font-size: 40px
+      line-height: normal
+
+@font-face
+  font-family: 'TitilliumWeb-Regular'
+  src: url($fonts-path + 'TitilliumWeb-Regular.woff') format('woff'),
+  src: url($fonts-path + 'TitilliumWeb-Regular.ttf') format('truetype'),
+  src: url($fonts-path + 'TitilliumWeb-Regular.otf') format('opentype')
+  font-weight: 400
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: 'TitilliumWeb-SemiBoldItalic'
+  src: url($fonts-path + 'TitilliumWeb-SemiBoldItalic.woff') format('woff'),
+  src: url($fonts-path + 'TitilliumWeb-SemiBoldItalic.ttf') format('truetype'),
+  src: url($fonts-path + 'TitilliumWeb-SemiBoldItalic.otf') format('opentype')
+  font-weight: 400
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: 'TitilliumWeb-Bold'
+  src: url($fonts-path + 'TitilliumWeb-Bold.woff') format('woff'),
+  src: url($fonts-path + 'TitilliumWeb-Bold.ttf') format('truetype'),
+  src: url($fonts-path + 'TitilliumWeb-Bold.otf') format('opentype')
+  font-weight: 300
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: 'TitilliumWeb-BoldItalic'
+  src: url($fonts-path + 'TitilliumWeb-BoldItalic.woff') format('woff'),
+  src: url($fonts-path + 'TitilliumWeb-BoldItalic.ttf') format('truetype'),
+  src: url($fonts-path + 'TitilliumWeb-BoldItalic.otf') format('opentype')
+  font-weight: 600
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: 'TitilliumWeb-ExtraLight'
+  src: url($fonts-path + 'TitilliumWeb-ExtraLight.woff') format('woff'),
+  src: url($fonts-path + 'TitilliumWeb-ExtraLight.ttf') format('truetype'),
+  src: url($fonts-path + 'TitilliumWeb-ExtraLight.otf') format('opentype')
+  font-weight: 700
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: 'TitilliumWeb-ExtraLightItalic'
+  src: url($fonts-path + 'TitilliumWeb-ExtraLightItalic.woff') format('woff'),
+  src: url($fonts-path + 'TitilliumWeb-ExtraLightItalic.ttf') format('truetype'),
+  src: url($fonts-path + 'TitilliumWeb-ExtraLightItalic.otf') format('opentype')
+  font-weight: 400
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: 'TitilliumWeb-Italic'
+  src: url($fonts-path + 'TitilliumWeb-Italic.woff') format('woff'),
+  src: url($fonts-path + 'TitilliumWeb-Italic.ttf') format('truetype'),
+  src: url($fonts-path + 'TitilliumWeb-Italic.otf') format('opentype')
+  font-weight: 400
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: 'TitilliumWeb-Light'
+  src: url($fonts-path + 'TitilliumWeb-Light.woff') format('woff'),
+  src: url($fonts-path + 'TitilliumWeb-Light.ttf') format('truetype'),
+  src: url($fonts-path + 'TitilliumWeb-Light.otf') format('opentype')
+  font-weight: 400
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: 'TitilliumWeb-LightItalic'
+  src: url($fonts-path + 'TitilliumWeb-LightItalic.woff') format('woff'),
+  src: url($fonts-path + 'TitilliumWeb-LightItalic.ttf') format('truetype'),
+  src: url($fonts-path + 'TitilliumWeb-LightItalic.otf') format('opentype')
+  font-weight: 400
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: 'TitilliumWeb-SemiBold'
+  src: url($fonts-path + 'TitilliumWeb-SemiBold.woff') format('woff'),
+  src: url($fonts-path + 'TitilliumWeb-SemiBold.ttf') format('truetype'),
+  src: url($fonts-path + 'TitilliumWeb-SemiBold.otf') format('opentype')
+  font-weight: 400
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: 'ReplayPro-Bold'
+  src: url($fonts-path + 'ReplayPro-Bold.otf') format('opentype')
+  font-weight: 400
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: 'custom'
+  src: url($fonts-path + 'custom.eot?gx9t68')
+  src: url($fonts-path + 'custom.eot?gx9t68#iefix') format('embedded-opentype'),
+  src: url($fonts-path + 'custom.ttf?gx9t68') format('truetype'),
+  src: url($fonts-path + 'custom.woff?gx9t68') format('woff'),
+  src: url($fonts-path + 'custom.svg?gx9t68#custom') format('svg')
+  font-weight: normal
+  font-style: normal
+  font-display: block
+
+.icon
+  font-family: 'custom' !important
+  font-style: normal
+  font-weight: normal
+  font-variant: normal
+  text-transform: none
+  line-height: 1
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale

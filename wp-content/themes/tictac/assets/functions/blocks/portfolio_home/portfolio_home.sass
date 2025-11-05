@@ -1,0 +1,137 @@
+
+$white: #FFFFFF
+$black: #2E2D2C
+$background-invert: #000000
+$color-invert: #ffffff
+$text-black: #1f1f1f
+$primary: #2E2D2C
+$green:#404521
+$green2: #867B2F
+$blue: #0B9DDA
+$blue2: #005C9A
+$yellow: #F8AE4B
+$brown: #87764E
+$red: #E25252
+$orange: #F8AE4B
+$gradient: linear-gradient(90deg, rgba(0,91,153,1) 0%, rgba(11,157,218,1) 100%)
+$grey: #797979
+$lightgrey: #D0D0D0
+$text: #797979
+$grey2: #CAC9C9
+body .portfolio
+    overflow: hidden
+    .splide
+        li
+            padding: 0 5px
+    .selector_type
+        span
+            color: $green2
+            text-transform: uppercase
+            font-weight: 500
+            font-family: "worksans"
+            font-size: 32px
+            position: relative
+            display: inline-flex
+            justify-content: center
+            align-items: center
+            padding: 0 30px
+            cursor: pointer
+            transition: all .2s linear
+            &::before
+               content: ""
+               position: absolute
+               width: 0%
+               height: 3px
+               background: $green2
+               z-index: -1
+               border-radius: 20px
+               transition: all .2s linear
+            &.active_span
+                color: $green
+                &::before
+                    width: 100%
+    iframe
+        width: 100%
+        height: 600px
+    .tabs_buttons_gallery
+        background: $green2
+        border-radius: 12px
+        margin-bottom: 10px
+    &.container
+        max-width: 100%
+        padding: 0 10px
+    .galeria_fotos
+        .col-12
+            padding: 3px
+        a
+            height: 297px
+    .container
+        display: flex
+        flex-wrap: wrap
+        & > div
+            //display: flex
+            //flex-wrap: wrap
+    .box_portfolio
+        display: inline-flex
+        flex-wrap: wrap
+        justify-content: center
+        overflow: hidden
+        width: 320px
+        img
+            width: 100%
+            height: 200px
+            object-fit: cover
+            object-position: center
+            border-top-left-radius: 15px
+            border-top-right-radius: 15px
+        .h2
+            width: 100%
+            text-align: center
+            background: #3FB38C
+            color: #FFFFFF
+            border-bottom-left-radius: 15px
+            border-bottom-right-radius: 15px
+            transition: all .2s linear
+        &:hover .h2
+            background: #364E8C
+    .box-btn
+        width: 360px
+        height: 225px
+        display: inline-flex
+        flex-wrap: wrap
+        justify-content: center
+        align-items: center
+        color: $white
+        font-weight: 500
+        font-family: "worksans"
+        font-size: 32px
+        text-transform: uppercase
+        transition: all .2s linear
+        cursor: pointer
+        img
+            text-align: center
+            width: 100%
+            height: 130px
+            object-fit: contain
+        .green
+            display: none
+        &.active
+            color: $green
+            background: $white
+            .green
+                display: block
+            .white
+                display: none
+    .btn.custom
+        padding: 5px 15px
+        font-size: 0.8rem
+
+.tabset .tabs_buttons_gallery input[type="radio"]
+    position: absolute
+    left: -200vw
+
+
+.tabset .tab-panel
+    display: none
+
+

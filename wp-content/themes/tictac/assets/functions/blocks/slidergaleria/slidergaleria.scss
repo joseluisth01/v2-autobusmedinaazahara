@@ -1,0 +1,213 @@
+/* slidergaleria.css */
+.slidergaleria-block {
+    padding: 40px 0;
+    position: relative;
+}
+
+
+
+.slider-galeria {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    visibility: hidden;
+    cursor: grab;
+}
+
+/* Estilos para el enlace debajo de la galería */
+.enlace-galeria-container {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.btn-enlace-galeria {
+    display: inline-block;
+    padding: 10px 85px;
+    background-color: #009CDD;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    box-shadow: 0px 2.5px 2.5px 0px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+    font-family: 'Duran-Bold';
+    font-size: 16px;
+}
+
+.btn-enlace-galeria:hover {
+    background-color: #007bb1;
+    color: #ffffff;
+}
+
+.slider-galeria.slick-initialized {
+    visibility: visible;
+}
+
+.slider-galeria:active {
+    cursor: grabbing;
+}
+
+.slide-grupo {
+    outline: none;
+}
+
+.grupo-imagenes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: space-around;
+}
+
+.imagen-grande {
+    width: 100%;
+    height: 500px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.imagenes-pequenas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+}
+
+.imagen-pequena {
+    height: 150px;
+    position: relative;
+}
+
+.imagen-pequena.placeholder {
+    visibility: hidden;
+}
+
+.imagen-grande img,
+.imagen-pequena img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+.imagen-grande:hover img,
+.imagen-pequena:hover img {
+    transition: transform 0.3s ease;
+}
+
+/* Icono de ampliar */
+.ampliar-icono {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background-image: url('https://dev.tictac-comunicacion.es/thepoint/wp-content/uploads/2025/05/Vector.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    z-index: 5;
+}
+
+/* Modal para imagen ampliada */
+.modal-galeria {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 99999999999999999999999999999;
+}
+
+.modal-contenido {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.modal-contenido img {
+    max-width: 100%;
+    max-height: 90vh;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Estilos para el modo columna de las imágenes pequeñas */
+.imagenes-pequenas.columna {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.imagenes-pequenas.columna .imagen-pequena {
+    height: auto;
+    flex: 1;
+}
+
+.imagen-pequena img{
+    height: 241px;
+}
+
+.slider-galeria:not(.slick-initialized) .slide-grupo {
+    display: block;
+    margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+    .grupo-imagenes {
+        flex-direction: row;
+    }
+    
+    .imagen-grande {
+        width: 48%;
+        margin-bottom: 0;
+        height: 500px;
+    }
+    
+    .imagenes-pequenas,
+    .imagenes-pequenas.columna {
+        width: 50%;
+    }
+}
+
+@media (max-width: 767px) {
+    .slidergaleria-block {
+        padding: 30px 0;
+    }
+    
+    .slidergaleria-block h2 {
+        font-size: 24px;
+    }
+    
+    .imagen-grande {
+        height: 200px;
+    }
+    
+    .imagen-pequena {
+        height: 120px;
+    }
+    
+    .imagenes-pequenas.columna .imagen-pequena {
+        height: 120px;
+    }
+}

@@ -1,0 +1,117 @@
+$border-color: #ffffff
+$color: #ffffff
+$background: rgba(32, 62, 44, 0.8)
+$green: rgba(32, 62, 44, 1)
+$grey: rgba(121, 121, 121, 0.6)
+.paginas
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    .container
+        width: 100%
+        max-width: 100%
+    .item
+        border-radius: 20px
+        overflow: hidden
+        position: relative
+        .content::before
+            content: ""
+            position: absolute
+            top: 0
+            left: 0
+            width: 100%
+            height: 100%
+            z-index: 1
+    .content
+        display: flex
+        flex-wrap: wrap
+        justify-content: center
+        align-items: center
+        position: relative
+        border-radius: 20px
+        overflow: hidden
+        .hover
+            position: absolute
+            width: 100%
+            height: 100%
+            display: flex
+            flex-wrap: wrap
+            justify-content: center
+            align-items: center
+            text-align: center
+            padding: 0
+            color: $color
+            opacity: 1
+            transition: all .2s linear
+            z-index: 9
+            min-height: 100px
+            cursor: pointer
+            z-index: 3
+            label
+                color: $color
+                width: 100%
+                font-size: 35px
+                font-weight: 500
+                line-height: normal
+                text-transform: uppercase
+                cursor: pointer
+                align-self: baseline
+                padding: 15px
+                background: $background
+                margin-top: 50px
+                margin-bottom: 0
+            span
+                color: $color
+                width: 100%
+                font-size: 35px
+                font-weight: 500
+                line-height: normal
+                text-transform: uppercase
+                cursor: pointer
+                align-self: baseline
+                padding: 6px 15px
+                background: $grey
+                margin-top: 114px
+                margin-bottom: 0
+            .excerpt
+                color: $color
+                text-align: center
+            .btn
+                align-self: flex-end
+                margin-bottom: 50px
+                font-weight: 600
+        .titulo_back
+            transition: all .2s linear
+                    
+    .img
+        width: 100%
+        height: 450px
+        display: flex
+        justify-content: center
+        align-items: center
+        z-index: 0
+        img
+            width: 100%
+            object-fit: cover
+    &.estilo2
+        .img
+            height: 515px
+        label
+            width: 100%
+            padding: 0 30px
+    span
+        color: $color
+        width: auto
+        font-size: 1.3rem
+        font-weight: 400
+        position: absolute
+    img
+        width: 100%
+        height: 100%
+        object-fit: contain
+@media (min-width: 768px)
+    .paginas .img
+        height: 700px
+            
+            
+            

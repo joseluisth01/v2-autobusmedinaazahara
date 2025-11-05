@@ -1,0 +1,277 @@
+$white: #FFFFFF
+$black: #000000
+$background-invert: #000000
+$color-invert: #ffffff
+$text-black: #000000
+$primary: #2E2D2C
+$green:#404521
+$green2: #867B2F
+$blue: #7879B7
+$blue2: #7879B7
+$purple: #7879B7
+$purple20: #F0F0F8
+$purple50: rgba(120, 121, 183, 0.50)
+$yellow: #FBD6BD
+$yellow50: rgba(251, 214, 189, 0.50)
+$brown: #87764E
+$red: #E25252
+$orange: #F8AE4B
+$gradient: linear-gradient(90deg, rgba(0,91,153,1) 0%, rgba(11,157,218,1) 100%)
+$grey: #4F4E4E
+$lightgrey: #D0D0D0
+$text: #565790
+$grey2: #CAC9C9
+
+/* Estilos para la imagen superior */
+.imagen-superior
+    width: 100%
+    display: flex
+    justify-content: center
+    margin-bottom: -1px /* Para eliminar el espacio entre la imagen y el bloque */
+    position: relative
+    z-index: 2
+    img
+        width: 100%
+        height: auto
+        object-fit: cover
+
+.texto_imagen3
+    width: 100%
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    position: relative
+    height: auto
+    color: #ffffff
+    overflow: hidden
+    background-color: #DFD3C3
+    &.inv
+        .texto
+            padding-right: 0
+    &:not(.inv)
+        .texto
+            padding-left: 50px
+    &.white
+        color: #000000
+        p
+            color: #000000
+    
+    /* Estilos cuando no hay imagen */
+    &.sin-imagen
+        .texto
+            width: 100%
+            padding-left: 20px
+            padding-right: 20px
+            .titulo, .subtitulo
+                text-align: center
+    
+    .container
+        display: flex
+        flex-wrap: wrap
+        justify-content: center
+        position: relative
+        height: auto
+        padding-top: 60px 
+        padding-bottom: 60px
+        /* Estilos para el contenedor del enlace */
+        .enlace-container
+            width: 100%
+            display: flex
+            justify-content: center
+            margin-top: 30px
+            a
+                width: auto
+                padding: 10px 20px
+                background-color: $primary
+                color: white !important
+                text-decoration: none
+                transition: all .3s ease
+                border-radius: 5px
+                box-shadow: 0px 2.5px 2.5px 0px #00000080
+
+                &:hover
+                    transform: translateY(-3px)
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.2)
+    .texto
+        width: 53%
+        display: flex
+        align-content: normal
+        text-align: left
+        padding: 0 20px
+        flex-direction: column
+        justify-content: center
+        gap: 0px !important
+        
+        /* Cuando el texto ocupa toda la pantalla (sin imagen) */
+        &.texto-completo
+            width: 100%
+            margin: 0 auto
+            text-align: center
+            
+            .titulo, .titulo h1, .titulo h2, .titulo h3, .titulo h4
+                text-align: center
+            
+            .subtitulo
+                text-align: center
+            
+            .contenido-texto p
+                text-align: center
+        
+        p
+            margin-bottom: 15px
+        img
+            display: block
+            width: 50%
+            max-width: 250px
+            margin: 0 auto
+            object-fit: contain
+        ol,ul
+            color: $primary
+        .titulo h2
+            font-family: 'Catchy-Mager' !important
+            font-style: normal !important
+            font-weight: 400 !important
+            font-size: 55px !important
+            line-height: 90% !important
+            letter-spacing: 0.05em !important
+            color: #1D1D1B !important
+
+        .titulo,.titulo h1,.titulo h2,.titulo h3,.titulo h4
+            margin-bottom: 10px
+            width: 100%
+            font-weight: 500
+            font-family: 'serif'
+            font-size: 50px
+            text-transform: uppercase
+            letter-spacing: 1px
+            text-align: left
+            margin: 0px !important
+        .subtitulo
+            font-size: 18px
+            line-height: normal
+            color: #333
+            font-weight: 400
+            text-align: left
+            margin-bottom: 20px
+            letter-spacing: 1px
+            width: 100%
+            h2
+                color: white !important
+                font-family: 'Duran-Regular' !important
+                font-size: 32px !important
+                text-transform: uppercase
+
+            h3
+                font-family: 'Duran-Regular'
+                font-style: normal
+                font-weight: 400
+                font-size: 28px
+                line-height: 110%
+                letter-spacing: 0.15em
+                color: #1D1D1B
+
+        & > p
+            width: 100%
+            text-align: left
+            a:not(.btn)
+                color: $yellow
+                transition: all .2s linear
+                font-weight: 600
+                &:hover
+                    color: $primary
+
+    .imagen
+        width: 47%
+        position: relative
+        height: auto
+        display: flex
+        img,iframe
+            width: 100%
+            height: auto
+            object-fit: cover
+            position: relative
+            border-radius: 20px
+            box-shadow: 0px 0px 6px 0px #00000059
+
+.texto_imagen3.inv
+    .imagen
+        order: 2
+
+@media (max-width: 1600px)
+    .texto_imagen3
+        .texto
+            padding: 20px
+            height: 100%
+            align-items: center
+
+@media (max-width: 1000px)
+    .texto_imagen3
+        .texto
+            width: 100%
+            padding: 20px
+            .titulo
+                margin-top: 25px
+                text-align: center !important
+                &::after
+                    margin-left: auto
+                    margin-right: auto
+                    margin-top: 15px
+            .subtitulo
+                text-align: center
+        .imagen
+            width: 100%
+            height: auto
+            max-height: 400px
+            justify-content: center
+            overflow: hidden
+            margin-bottom: 20px
+            img
+                height: 100%
+                object-fit: cover
+                
+    .texto_imagen3.inv
+        .imagen
+            order: 1
+        .texto
+            order: 2
+
+@media (max-width: 768px)
+    .texto_imagen3
+        .texto
+            padding: 15px
+            .titulo
+                font-size: 28px
+            .subtitulo
+                font-size: 16px
+        .imagen
+            max-height: 300px
+            
+@media (max-width: 500px)
+    .texto_imagen3
+        .texto
+            padding: 10px
+            .titulo
+                font-size: 24px
+            .subtitulo
+                font-size: 14px
+        .imagen
+            max-height: 100% !important
+
+
+.texto_imagen3 .contenido-texto p
+    font-family: 'Duran-Regular' !important
+    font-style: normal !important
+    font-weight: 400 !important
+    font-size: 15px !important
+    line-height: 22px !important
+    letter-spacing: 0.1em !important
+    color: white !important
+    text-align: left
+
+/* Ajuste para texto completo (sin imagen) */
+.texto_imagen3 .texto.texto-completo .contenido-texto p
+    text-align: center !important
+
+
+.texto_imagen3 .texto.texto-completo h1
+    text-align: center !important

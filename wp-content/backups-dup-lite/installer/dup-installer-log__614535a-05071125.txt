@@ -1,0 +1,1393 @@
+********************************************************************************
+* DUPLICATOR LITE: Install-Log
+* STEP-0 START @ 07:15:37
+* NOTICE: Do NOT post to public sites or forums!!
+********************************************************************************
+PACKAGE INFO________ ORIGINAL SERVER                        |CURRENT SERVER
+OS__________________: Linux                                 |Linux
+PHP VERSION_________: 8.2.29                                |8.1.33
+********************************************************************************
+CURRENT SERVER INFO
+PHP_________________: 8.1.33 | SAPI: litespeed
+PHP MEMORY__________: 4294967296 | SUHOSIN: disabled
+ARCHITECTURE________: 64-bit
+SERVER______________: LiteSpeed
+DOC ROOT____________: "/home/autobusv2/public_html"
+REQUEST URL_________: "https://v2.autobusmedinaazahara.com"
+********************************************************************************
+OVERWRITE PARAMS
+ *** FROM PACKAGE
+PARAM SET KEY[blogname]
+********************************************************************************
+MAINTENANCE MODE DISABLE
+INSTALLER INFO
+
+TEMPLATE____________: "base"
+SECURE MODE_________: "none"
+URL PLUGINS_________: https://dev-tictac.com/bravobravo2parteback/wp-content/plugins
+VALIDATE ON START___: "normal"
+PATH_NEW____________: "/home/autobusv2/public_html"
+URL_NEW_____________: "https://v2.autobusmedinaazahara.com"
+********************************************************************************
+ARCHIVE INFO
+
+ARCHIVE NAME________: "/home/autobusv2/public_html/ult3_[HASH]_20251105071125_archive.zip"
+ARCHIVE SIZE________: 255.27MB
+CREATED_____________: 2025-11-05 07:11:25
+WP VERSION__________: 6.8.3
+DUP VERSION_________: 1.5.12
+LICENSE_____________: Free version
+DB VERSION__________: 10.6.22
+DB FILE SIZE________: 20.45MB
+DB TABLES___________: 98
+DB ROWS_____________: 27282
+URL HOME____________: https://dev-tictac.com/bravobravo2parteback
+URL CORE____________: https://dev-tictac.com/bravobravo2parteback
+URL CONTENT_________: https://dev-tictac.com/bravobravo2parteback/wp-content
+URL UPLOAD__________: https://dev-tictac.com/bravobravo2parteback/wp-content/uploads
+URL PLUGINS_________: https://dev-tictac.com/bravobravo2parteback/wp-content/plugins
+URL MU PLUGINS______: https://dev-tictac.com/bravobravo2parteback/wp-content/mu-plugins
+URL THEMES__________: https://dev-tictac.com/bravobravo2parteback/wp-content/themes
+PATH HOME___________: /var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback
+PATH ABS____________: /var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback
+PATH WPCONFIG_______: /var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback
+PATH WPCONTENT______: /var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback/wp-content
+PATH UPLOADS________: /var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback/wp-content/uploads
+PATH PLUGINS________: /var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback/wp-content/plugins
+PATH MUPLUGINS______: /var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback/wp-content/mu-plugins
+PATH THEMES_________: /var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback/wp-content/themes
+
+SUBSITES
+SUBSITE [ID:   1] "dev-tictac.com/bravobravo2parteback/"
+
+PLUGINS
+PLUGIN [SLUG:advanced-custom-fields-pro/acf.php                ][ON:true ]  Advanced Custom Fields PRO
+PLUGIN [SLUG:all-in-one-wp-migration/all-in-one-wp-migration.php][ON:true ]  All-in-One WP Migration and Backup
+PLUGIN [SLUG:better-search-replace/better-search-replace.php   ][ON:true ]  Better Search Replace
+PLUGIN [SLUG:complianz-gdpr/complianz-gpdr.php                 ][ON:false]  Complianz | GDPR/CCPA Cookie Consent
+PLUGIN [SLUG:contact-form-7/wp-contact-form-7.php              ][ON:true ]  Contact Form 7
+PLUGIN [SLUG:duplicator/duplicator.php                         ][ON:true ]  Duplicator
+PLUGIN [SLUG:gtranslate/gtranslate.php                         ][ON:true ]  GTranslate
+PLUGIN [SLUG:litespeed-cache/litespeed-cache.php               ][ON:true ]  LiteSpeed Cache
+PLUGIN [SLUG:maintenance/maintenance.php                       ][ON:true ]  Maintenance
+PLUGIN [SLUG:seo-by-rank-math/rank-math.php                    ][ON:true ]  Rank Math SEO
+PLUGIN [SLUG:seo-by-rank-math-pro/rank-math-pro.php            ][ON:true ]  Rank Math SEO PRO
+PLUGIN [SLUG:sistema-reservas/sistema-reservas.php             ][ON:true ]  Sistema de Reservas
+PLUGIN [SLUG:wordfence/wordfence.php                           ][ON:true ]  Wordfence Security
+PLUGIN [SLUG:wp-file-manager/file_folder_manager.php           ][ON:true ]  WP File Manager
+
+********************************************************************************
+[PHP ERR][E_NOTICE] MSG:ob_end_clean(): Failed to delete buffer. No buffer to delete [CODE:8|FILE:/home/autobusv2/public_html/dup-installer/main.installer.php|LINE:88]
+LOG-TIME[/home/autobusv2/public_html/dup-installer/ctrls/ctrl.base.php:227][DELTA:   0.11341]  MESSAGE:END RENDER PAGE
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+SECURITY CHECK:  Security Check Validation - No Token Found
+	FILE:/home/autobusv2/public_html/dup-installer/classes/config/class.security.php[252]
+	TRACE:
+#0 /home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php(84): DUPX_Security->check()
+#1 /home/autobusv2/public_html/dup-installer/main.installer.php(55): Duplicator\Installer\Core\Bootstrap::init()
+#2 {main}
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [sparam_s1] START
+AJAX ACTION [sparam_s1] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+STEP ACTION: "on-validate"
+[PHP ERR][E_NOTICE] MSG:ob_end_clean(): Failed to delete buffer. No buffer to delete [CODE:8|FILE:/home/autobusv2/public_html/dup-installer/main.installer.php|LINE:88]
+LOG-TIME[/home/autobusv2/public_html/dup-installer/ctrls/ctrl.base.php:227][DELTA:   0.06821]  MESSAGE:END RENDER PAGE
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [validate] START
+START TEST "Archive Check" [CLASS: DUPX_Validation_test_archive_check]
+LOG-TIME[DELTA:   0.00004]  MESSAGE:TEST "Archive Check" RESULT: passed
+
+START TEST "Duplicator importer version" [CLASS: DUPX_Validation_test_importer_version]
+LOG-TIME[DELTA:   0.00002]  MESSAGE:TEST "Duplicator importer version" RESULT: skip
+
+START TEST "Overwrite Install" [CLASS: DUPX_Validation_test_owrinstall]
+LOG-TIME[DELTA:   0.00002]  MESSAGE:TEST "Overwrite Install" RESULT: skip
+
+START TEST "Recovery Point" [CLASS: DUPX_Validation_test_recovery]
+LOG-TIME[DELTA:   0.00001]  MESSAGE:TEST "Recovery Point" RESULT: skip
+
+START TEST "Package is Importable" [CLASS: DUPX_Validation_test_importable]
+LOG-TIME[DELTA:   0.00001]  MESSAGE:TEST "Package is Importable" RESULT: skip
+
+START TEST "REST API test" [CLASS: DUPX_Validation_test_rest_api]
+LOG-TIME[DELTA:   0.00001]  MESSAGE:TEST "REST API test" RESULT: skip
+
+START TEST "Manual extraction detected" [CLASS: DUPX_Validation_test_manual_extraction]
+LOG-TIME[DELTA:   0.00003]  MESSAGE:TEST "Manual extraction detected" RESULT: good
+
+START TEST "Database Only" [CLASS: DUPX_Validation_test_dbonly_iswordpress]
+LOG-TIME[DELTA:   0.00002]  MESSAGE:TEST "Database Only" RESULT: skip
+
+START TEST "Package Age" [CLASS: DUPX_Validation_test_package_age]
+LOG-TIME[DELTA:   0.00006]  MESSAGE:TEST "Package Age" RESULT: good
+
+START TEST "Package Size" [CLASS: DUPX_Validation_test_package_size]
+LOG-TIME[DELTA:   0.00003]  MESSAGE:TEST "Package Size" RESULT: good
+
+START TEST "Replace PATHs in database" [CLASS: DUPX_Validation_test_replace_paths]
+LOG-TIME[DELTA:   0.00002]  MESSAGE:TEST "Replace PATHs in database" RESULT: skip
+
+START TEST "Managed hosting supported" [CLASS: DUPX_Validation_test_managed_supported]
+LOG-TIME[DELTA:   0.00003]  MESSAGE:TEST "Managed hosting supported" RESULT: skip
+
+START TEST "Siteground" [CLASS: DUPX_Validation_test_siteground]
+LOG-TIME[DELTA:   0.00012]  MESSAGE:TEST "Siteground" RESULT: skip
+
+START TEST "Addon Sites" [CLASS: DUPX_Validation_test_addon_sites]
+--------------------------------------
+PATHS MAPPING : "/home/autobusv2/public_html"
+--------------------------------------
+LOG-TIME[DELTA:   0.00771]  MESSAGE:TEST "Addon Sites" RESULT: good
+
+START TEST "Wordfence" [CLASS: DUPX_Validation_test_wordfence]
+LOG-TIME[DELTA:   0.00028]  MESSAGE:TEST "Wordfence" RESULT: good
+
+START TEST "Table prefix of managed hosting" [CLASS: DUPX_Validation_test_managed_tprefix]
+LOG-TIME[DELTA:   0.00004]  MESSAGE:TEST "Table prefix of managed hosting" RESULT: skip
+
+START TEST "PHP Version Mismatch" [CLASS: DUPX_Validation_test_php_version]
+LOG-TIME[DELTA:   0.00002]  MESSAGE:TEST "PHP Version Mismatch" RESULT: good
+
+START TEST "PHP Open Base" [CLASS: DUPX_Validation_test_open_basedir]
+LOG-TIME[DELTA:   0.00001]  MESSAGE:TEST "PHP Open Base" RESULT: good
+
+START TEST "PHP Memory Limit" [CLASS: DUPX_Validation_test_memory_limit]
+LOG-TIME[DELTA:   0.00003]  MESSAGE:TEST "PHP Memory Limit" RESULT: good
+
+START TEST "PHP Extensions" [CLASS: DUPX_Validation_test_extensions]
+LOG-TIME[DELTA:   0.00002]  MESSAGE:TEST "PHP Extensions" RESULT: good
+
+START TEST "PHP Mysqli" [CLASS: DUPX_Validation_test_mysql_connect]
+LOG-TIME[DELTA:   0.00001]  MESSAGE:TEST "PHP Mysqli" RESULT: passed
+
+START TEST "PHP Tokenizer" [CLASS: DUPX_Validation_test_tokenizer]
+LOG-TIME[DELTA:   0.00001]  MESSAGE:TEST "PHP Tokenizer" RESULT: passed
+
+START TEST "PHP Timeout" [CLASS: DUPX_Validation_test_timeout]
+LOG-TIME[DELTA:   0.00002]  MESSAGE:TEST "PHP Timeout" RESULT: good
+
+START TEST "Disk Space" [CLASS: DUPX_Validation_test_disk_space]
+LOG-TIME[DELTA:   0.01128]  MESSAGE:TEST "Disk Space" RESULT: good
+
+START TEST "Permissions: General" [CLASS: DUPX_Validation_test_iswritable]
+LOG-TIME[DELTA:   0.00581]  MESSAGE:TEST "Permissions: General" RESULT: passed
+
+START TEST "Permissions: Configs Files " [CLASS: DUPX_Validation_test_iswritable_configs]
+LOG-TIME[DELTA:   0.00007]  MESSAGE:TEST "Permissions: Configs Files " RESULT: passed
+
+START TEST "Host Name" [CLASS: DUPX_Validation_test_db_host_name]
+LOG-TIME[DELTA:   0.00003]  MESSAGE:TEST "Host Name" RESULT: passed
+
+START TEST "Host Connection" [CLASS: DUPX_Validation_test_db_connection]
+LOG-TIME[DELTA:   0.00025]  MESSAGE:TEST "Host Connection" RESULT: passed
+
+START TEST "Database Version" [CLASS: DUPX_Validation_test_db_version]
+LOG-TIME[DELTA:   0.00128]  MESSAGE:TEST "Database Version" RESULT: passed
+
+START TEST "Create New Database" [CLASS: DUPX_Validation_test_db_create]
+LOG-TIME[DELTA:   0.00002]  MESSAGE:TEST "Create New Database" RESULT: skip
+
+START TEST "Database Engine Support" [CLASS: DUPX_Validation_test_db_supported_engine]
+LOG-TIME[DELTA:   0.00022]  MESSAGE:TEST "Database Engine Support" RESULT: passed
+
+START TEST "Database GTID Mode" [CLASS: DUPX_Validation_test_db_gtid_mode]
+LOG-TIME[DELTA:   0.00012]  MESSAGE:TEST "Database GTID Mode" RESULT: passed
+
+START TEST "Privileges: User Visibility" [CLASS: DUPX_Validation_test_db_visibility]
+LOG-TIME[DELTA:   0.00007]  MESSAGE:TEST "Privileges: User Visibility" RESULT: passed
+
+START TEST "Manual Table Check" [CLASS: DUPX_Validation_test_db_manual_tabels_count]
+LOG-TIME[DELTA:   0.00002]  MESSAGE:TEST "Manual Table Check" RESULT: skip
+
+START TEST "Multiple WordPress Installs" [CLASS: DUPX_Validation_test_db_multiple_wp_installs]
+LOG-TIME[DELTA:   0.00039]  MESSAGE:TEST "Multiple WordPress Installs" RESULT: passed
+
+START TEST "Privileges: User Resources" [CLASS: DUPX_Validation_test_db_user_resources]
+DB QUERY [ERROR][/home/autobusv2/public_html/dup-installer/classes/database/class.db.php:645] MSG: SELECT command denied to user 'autobusv2_user'@'localhost' for table `mysql`.`user`
+	SQL: SELECT max_questions, max_updates, max_connections FROM mysql.user WHERE user = 'autobusv2_user' AND host = 'localhost'
+TRACE[1] CLASS___: DUPX_DB::mysqli_query      FILE: /home/autobusv2/public_html/dup-installer/classes/validation/class.validation.database.service.php[763]
+TRACE[2] CLASS___: DUPX_Validation_database_service->getUserResources FILE: /home/autobusv2/public_html/dup-installer/classes/validation/database-tests/class.validation.test.db.user.resources.php[28]
+TRACE[3] CLASS___: DUPX_Validation_test_db_user_resources->runTest FILE: /home/autobusv2/public_html/dup-installer/classes/validation/class.validation.abstract.item.php[46]
+TRACE[4] CLASS___: DUPX_Validation_abstract_item->test FILE: /home/autobusv2/public_html/dup-installer/classes/validation/class.validation.manager.php[232]
+TRACE[5] CLASS___: DUPX_Validation_manager->runTests FILE: /home/autobusv2/public_html/dup-installer/classes/validation/class.validation.manager.php[205]
+TRACE[6] CLASS___: DUPX_Validation_manager->getValidateData FILE: /home/autobusv2/public_html/dup-installer/ctrls/classes/class.ctrl.ajax.php[173]
+TRACE[7] CLASS___: DUPX_Ctrl_ajax::actions    FILE: /home/autobusv2/public_html/dup-installer/ctrls/classes/class.ctrl.ajax.php[95]
+TRACE[8] CLASS___: DUPX_Ctrl_ajax::controller FILE: /home/autobusv2/public_html/dup-installer/main.installer.php[60]
+
+LOG-TIME[DELTA:   0.00023]  MESSAGE:TEST "Privileges: User Resources" RESULT: passed
+
+START TEST "Privileges: User Table Access" [CLASS: DUPX_Validation_test_db_user_perms]
+LOG-TIME[DELTA:   0.00555]  MESSAGE:TEST "Privileges: User Table Access" RESULT: passed
+
+START TEST "Privileges: 'Show Variables' Query" [CLASS: DUPX_Validation_test_db_custom_queries]
+LOG-TIME[DELTA:   0.00067]  MESSAGE:TEST "Privileges: 'Show Variables' Query" RESULT: passed
+
+START TEST "Source Database Triggers" [CLASS: DUPX_Validation_test_db_triggers]
+LOG-TIME[DELTA:   0.00002]  MESSAGE:TEST "Source Database Triggers" RESULT: passed
+
+START TEST "Character Set and Collation Support" [CLASS: DUPX_Validation_test_db_supported_default_charset]
+LOG-TIME[DELTA:   0.00138]  MESSAGE:TEST "Character Set and Collation Support" RESULT: passed
+
+START TEST "Character Set and  Collation Capability" [CLASS: DUPX_Validation_test_db_supported_charset]
+LOG-TIME[DELTA:   0.00020]  MESSAGE:TEST "Character Set and  Collation Capability" RESULT: passed
+
+START TEST "Tables Case Sensitivity" [CLASS: DUPX_Validation_test_db_case_sensitive_tables]
+LOG-TIME[DELTA:   0.00003]  MESSAGE:TEST "Tables Case Sensitivity" RESULT: skip
+
+START TEST "Tables Flagged for Removal or Backup" [CLASS: DUPX_Validation_test_db_affected_tables]
+LOG-TIME[DELTA:   0.00041]  MESSAGE:TEST "Tables Flagged for Removal or Backup" RESULT: passed
+
+START TEST "Prefix too long" [CLASS: DUPX_Validation_test_db_prefix_too_long]
+LOG-TIME[DELTA:   0.00017]  MESSAGE:TEST "Prefix too long" RESULT: passed
+
+START TEST "Database cleanup" [CLASS: DUPX_Validation_test_db_cleanup]
+LOG-TIME[DELTA:   0.00001]  MESSAGE:TEST "Database cleanup" RESULT: skip
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+SECURITY CHECK:  Security Check Validation - No Token Found
+	FILE:/home/autobusv2/public_html/dup-installer/classes/config/class.security.php[252]
+	TRACE:
+#0 /home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php(84): DUPX_Security->check()
+#1 /home/autobusv2/public_html/dup-installer/main.installer.php(55): Duplicator\Installer\Core\Bootstrap::init()
+#2 {main}
+
+
+CTRL PARAMS AFTER VALIDATION
+AJAX ACTION [validate] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [proceed_confirm_dialog] START
+AJAX ACTION [proceed_confirm_dialog] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [sparam_s1] START
+AJAX ACTION [sparam_s1] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [extract] START
+INITIALIZE FILTERS
+--------------------------------------
+PATHS MAPPING : "/home/autobusv2/public_html"
+--------------------------------------
+********************************************************************************
+* DUPLICATOR LITE: Install-Log
+* STEP-1 START @ 07:17:04
+* NOTICE: Do NOT post to public sites or forums!!
+********************************************************************************
+USER INPUTS
+INSTALL TYPE________: single site
+BLOG NAME___________: "AUTOCARES BRAVO"
+HOME URL NEW________: "https://v2.autobusmedinaazahara.com"
+SITE URL NEW________: "https://v2.autobusmedinaazahara.com"
+CONTENT URL NEW_____: "https://v2.autobusmedinaazahara.com/wp-content"
+UPLOAD URL NEW______: "https://v2.autobusmedinaazahara.com/wp-content/uploads"
+PLUGINS URL NEW_____: "https://v2.autobusmedinaazahara.com/wp-content/plugins"
+MUPLUGINS URL NEW___: "https://v2.autobusmedinaazahara.com/wp-content/mu-plugins"
+HOME PATH NEW_______: "/home/autobusv2/public_html"
+SITE PATH NEW_______: "/home/autobusv2/public_html"
+CONTENT PATH NEW____: "/home/autobusv2/public_html/wp-content"
+UPLOAD PATH NEW_____: "/home/autobusv2/public_html/wp-content/uploads"
+PLUGINS PATH NEW____: "/home/autobusv2/public_html/wp-content/plugins"
+MUPLUGINS PATH NEW__: "/home/autobusv2/public_html/wp-content/mu-plugins"
+ARCHIVE ACTION______: "donothing"
+SKIP WP FILES_______: "none"
+ARCHIVE ENGINE______: "ziparchivechunking"
+SET DIR PERMS_______: true
+DIR PERMS VALUE_____: 0755
+SET FILE PERMS______: true
+FILE PERMS VALUE____: 0644
+SAFE MODE___________: 0
+LOGGING_____________: 1
+ZIP THROTTLING______: false
+WP CONFIG___________: "modify"
+HTACCESS CONFIG_____: "new"
+OTHER CONFIG________: "new"
+FILE TIME___________: "current"
+********************************************************************************
+
+REMOVE FILTERS
+	DIR : "/home/autobusv2/public_html/dup-installer"
+	FILE: "/home/autobusv2/public_html/ult3_[HASH]_20251105071125_installer-backup.php"
+	FILE: "/home/autobusv2/public_html/ult3_[HASH]_20251105071125_archive.zip"
+	FILE: "/home/autobusv2/public_html/installer.php"
+	FILE: "/home/autobusv2/public_html/dup-installer-bootlog__614535a-05071125.txt"
+EXTRACTION FILTERS
+	DIR : "dup-installer"
+	FILE: "ult3_[HASH]_20251105071125_installer-backup.php"
+--------------------------------------
+
+
+EXTRACTION: ZIP CHUNKING >>> START
+MAINTENANCE MODE ENABLE
+BEFORE EXTRACION ACTIONS
+
+*** RESET CONFIG FILES IN CURRENT HOSTING >>> START
+RESET CONFIG FILES: I'M GOING TO MOVE CONFIG FILE ".htaccess" IN ORIGINAL FOLDER
+	CONFIG FILE HAS BEEN RESET
+
+*** RESET CONFIG FILES IN CURRENT HOSTING >>> END
+MAINTENANCE MODE ENABLE
+
+*** CREATE FOLDER AND PERMISSION PREPARE
+FOLDER PREPARE DONE
+ARCHIVE OFFSET 0
+CHUNK COMPLETE - RUNTIME: 5.3893 sec. - Files processed: 4,226 of 15,486
+AJAX ACTION [extract] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [extract] START
+MAINTENANCE MODE ENABLE
+ARCHIVE OFFSET 4226
+--------------------------------------
+PATHS MAPPING : "/home/autobusv2/public_html"
+--------------------------------------
+CHUNK COMPLETE - RUNTIME: 5.0086 sec. - Files processed: 5,989 of 15,486
+AJAX ACTION [extract] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [extract] START
+MAINTENANCE MODE ENABLE
+ARCHIVE OFFSET 5989
+--------------------------------------
+PATHS MAPPING : "/home/autobusv2/public_html"
+--------------------------------------
+CHUNK COMPLETE - RUNTIME: 5.0168 sec. - Files processed: 6,504 of 15,486
+AJAX ACTION [extract] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [extract] START
+MAINTENANCE MODE ENABLE
+ARCHIVE OFFSET 6504
+--------------------------------------
+PATHS MAPPING : "/home/autobusv2/public_html"
+--------------------------------------
+CHUNK COMPLETE - RUNTIME: 6.1175 sec. - Files processed: 6,753 of 15,486
+AJAX ACTION [extract] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [extract] START
+MAINTENANCE MODE ENABLE
+ARCHIVE OFFSET 6753
+--------------------------------------
+PATHS MAPPING : "/home/autobusv2/public_html"
+--------------------------------------
+CHUNK COMPLETE - RUNTIME: 5.0055 sec. - Files processed: 7,174 of 15,486
+AJAX ACTION [extract] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [extract] START
+MAINTENANCE MODE ENABLE
+ARCHIVE OFFSET 7174
+--------------------------------------
+PATHS MAPPING : "/home/autobusv2/public_html"
+--------------------------------------
+CHUNK COMPLETE - RUNTIME: 5.0196 sec. - Files processed: 9,890 of 15,486
+AJAX ACTION [extract] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [extract] START
+MAINTENANCE MODE ENABLE
+ARCHIVE OFFSET 9890
+--------------------------------------
+PATHS MAPPING : "/home/autobusv2/public_html"
+--------------------------------------
+CHUNK COMPLETE - RUNTIME: 5.0644 sec. - Files processed: 12,306 of 15,486
+AJAX ACTION [extract] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [extract] START
+MAINTENANCE MODE ENABLE
+ARCHIVE OFFSET 12306
+--------------------------------------
+PATHS MAPPING : "/home/autobusv2/public_html"
+--------------------------------------
+CHUNK COMPLETE - RUNTIME: 5.0218 sec. - Files processed: 14,699 of 15,486
+AJAX ACTION [extract] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [extract] START
+MAINTENANCE MODE ENABLE
+ARCHIVE OFFSET 14699
+--------------------------------------
+PATHS MAPPING : "/home/autobusv2/public_html"
+--------------------------------------
+FILE EXTRACTION: done processing last file in list of 16093
+
+EXTRACTION: ZIP CHUNKING >>> DONE
+
+EXTRACTION COMPLETE @ 07:17:48 - RUNTIME: 44.1768 sec. - Files processed: 15,486 of 15,486
+AJAX ACTION [extract] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [dbinstall] START
+ADD PREFIX META MAP ID 0 wp_
+
+
+
+********************************************************************************
+* DUPLICATOR LITE: INSTALL-LOG
+* STEP-2 START @ 07:17:48
+* NOTICE: Do NOT post to public sites or forums!!
+********************************************************************************
+USER INPUTS
+DB ENGINE___________: "chunk"
+VIEW MODE___________: "basic"
+DB ACTION___________: "empty"
+DB HOST_____________: "**OBSCURED**"
+DB NAME_____________: "**OBSCURED**"
+DB PASS_____________: "**OBSCURED**"
+DB PORT_____________: "**OBSCURED**"
+USER MODE___________: "overwrite"
+TABLE PREFIX________: "wp_"
+MYSQL MODE__________: "DEFAULT"
+MYSQL MODE OPTS_____: ""
+CHARSET_____________: "utf8mb4"
+COLLATE_____________: ""
+CUNKING_____________: true
+VIEW CREATION_______: true
+STORED PROCEDURE____: true
+FUNCTIONS___________: true
+REMOVE DEFINER______: false
+SPLIT CREATES_______: true
+--------------------------------------
+TABLES
+--------------------------------------
+TABLE "wp_actionscheduler_actions"______________________[ROWS:      81] [EXTRACT|REPLACE] [INST NAME: wp_actionscheduler_actions]
+TABLE "wp_actionscheduler_claims"_______________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_actionscheduler_claims]
+TABLE "wp_actionscheduler_groups"_______________________[ROWS:       5] [EXTRACT|REPLACE] [INST NAME: wp_actionscheduler_groups]
+TABLE "wp_actionscheduler_logs"_________________________[ROWS:     246] [EXTRACT|REPLACE] [INST NAME: wp_actionscheduler_logs]
+TABLE "wp_cmplz_cookiebanners"__________________________[ROWS:       1] [EXTRACT|REPLACE] [INST NAME: wp_cmplz_cookiebanners]
+TABLE "wp_cmplz_cookies"________________________________[ROWS:      40] [EXTRACT|REPLACE] [INST NAME: wp_cmplz_cookies]
+TABLE "wp_cmplz_dnsmpd"_________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_cmplz_dnsmpd]
+TABLE "wp_cmplz_services"_______________________________[ROWS:      16] [EXTRACT|REPLACE] [INST NAME: wp_cmplz_services]
+TABLE "wp_commentmeta"__________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_commentmeta]
+TABLE "wp_comments"_____________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_comments]
+TABLE "wp_duplicator_packages"__________________________[ROWS:       5] [EXTRACT|REPLACE] [INST NAME: wp_duplicator_packages]
+TABLE "wp_links"________________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_links]
+TABLE "wp_litespeed_url"________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_litespeed_url]
+TABLE "wp_litespeed_url_file"___________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_litespeed_url_file]
+TABLE "wp_options"______________________________________[ROWS:    1999] [EXTRACT|REPLACE] [INST NAME: wp_options]
+TABLE "wp_postmeta"_____________________________________[ROWS:     458] [EXTRACT|REPLACE] [INST NAME: wp_postmeta]
+TABLE "wp_posts"________________________________________[ROWS:     302] [EXTRACT|REPLACE] [INST NAME: wp_posts]
+TABLE "wp_rank_math_analytics_objects"__________________[ROWS:      12] [EXTRACT|REPLACE] [INST NAME: wp_rank_math_analytics_objects]
+TABLE "wp_rank_math_internal_links"_____________________[ROWS:      33] [EXTRACT|REPLACE] [INST NAME: wp_rank_math_internal_links]
+TABLE "wp_rank_math_internal_meta"______________________[ROWS:      21] [EXTRACT|REPLACE] [INST NAME: wp_rank_math_internal_meta]
+TABLE "wp_reservas_agencies"____________________________[ROWS:       4] [EXTRACT|REPLACE] [INST NAME: wp_reservas_agencies]
+TABLE "wp_reservas_agency_horarios_disabled"____________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_reservas_agency_horarios_disabled]
+TABLE "wp_reservas_agency_services"_____________________[ROWS:       4] [EXTRACT|REPLACE] [INST NAME: wp_reservas_agency_services]
+TABLE "wp_reservas_configuration"_______________________[ROWS:      38] [EXTRACT|REPLACE] [INST NAME: wp_reservas_configuration]
+TABLE "wp_reservas_discount_rules"______________________[ROWS:       1] [EXTRACT|REPLACE] [INST NAME: wp_reservas_discount_rules]
+TABLE "wp_reservas_rapidas"_____________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_reservas_rapidas]
+TABLE "wp_reservas_reservas"____________________________[ROWS:     104] [EXTRACT|REPLACE] [INST NAME: wp_reservas_reservas]
+TABLE "wp_reservas_servicios"___________________________[ROWS:      11] [EXTRACT|REPLACE] [INST NAME: wp_reservas_servicios]
+TABLE "wp_reservas_users"_______________________________[ROWS:       2] [EXTRACT|REPLACE] [INST NAME: wp_reservas_users]
+TABLE "wp_reservas_visitas"_____________________________[ROWS:      27] [EXTRACT|REPLACE] [INST NAME: wp_reservas_visitas]
+TABLE "wp_termmeta"_____________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_termmeta]
+TABLE "wp_terms"________________________________________[ROWS:      16] [EXTRACT|REPLACE] [INST NAME: wp_terms]
+TABLE "wp_term_relationships"___________________________[ROWS:       3] [EXTRACT|REPLACE] [INST NAME: wp_term_relationships]
+TABLE "wp_term_taxonomy"________________________________[ROWS:      16] [EXTRACT|REPLACE] [INST NAME: wp_term_taxonomy]
+TABLE "wp_usermeta"_____________________________________[ROWS:      37] [EXTRACT|REPLACE] [INST NAME: wp_usermeta]
+TABLE "wp_users"________________________________________[ROWS:       1] [EXTRACT|REPLACE] [INST NAME: wp_users]
+TABLE "wp_wc_admin_notes"_______________________________[ROWS:      65] [EXTRACT|REPLACE] [INST NAME: wp_wc_admin_notes]
+TABLE "wp_wc_admin_note_actions"________________________[ROWS:      93] [EXTRACT|REPLACE] [INST NAME: wp_wc_admin_note_actions]
+TABLE "wp_wc_category_lookup"___________________________[ROWS:       1] [EXTRACT|REPLACE] [INST NAME: wp_wc_category_lookup]
+TABLE "wp_wc_customer_lookup"___________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_customer_lookup]
+TABLE "wp_wc_download_log"______________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_download_log]
+TABLE "wp_wc_orders"____________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_orders]
+TABLE "wp_wc_orders_meta"_______________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_orders_meta]
+TABLE "wp_wc_order_addresses"___________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_order_addresses]
+TABLE "wp_wc_order_coupon_lookup"_______________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_order_coupon_lookup]
+TABLE "wp_wc_order_operational_data"____________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_order_operational_data]
+TABLE "wp_wc_order_product_lookup"______________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_order_product_lookup]
+TABLE "wp_wc_order_stats"_______________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_order_stats]
+TABLE "wp_wc_order_tax_lookup"__________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_order_tax_lookup]
+TABLE "wp_wc_product_attributes_lookup"_________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_product_attributes_lookup]
+TABLE "wp_wc_product_download_directories"______________[ROWS:       2] [EXTRACT|REPLACE] [INST NAME: wp_wc_product_download_directories]
+TABLE "wp_wc_product_meta_lookup"_______________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_product_meta_lookup]
+TABLE "wp_wc_rate_limits"_______________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_rate_limits]
+TABLE "wp_wc_reserved_stock"____________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_reserved_stock]
+TABLE "wp_wc_tax_rate_classes"__________________________[ROWS:       2] [EXTRACT|REPLACE] [INST NAME: wp_wc_tax_rate_classes]
+TABLE "wp_wc_webhooks"__________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wc_webhooks]
+TABLE "wp_wfauditevents"________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wfauditevents]
+TABLE "wp_wfblockediplog"_______________________________[ROWS:       1] [EXTRACT|REPLACE] [INST NAME: wp_wfblockediplog]
+TABLE "wp_wfblocks7"____________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wfblocks7]
+TABLE "wp_wfconfig"_____________________________________[ROWS:     281] [EXTRACT|REPLACE] [INST NAME: wp_wfconfig]
+TABLE "wp_wfcrawlers"___________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wfcrawlers]
+TABLE "wp_wffilechanges"________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wffilechanges]
+TABLE "wp_wffilemods"___________________________________[ROWS:   10883] [EXTRACT|REPLACE] [INST NAME: wp_wffilemods]
+TABLE "wp_wfhits"_______________________________________[ROWS:      13] [EXTRACT|REPLACE] [INST NAME: wp_wfhits]
+TABLE "wp_wfhoover"_____________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wfhoover]
+TABLE "wp_wfissues"_____________________________________[ROWS:      13] [EXTRACT|REPLACE] [INST NAME: wp_wfissues]
+TABLE "wp_wfknownfilelist"______________________________[ROWS:   10884] [EXTRACT|REPLACE] [INST NAME: wp_wfknownfilelist]
+TABLE "wp_wflivetraffichuman"___________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wflivetraffichuman]
+TABLE "wp_wflocs"_______________________________________[ROWS:       1] [EXTRACT|REPLACE] [INST NAME: wp_wflocs]
+TABLE "wp_wflogins"_____________________________________[ROWS:      44] [EXTRACT|REPLACE] [INST NAME: wp_wflogins]
+TABLE "wp_wfls_2fa_secrets"_____________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wfls_2fa_secrets]
+TABLE "wp_wfls_role_counts"_____________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wfls_role_counts]
+TABLE "wp_wfls_settings"________________________________[ROWS:      30] [EXTRACT|REPLACE] [INST NAME: wp_wfls_settings]
+TABLE "wp_wfnotifications"______________________________[ROWS:       3] [EXTRACT|REPLACE] [INST NAME: wp_wfnotifications]
+TABLE "wp_wfpendingissues"______________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wfpendingissues]
+TABLE "wp_wfreversecache"_______________________________[ROWS:       1] [EXTRACT|REPLACE] [INST NAME: wp_wfreversecache]
+TABLE "wp_wfsecurityevents"_____________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wfsecurityevents]
+TABLE "wp_wfsnipcache"__________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wfsnipcache]
+TABLE "wp_wfstatus"_____________________________________[ROWS:     912] [EXTRACT|REPLACE] [INST NAME: wp_wfstatus]
+TABLE "wp_wftrafficrates"_______________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wftrafficrates]
+TABLE "wp_wfwaffailures"________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wfwaffailures]
+TABLE "wp_woocommerce_api_keys"_________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_api_keys]
+TABLE "wp_woocommerce_attribute_taxonomies"_____________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_attribute_taxonomies]
+TABLE "wp_woocommerce_downloadable_product_permissions"_[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_downloadable_product_permissions]
+TABLE "wp_woocommerce_log"______________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_log]
+TABLE "wp_woocommerce_order_itemmeta"___________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_order_itemmeta]
+TABLE "wp_woocommerce_order_items"______________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_order_items]
+TABLE "wp_woocommerce_payment_tokenmeta"________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_payment_tokenmeta]
+TABLE "wp_woocommerce_payment_tokens"___________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_payment_tokens]
+TABLE "wp_woocommerce_sessions"_________________________[ROWS:       1] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_sessions]
+TABLE "wp_woocommerce_shipping_zones"___________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_shipping_zones]
+TABLE "wp_woocommerce_shipping_zone_locations"__________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_shipping_zone_locations]
+TABLE "wp_woocommerce_shipping_zone_methods"____________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_shipping_zone_methods]
+TABLE "wp_woocommerce_tax_rates"________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_tax_rates]
+TABLE "wp_woocommerce_tax_rate_locations"_______________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_woocommerce_tax_rate_locations]
+TABLE "wp_wpfm_backup"__________________________________[ROWS:       0] [EXTRACT|REPLACE] [INST NAME: wp_wpfm_backup]
+TABLE "wp_wpmailsmtp_debug_events"______________________[ROWS:      11] [EXTRACT|REPLACE] [INST NAME: wp_wpmailsmtp_debug_events]
+TABLE "wp_wpmailsmtp_tasks_meta"________________________[ROWS:       2] [EXTRACT|REPLACE] [INST NAME: wp_wpmailsmtp_tasks_meta]
+********************************************************************************
+
+--------------------------------------
+DATABASE-ENVIRONMENT
+--------------------------------------
+MYSQL VERSION:	This Server: 11.4.8 -- Build Server: 10.6.22
+FILE SIZE:	dup-database__[HASH].sql (10.9MB)
+TIMEOUT:	5000
+MAXPACK:	524288000
+SQLMODE-GLOBAL:	STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+SQLMODE-SESSION:NO_AUTO_VALUE_ON_ZERO
+DROP ALL TABLES
+--------------------------------------
+DATABASE RESULTS
+--------------------------------------
+QUERY FIXES
+GLOBAL RULES ADDED: PROC AND VIEWS
+
+QUERY FIXES GLOBAL RULES
+	SEARCH  => /^(\s*(?:\/\*!\d+\s)?\s*(?:CREATE.+)?DEFINER\s*=)([^\*\s]+)(.*)$/m
+	REPLACE => $1`autobusv2_user`@`localhost`$3
+
+	SEARCH  => /^(\s*CREATE.+(?:PROCEDURE|FUNCTION)[\s\S]*)(BEGIN)([\s\S]*)$/
+	REPLACE => $1SQL SECURITY INVOKER
+$2$3
+
+--------------------------------------
+** DATABASE CHUNK install start
+--------------------------------------
+DATABASE CHUNK SEEK POSITION: 0
+Auto Commit set to false successfully
+NO TABLE TO SKIP
+Auto Commit set to true successfully
+--------------------------------------
+** DATABASE CHUNK install end
+--------------------------------------
+ERRORS FOUND:	0
+DROPPED TABLES:	0
+RENAMED TABLES:	0
+QUERIES RAN:	849
+
+TABLES ROWS IN DATABASE AFTER EXTRACTION
+
+TABLE "wp_actionscheduler_actions"______________________[ROWS:    81]
+TABLE "wp_actionscheduler_claims"_______________________[ROWS:     0]
+TABLE "wp_actionscheduler_groups"_______________________[ROWS:     5]
+TABLE "wp_actionscheduler_logs"_________________________[ROWS:   246]
+TABLE "wp_cmplz_cookiebanners"__________________________[ROWS:     1]
+TABLE "wp_cmplz_cookies"________________________________[ROWS:    40]
+TABLE "wp_cmplz_dnsmpd"_________________________________[ROWS:     0]
+TABLE "wp_cmplz_services"_______________________________[ROWS:    16]
+TABLE "wp_commentmeta"__________________________________[ROWS:     0]
+TABLE "wp_comments"_____________________________________[ROWS:     0]
+TABLE "wp_duplicator_packages"__________________________[ROWS:     5]
+TABLE "wp_links"________________________________________[ROWS:     0]
+TABLE "wp_litespeed_url"________________________________[ROWS:     0]
+TABLE "wp_litespeed_url_file"___________________________[ROWS:     0]
+TABLE "wp_options"______________________________________[ROWS:  2000]
+TABLE "wp_postmeta"_____________________________________[ROWS:   458]
+TABLE "wp_posts"________________________________________[ROWS:   302]
+TABLE "wp_rank_math_analytics_objects"__________________[ROWS:    12]
+TABLE "wp_rank_math_internal_links"_____________________[ROWS:    33]
+TABLE "wp_rank_math_internal_meta"______________________[ROWS:    21]
+TABLE "wp_reservas_agencies"____________________________[ROWS:     4]
+TABLE "wp_reservas_agency_horarios_disabled"____________[ROWS:     0]
+TABLE "wp_reservas_agency_services"_____________________[ROWS:     4]
+TABLE "wp_reservas_configuration"_______________________[ROWS:    38]
+TABLE "wp_reservas_discount_rules"______________________[ROWS:     1]
+TABLE "wp_reservas_rapidas"_____________________________[ROWS:     0]
+TABLE "wp_reservas_reservas"____________________________[ROWS:   104]
+TABLE "wp_reservas_servicios"___________________________[ROWS:    11]
+TABLE "wp_reservas_users"_______________________________[ROWS:     2]
+TABLE "wp_reservas_visitas"_____________________________[ROWS:    27]
+TABLE "wp_term_relationships"___________________________[ROWS:     3]
+TABLE "wp_term_taxonomy"________________________________[ROWS:    16]
+TABLE "wp_termmeta"_____________________________________[ROWS:     0]
+TABLE "wp_terms"________________________________________[ROWS:    16]
+TABLE "wp_usermeta"_____________________________________[ROWS:    37]
+TABLE "wp_users"________________________________________[ROWS:     1]
+TABLE "wp_wc_admin_note_actions"________________________[ROWS:    93]
+TABLE "wp_wc_admin_notes"_______________________________[ROWS:    65]
+TABLE "wp_wc_category_lookup"___________________________[ROWS:     1]
+TABLE "wp_wc_customer_lookup"___________________________[ROWS:     0]
+TABLE "wp_wc_download_log"______________________________[ROWS:     0]
+TABLE "wp_wc_order_addresses"___________________________[ROWS:     0]
+TABLE "wp_wc_order_coupon_lookup"_______________________[ROWS:     0]
+TABLE "wp_wc_order_operational_data"____________________[ROWS:     0]
+TABLE "wp_wc_order_product_lookup"______________________[ROWS:     0]
+TABLE "wp_wc_order_stats"_______________________________[ROWS:     0]
+TABLE "wp_wc_order_tax_lookup"__________________________[ROWS:     0]
+TABLE "wp_wc_orders"____________________________________[ROWS:     0]
+TABLE "wp_wc_orders_meta"_______________________________[ROWS:     0]
+TABLE "wp_wc_product_attributes_lookup"_________________[ROWS:     0]
+TABLE "wp_wc_product_download_directories"______________[ROWS:     2]
+TABLE "wp_wc_product_meta_lookup"_______________________[ROWS:     0]
+TABLE "wp_wc_rate_limits"_______________________________[ROWS:     0]
+TABLE "wp_wc_reserved_stock"____________________________[ROWS:     0]
+TABLE "wp_wc_tax_rate_classes"__________________________[ROWS:     2]
+TABLE "wp_wc_webhooks"__________________________________[ROWS:     0]
+TABLE "wp_wfauditevents"________________________________[ROWS:     0]
+TABLE "wp_wfblockediplog"_______________________________[ROWS:     1]
+TABLE "wp_wfblocks7"____________________________________[ROWS:     0]
+TABLE "wp_wfconfig"_____________________________________[ROWS:   281]
+TABLE "wp_wfcrawlers"___________________________________[ROWS:     0]
+TABLE "wp_wffilechanges"________________________________[ROWS:     0]
+TABLE "wp_wffilemods"___________________________________[ROWS: 10883]
+TABLE "wp_wfhits"_______________________________________[ROWS:    13]
+TABLE "wp_wfhoover"_____________________________________[ROWS:     0]
+TABLE "wp_wfissues"_____________________________________[ROWS:    13]
+TABLE "wp_wfknownfilelist"______________________________[ROWS: 10884]
+TABLE "wp_wflivetraffichuman"___________________________[ROWS:     0]
+TABLE "wp_wflocs"_______________________________________[ROWS:     1]
+TABLE "wp_wflogins"_____________________________________[ROWS:    44]
+TABLE "wp_wfls_2fa_secrets"_____________________________[ROWS:     0]
+TABLE "wp_wfls_role_counts"_____________________________[ROWS:     0]
+TABLE "wp_wfls_settings"________________________________[ROWS:    30]
+TABLE "wp_wfnotifications"______________________________[ROWS:     3]
+TABLE "wp_wfpendingissues"______________________________[ROWS:     0]
+TABLE "wp_wfreversecache"_______________________________[ROWS:     1]
+TABLE "wp_wfsecurityevents"_____________________________[ROWS:     0]
+TABLE "wp_wfsnipcache"__________________________________[ROWS:     0]
+TABLE "wp_wfstatus"_____________________________________[ROWS:   912]
+TABLE "wp_wftrafficrates"_______________________________[ROWS:     0]
+TABLE "wp_wfwaffailures"________________________________[ROWS:     0]
+TABLE "wp_woocommerce_api_keys"_________________________[ROWS:     0]
+TABLE "wp_woocommerce_attribute_taxonomies"_____________[ROWS:     0]
+TABLE "wp_woocommerce_downloadable_product_permissions"_[ROWS:     0]
+TABLE "wp_woocommerce_log"______________________________[ROWS:     0]
+TABLE "wp_woocommerce_order_itemmeta"___________________[ROWS:     0]
+TABLE "wp_woocommerce_order_items"______________________[ROWS:     0]
+TABLE "wp_woocommerce_payment_tokenmeta"________________[ROWS:     0]
+TABLE "wp_woocommerce_payment_tokens"___________________[ROWS:     0]
+TABLE "wp_woocommerce_sessions"_________________________[ROWS:     1]
+TABLE "wp_woocommerce_shipping_zone_locations"__________[ROWS:     0]
+TABLE "wp_woocommerce_shipping_zone_methods"____________[ROWS:     0]
+TABLE "wp_woocommerce_shipping_zones"___________________[ROWS:     0]
+TABLE "wp_woocommerce_tax_rate_locations"_______________[ROWS:     0]
+TABLE "wp_woocommerce_tax_rates"________________________[ROWS:     0]
+TABLE "wp_wpfm_backup"__________________________________[ROWS:     0]
+TABLE "wp_wpmailsmtp_debug_events"______________________[ROWS:    11]
+TABLE "wp_wpmailsmtp_tasks_meta"________________________[ROWS:     2]
+
+INSERT DATA RUNTIME: 0.8861 sec.
+STEP-2 COMPLETE @ 07:17:49 - RUNTIME: 0.8861 sec.
+AJAX ACTION [dbinstall] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [webupdate] START
+
+====================================
+SET SEARCH AND REPLACE LIST INSTALL TYPE single site
+====================================
+SEARCH ITEM[T:path |P:12] SEARCH: /var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback REPLACE: /home/autobusv2/public_html [SCOPE: ALL]
+SEARCH ITEM[T:urlnd|P:12] SEARCH: https://dev-tictac.com/bravobravo2parteback REPLACE: https://v2.autobusmedinaazahara.com [SCOPE: ALL]
+CHUNK LOAD DATA: IS NULL 
+CHUNK ACTION: CURRENT [start][][]
+
+
+********************************************************************************
+DUPLICATOR LITE: INSTALL-LOG
+STEP-3 START @ 07:17:49
+NOTICE: Do NOT post to public sites or forums
+********************************************************************************
+CHARSET SERVER:	"utf8mb4"
+CHARSET CLIENT:	"utf8mb4"
+********************************************************************************
+OPTIONS:
+SKIP PATH REPLACE_____: false
+DISALLOW_FILE_EDIT____: [value = ], [inWpConfig = ]
+DISALLOW_FILE_MODS____: [value = ], [inWpConfig = ]
+AUTOSAVE_INTERVAL_____: [value = 60], [inWpConfig = ]
+WP_POST_REVISIONS_____: [value = 1], [inWpConfig = ]
+FORCE_SSL_ADMIN_______: [value = 1], [inWpConfig = ]
+WP_AUTO_UPDATE_CORE___: [value = false], [inWpConfig = ]
+WP_CACHE______________: [value = 1], [inWpConfig = 1]
+WPCACHEHOME___________: [value = /], [inWpConfig = ]
+WP_DEBUG______________: [value = 1], [inWpConfig = 1]
+WP_DEBUG_LOG__________: [value = 1], [inWpConfig = 1]
+WP_DEBUG_DISPLAY______: [value = ], [inWpConfig = 1]
+WP_DISABLE_FATAL_ERROR_HANDLER: [value = ], [inWpConfig = ]
+SCRIPT_DEBUG__________: [value = 1], [inWpConfig = 1]
+CONCATENATE_SCRIPTS___: [value = ], [inWpConfig = ]
+SAVEQUERIES___________: [value = ], [inWpConfig = ]
+ALTERNATE_WP_CRON_____: [value = ], [inWpConfig = ]
+DISABLE_WP_CRON_______: [value = ], [inWpConfig = ]
+WP_CRON_LOCK_TIMEOUT__: [value = 60], [inWpConfig = ]
+COOKIE_DOMAIN_________: [value = ], [inWpConfig = ]
+WP_MEMORY_LIMIT_______: [value = 40M], [inWpConfig = ]
+WP_MAX_MEMORY_LIMIT___: [value = 512M], [inWpConfig = ]
+WP_TEMP_DIR___________: [value = ], [inWpConfig = ]
+********************************************************************************
+
+********************************************************************************
+CHUNK PARAMS:
+maxIteration__________: 0
+timeOut_______________: 5000
+throttling____________: 2
+rowsPerPage___________: 1000
+********************************************************************************
+
+CHUNK ACTION: CURRENT [cleanup_trans][][]
+[PHP ERR][E_WARNING] MSG:foreach() argument must be of type array|object, string given [CODE:2|FILE:/home/autobusv2/public_html/dup-installer/src/Core/Deploy/Database/DbCleanup.php|LINE:95]
+CLEAN OPTIONS [wp_options]
+	`option_name` = "duplicator_plugin_data_stats"
+	`option_name` LIKE "\_transient%"
+	`option_name` LIKE "\_site\_transient%"
+DATABASE OPTIONS DELETED [ROWS:    45]
+CHUNK ACTION: CURRENT [cleanup_extra][][]
+CLEANUP EXTRA
+	- SKIP DROP VIEWS
+	- SKIP DROP PROCS
+	- SKIP DROP FUNCS
+CHUNK ACTION: CURRENT [cleanup_packages][][]
+EMPTY PACKAGES TABLE
+CLEAN PACKAGES
+DATABASE PACKAGE DELETED [ROWS:     5]
+CHUNK ACTION: CURRENT [init][][]
+
+EVALUATE TABLE: "wp_actionscheduler_actions"______________________[ROWS:    81][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_actionscheduler_actions][0]
+
+EVALUATE TABLE: "wp_actionscheduler_claims"_______________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_actionscheduler_groups"_______________________[ROWS:     5][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_actionscheduler_groups][0]
+
+EVALUATE TABLE: "wp_actionscheduler_logs"_________________________[ROWS:   246][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_actionscheduler_logs][0]
+
+EVALUATE TABLE: "wp_cmplz_cookiebanners"__________________________[ROWS:     1][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_cmplz_cookiebanners][0]
+
+EVALUATE TABLE: "wp_cmplz_cookies"________________________________[ROWS:    40][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_cmplz_cookies][0]
+
+EVALUATE TABLE: "wp_cmplz_dnsmpd"_________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_cmplz_services"_______________________________[ROWS:    16][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_cmplz_services][0]
+
+EVALUATE TABLE: "wp_commentmeta"__________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_comments"_____________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_duplicator_packages"__________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_links"________________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_litespeed_url"________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_litespeed_url_file"___________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_options"______________________________________[ROWS:  1955][PG:   2][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_options][0]
+	CHUNK ACTION: CURRENT [search_replace][wp_options][1]
+
+EVALUATE TABLE: "wp_postmeta"_____________________________________[ROWS:   458][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_postmeta][0]
+
+EVALUATE TABLE: "wp_posts"________________________________________[ROWS:   302][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_posts][0]
+
+EVALUATE TABLE: "wp_rank_math_analytics_objects"__________________[ROWS:    12][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_rank_math_analytics_objects][0]
+
+EVALUATE TABLE: "wp_rank_math_internal_links"_____________________[ROWS:    33][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_rank_math_internal_links][0]
+
+EVALUATE TABLE: "wp_rank_math_internal_meta"______________________[ROWS:    21][PG:   1][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_reservas_agencies"____________________________[ROWS:     4][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_reservas_agencies][0]
+
+EVALUATE TABLE: "wp_reservas_agency_horarios_disabled"____________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_reservas_agency_services"_____________________[ROWS:     4][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_reservas_agency_services][0]
+
+EVALUATE TABLE: "wp_reservas_configuration"_______________________[ROWS:    38][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_reservas_configuration][0]
+
+EVALUATE TABLE: "wp_reservas_discount_rules"______________________[ROWS:     1][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_reservas_discount_rules][0]
+
+EVALUATE TABLE: "wp_reservas_rapidas"_____________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_reservas_reservas"____________________________[ROWS:   104][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_reservas_reservas][0]
+
+EVALUATE TABLE: "wp_reservas_servicios"___________________________[ROWS:    11][PG:   1][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_reservas_users"_______________________________[ROWS:     2][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_reservas_users][0]
+
+EVALUATE TABLE: "wp_reservas_visitas"_____________________________[ROWS:    27][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_reservas_visitas][0]
+
+EVALUATE TABLE: "wp_termmeta"_____________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_terms"________________________________________[ROWS:    16][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_terms][0]
+
+EVALUATE TABLE: "wp_term_relationships"___________________________[ROWS:     3][PG:   1][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_term_taxonomy"________________________________[ROWS:    16][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_term_taxonomy][0]
+
+EVALUATE TABLE: "wp_usermeta"_____________________________________[ROWS:    37][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_usermeta][0]
+
+EVALUATE TABLE: "wp_users"________________________________________[ROWS:     1][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_users][0]
+
+EVALUATE TABLE: "wp_wc_admin_notes"_______________________________[ROWS:    65][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wc_admin_notes][0]
+
+EVALUATE TABLE: "wp_wc_admin_note_actions"________________________[ROWS:    93][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wc_admin_note_actions][0]
+
+EVALUATE TABLE: "wp_wc_category_lookup"___________________________[ROWS:     1][PG:   1][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_customer_lookup"___________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_download_log"______________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_orders"____________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_orders_meta"_______________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_order_addresses"___________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_order_coupon_lookup"_______________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_order_operational_data"____________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_order_product_lookup"______________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_order_stats"_______________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_order_tax_lookup"__________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_product_attributes_lookup"_________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_product_download_directories"______________[ROWS:     2][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wc_product_download_directories][0]
+
+EVALUATE TABLE: "wp_wc_product_meta_lookup"_______________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_rate_limits"_______________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_reserved_stock"____________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wc_tax_rate_classes"__________________________[ROWS:     2][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wc_tax_rate_classes][0]
+
+EVALUATE TABLE: "wp_wc_webhooks"__________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wfauditevents"________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wfblockediplog"_______________________________[ROWS:     1][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wfblockediplog][0]
+
+EVALUATE TABLE: "wp_wfblocks7"____________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wfconfig"_____________________________________[ROWS:   281][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wfconfig][0]
+
+EVALUATE TABLE: "wp_wfcrawlers"___________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wffilechanges"________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wffilemods"___________________________________[ROWS: 10883][PG:  11][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wffilemods][0]
+	CHUNK ACTION: CURRENT [search_replace][wp_wffilemods][1]
+	CHUNK ACTION: CURRENT [search_replace][wp_wffilemods][2]
+	CHUNK ACTION: CURRENT [search_replace][wp_wffilemods][3]
+	CHUNK ACTION: CURRENT [search_replace][wp_wffilemods][4]
+	CHUNK ACTION: CURRENT [search_replace][wp_wffilemods][5]
+	CHUNK ACTION: CURRENT [search_replace][wp_wffilemods][6]
+	CHUNK ACTION: CURRENT [search_replace][wp_wffilemods][7]
+	CHUNK ACTION: CURRENT [search_replace][wp_wffilemods][8]
+	CHUNK ACTION: CURRENT [search_replace][wp_wffilemods][9]
+	CHUNK ACTION: CURRENT [search_replace][wp_wffilemods][10]
+
+EVALUATE TABLE: "wp_wfhits"_______________________________________[ROWS:    13][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wfhits][0]
+
+EVALUATE TABLE: "wp_wfhoover"_____________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wfissues"_____________________________________[ROWS:    13][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wfissues][0]
+
+EVALUATE TABLE: "wp_wfknownfilelist"______________________________[ROWS: 10884][PG:  11][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wfknownfilelist][0]
+	CHUNK ACTION: CURRENT [search_replace][wp_wfknownfilelist][1]
+	CHUNK ACTION: CURRENT [search_replace][wp_wfknownfilelist][2]
+	CHUNK ACTION: CURRENT [search_replace][wp_wfknownfilelist][3]
+	CHUNK ACTION: CURRENT [search_replace][wp_wfknownfilelist][4]
+	CHUNK ACTION: CURRENT [search_replace][wp_wfknownfilelist][5]
+	CHUNK ACTION: CURRENT [search_replace][wp_wfknownfilelist][6]
+	CHUNK ACTION: CURRENT [search_replace][wp_wfknownfilelist][7]
+	CHUNK ACTION: CURRENT [search_replace][wp_wfknownfilelist][8]
+	CHUNK ACTION: CURRENT [search_replace][wp_wfknownfilelist][9]
+	CHUNK ACTION: CURRENT [search_replace][wp_wfknownfilelist][10]
+
+EVALUATE TABLE: "wp_wflivetraffichuman"___________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wflocs"_______________________________________[ROWS:     1][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wflocs][0]
+
+EVALUATE TABLE: "wp_wflogins"_____________________________________[ROWS:    44][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wflogins][0]
+
+EVALUATE TABLE: "wp_wfls_2fa_secrets"_____________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wfls_role_counts"_____________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wfls_settings"________________________________[ROWS:    30][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wfls_settings][0]
+
+EVALUATE TABLE: "wp_wfnotifications"______________________________[ROWS:     3][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wfnotifications][0]
+
+EVALUATE TABLE: "wp_wfpendingissues"______________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wfreversecache"_______________________________[ROWS:     1][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wfreversecache][0]
+
+EVALUATE TABLE: "wp_wfsecurityevents"_____________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wfsnipcache"__________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wfstatus"_____________________________________[ROWS:   912][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wfstatus][0]
+
+EVALUATE TABLE: "wp_wftrafficrates"_______________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wfwaffailures"________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_api_keys"_________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_attribute_taxonomies"_____________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_downloadable_product_permissions"_[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_log"______________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_order_itemmeta"___________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_order_items"______________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_payment_tokenmeta"________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_payment_tokens"___________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_sessions"_________________________[ROWS:     1][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_woocommerce_sessions][0]
+
+EVALUATE TABLE: "wp_woocommerce_shipping_zones"___________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_shipping_zone_locations"__________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_shipping_zone_methods"____________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_tax_rates"________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_woocommerce_tax_rate_locations"_______________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wpfm_backup"__________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wp_wpmailsmtp_debug_events"______________________[ROWS:    11][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wpmailsmtp_debug_events][0]
+
+EVALUATE TABLE: "wp_wpmailsmtp_tasks_meta"________________________[ROWS:     2][PG:   1][SCAN:text columns]
+	--- BASE STRINGS ---
+	SEARCH[path ]  1:"/var/www/vhosts/dev-tictac.com/httpdocs/bravobravo2parteback" => "/home/autobusv2/public_html"
+	SEARCH[urlnd]  2:"https://dev-tictac.com/bravobravo2parteback" =====> "https://v2.autobusmedinaazahara.com"
+	CHUNK ACTION: CURRENT [search_replace][wp_wpmailsmtp_tasks_meta][0]
+--------------------------------------
+SCANNED:	Tables:98 	|	 Rows:26641 	|	 Cells:174559 
+UPDATED:	Tables:9 	|	 Rows:21796 	|	 Cells:21802 
+ERRORS:		0 
+RUNTIME:	4.344400 sec
+CHUNK ACTION: CURRENT [rem_maintenance][][]
+
+====================================
+REMOVE MAINTENANCE MODE
+====================================
+MAINTENANCE MODE DISABLE
+CHUNK ACTION: CURRENT [config_update][][]
+SET CONFIG FILES
+Retained original entry wpconfig target:/home/autobusv2/public_html/wp-config.php
+New htaccess file created:/home/autobusv2/public_html/.htaccess
+
+====================================
+CONFIGURATION FILE UPDATES
+====================================
+	UPDATE ABSPATH "__DIR__ . '/'"
+	UPDATE WP_HOME "https://v2.autobusmedinaazahara.com"
+	UPDATE WP_SITEURL "https://v2.autobusmedinaazahara.com"
+	UPDATE DB_NAME ""autobusv2_admin""
+	UPDATE DB_USER "** OBSCURED **"
+	UPDATE DB_PASSWORD "** OBSCURED **"
+	UPDATE DB_HOST ""localhost""
+	UPDATE DB_CHARSET "utf8mb4"
+	UPDATE DB_COLLATE ""
+	WP CONFIG UPDATE WP_CACHE "true"
+	WP CONFIG UPDATE WP_DEBUG "true"
+	WP CONFIG UPDATE WP_DEBUG_LOG "true"
+	WP CONFIG UPDATE WP_DEBUG_DISPLAY "false"
+	WP CONFIG UPDATE SCRIPT_DEBUG "true"
+	
+*** UPDATED WP CONFIG FILE ***
+
+====================================
+HTACCESS UPDATE
+====================================
+
+WEB SERVER CONFIGURATION FILE UPDATED:
+- Preparing .htaccess file with basic setup.
+HTACCESS FILE - Successfully updated the .htaccess file setting.
+
+====================================
+INDEX.PHP UPDATE
+====================================
+INDEX.PHP updated with new blog header "__DIR__ . '/wp-blog-header.php'"
+
+CHUNK ACTION: CURRENT [gen_update][][]
+
+====================================
+GENERAL UPDATES
+====================================
+
+====================================
+MANAGE PLUGINS
+====================================
+CHUNK ACTION: CURRENT [gen_clean][][]
+
+====================================
+GENERAL CLEANUP
+====================================
+RESET ALL USERS SESSION TOKENS
+MIGRATION INFO SET
+CHUNK ACTION: CURRENT [create_admin][][]
+
+====================================
+RESET USERS PASSWORD
+====================================
+CHUNK ACTION: CURRENT [notice_test][][]
+
+====================================
+CHECK FOR INDEX.HTML
+====================================
+NO INDEX.HTML WAS FOUND
+
+====================================
+NOTICES TEST
+====================================
+No General Notices Found
+
+CHUNK ACTION: CURRENT [cleanup_tmp_files][][]
+
+====================================
+CLEANUP TMP FILES
+====================================
+CHUNK ACTION: CURRENT [set_files_perms][][]
+
+====================================
+SET PARAMS PERMISSION
+====================================
+
+*** SET FOLDER PERMISSION AFTER EXTRACTION
+--------------------------------------
+PATHS MAPPING : "/home/autobusv2/public_html"
+--------------------------------------
+SET FOLDER PERMISSION DONE
+CHUNK ACTION: CURRENT [final_report][][]
+
+====================================
+FINAL REPORT NOTICES
+====================================
+
+STEP-3 COMPLETE @ 07:17:53 - RUNTIME: 4.4557 sec. 
+
+
+AJAX ACTION [webupdate] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [finalpre] START
+AJAX ACTION [finalpre] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+-------------------------
+AJAX ACTION [finalafter] START
+AJAX ACTION [finalafter] SUCCESS
+-------------------------
+
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+[PHP ERR][E_NOTICE] MSG:ob_end_clean(): Failed to delete buffer. No buffer to delete [CODE:8|FILE:/home/autobusv2/public_html/dup-installer/main.installer.php|LINE:88]
+
+====================================
+FINAL REPORT NOTICES LIST
+====================================
+-----------------------
+[NOTICE] Warnings or notices on WordPress front-end tests!
+	SECTIONS: general
+	LONG MSG: SCRIPT FILE TEST: /home/autobusv2/public_html/index.php
+E_USER_NOTICE Function _load_textdomain_just_in_time was called incorrectly. Translation loading for the acf domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the init action or later. Please see Debugging in WordPress for more information. (This message was added in version 6.7.0.)
+	FILE: /home/autobusv2/public_html/wp-includes/functions.php[6121]
+	--- TRACE ---
+	FUNCTION: trigger_error                 FILE: /home/autobusv2/public_html/wp-includes/functions.php[6121]
+	FUNCTION: wp_trigger_error              FILE: /home/autobusv2/public_html/wp-includes/functions.php[6061]
+	FUNCTION: _doing_it_wrong               FILE: /home/autobusv2/public_html/wp-includes/l10n.php[1379]
+	FUNCTION: _load_textdomain_just_in_time FILE: /home/autobusv2/public_html/wp-includes/l10n.php[1409]
+	FUNCTION: get_translations_for_domain   FILE: /home/autobusv2/public_html/wp-includes/l10n.php[195]
+	FUNCTION: translate                     FILE: /home/autobusv2/public_html/wp-includes/l10n.php[307]
+	FUNCTION: __                            FILE: /home/autobusv2/public_html/wp-content/plugins/advanced-custom-fields-pro/acf.php[94]
+	CLASS___: ACF->initialize               FILE: /home/autobusv2/public_html/wp-content/plugins/advanced-custom-fields-pro/acf.php[780]
+	FUNCTION: acf                           FILE: /home/autobusv2/public_html/wp-content/plugins/advanced-custom-fields-pro/acf.php[786]
+	FUNCTION: include_once                  FILE: /home/autobusv2/public_html/wp-settings.php[545]
+	FUNCTION: require_once                  FILE: /home/autobusv2/public_html/wp-config.php[118]
+	FUNCTION: require_once                  FILE: /home/autobusv2/public_html/wp-load.php[50]
+	FUNCTION: require_once                  FILE: /home/autobusv2/public_html/wp-blog-header.php[13]
+	FUNCTION: require                       FILE: /home/autobusv2/public_html/index.php[17]
+	FUNCTION: require_once                  FILE: /home/autobusv2/public_html/wp-content/wp_test_script_614535a-05071125.php[117]
+-----
+For solutions to these issues see the online FAQs 
+https://duplicator.com/knowledge-base/ 
+
+
+-----------------------
+[NOTICE] Warnings or notices on WordPress backend tests!
+	SECTIONS: general
+	LONG MSG: SCRIPT FILE TEST: /home/autobusv2/public_html/wp-login.php
+E_USER_NOTICE Function _load_textdomain_just_in_time was called incorrectly. Translation loading for the acf domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the init action or later. Please see Debugging in WordPress for more information. (This message was added in version 6.7.0.)
+	FILE: /home/autobusv2/public_html/wp-includes/functions.php[6121]
+	--- TRACE ---
+	FUNCTION: trigger_error                 FILE: /home/autobusv2/public_html/wp-includes/functions.php[6121]
+	FUNCTION: wp_trigger_error              FILE: /home/autobusv2/public_html/wp-includes/functions.php[6061]
+	FUNCTION: _doing_it_wrong               FILE: /home/autobusv2/public_html/wp-includes/l10n.php[1379]
+	FUNCTION: _load_textdomain_just_in_time FILE: /home/autobusv2/public_html/wp-includes/l10n.php[1409]
+	FUNCTION: get_translations_for_domain   FILE: /home/autobusv2/public_html/wp-includes/l10n.php[195]
+	FUNCTION: translate                     FILE: /home/autobusv2/public_html/wp-includes/l10n.php[307]
+	FUNCTION: __                            FILE: /home/autobusv2/public_html/wp-content/plugins/advanced-custom-fields-pro/acf.php[94]
+	CLASS___: ACF->initialize               FILE: /home/autobusv2/public_html/wp-content/plugins/advanced-custom-fields-pro/acf.php[780]
+	FUNCTION: acf                           FILE: /home/autobusv2/public_html/wp-content/plugins/advanced-custom-fields-pro/acf.php[786]
+	FUNCTION: include_once                  FILE: /home/autobusv2/public_html/wp-settings.php[545]
+	FUNCTION: require_once                  FILE: /home/autobusv2/public_html/wp-config.php[118]
+	FUNCTION: require_once                  FILE: /home/autobusv2/public_html/wp-load.php[50]
+	FUNCTION: require                       FILE: /home/autobusv2/public_html/wp-login.php[12]
+	FUNCTION: require_once                  FILE: /home/autobusv2/public_html/wp-content/wp_test_script_614535a-05071125.php[117]
+-----
+For solutions to these issues see the online FAQs 
+https://duplicator.com/knowledge-base/ 
+
+
+====================================
+LOG-TIME[/home/autobusv2/public_html/dup-installer/ctrls/ctrl.base.php:227][DELTA:   0.02103]  MESSAGE:END RENDER PAGE
+LOG-TIME[/home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php:71] RESET TIME
+
+SECURITY CHECK:  Security Check Validation - No Token Found
+	FILE:/home/autobusv2/public_html/dup-installer/classes/config/class.security.php[252]
+	TRACE:
+#0 /home/autobusv2/public_html/dup-installer/src/Core/Bootstrap.php(84): DUPX_Security->check()
+#1 /home/autobusv2/public_html/dup-installer/main.installer.php(55): Duplicator\Installer\Core\Bootstrap::init()
+#2 {main}
+

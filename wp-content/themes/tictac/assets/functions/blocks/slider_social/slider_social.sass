@@ -1,0 +1,58 @@
+$height: 650px
+$content: 650px
+$content-padding: 30px 20px
+$content-background: none
+$title-font: 40px
+$title-line: 50px
+$title-weight: 700
+$title-color: #ffffff
+$title-width: 550px
+$subtitle-font: 32px
+$subtitle-line: 42px
+$subtitle-weight: 600
+$subtitle-color: #ffffff
+$subtitle-background: none
+$subtitle-width: 550px
+$subtitle-margin: 12px 0 20px 0
+$subtitle-padding: 12px 0 20px 0
+$text-color: #ffffff
+$slider-background: rgba(21, 112, 184, 0.15)
+.slider_social
+    background: $slider-background
+    padding: 20px
+    position: relative
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    .social
+        position: absolute
+        display: inline-flex
+        bottom: -52px
+        .link
+            width: 144px
+            height: 52px
+            background: $slider-background
+            display: inline-flex
+            justify-content: center
+            align-items: flex-start
+            border-bottom-left-radius: 50px
+            border-bottom-right-radius: 50px
+            a
+                .icon
+                    font-size: 30px
+                    &::before
+                        color: #1570B8
+    ul
+        width: 100%
+        li.splide__slide
+            display: flex
+            flex-wrap: wrap
+            align-items: center
+            justify-content: center
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+            object-position: center center
+            padding: 5px 10px
+    

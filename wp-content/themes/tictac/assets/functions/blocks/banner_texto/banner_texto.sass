@@ -1,0 +1,102 @@
+$white: #ffffff
+$background: rgba(32, 62, 44, 0.8)
+body .bannertexto
+    text-align: center
+    position: relative
+    padding: 40px 20px
+    min-height: 553px
+    width: 100%
+    margin: 0 auto
+    overflow: hidden
+    padding: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    .container
+        max-width: 550px
+    .links
+        margin-top: 25px
+    .sub_full
+        margin-top: 50px
+        font-size: 40px
+        font-family: "worksans"
+        color: $white
+        padding: 12px 20px
+        width: 100%
+        text-align: center
+        background: $background
+        padding: 22px 20px 15px 20px
+        margin-bottom: 85px
+    .titulo
+        margin-bottom: 15px
+        font-size: 50px
+        line-height: normal
+        font-weight: 700
+        font-family: "worksans"
+        padding-bottom: 15px
+        padding: 0 20px
+        text-shadow: 0px 2px 2px rgba(0,0,0,0.35)
+    .subtitulo
+        font-size: 35px
+        line-height: normal
+        font-weight: 400
+        font-family: "worksans"
+        padding: 0 20px
+        text-shadow: 0px 2px 2px rgba(0,0,0,0.35)
+        color: $white
+    img.bg
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        object-fit: cover
+        z-index: -1
+    img:not(.bg)
+        height: 95px
+        object-fit: contain
+        margin: 0 20px
+    .titulo
+        color: $white
+    .texto
+        color: $white
+        font-size: 35px
+        line-height: normal
+        font-family: "worksans"
+        p
+            color: $white
+            font-weight: 400
+            font-size: 35px
+            line-height: normal
+            text-shadow: 0px 2px 2px rgba(0,0,0,0.35)
+    @media (max-width: 768px)
+        .titulo
+            font-size: 35px
+        .texto,.texto p
+            font-size: 25px
+
+.bannertexto.formulario
+    .row
+        padding: 0
+    .titulo
+        font-size: 40px
+        line-height: normal
+    .texto
+        font-size: 18px
+        font-weight: 300
+        p
+            font-size: 18px
+            font-weight: 300
+        a
+            text-decoration: none
+            color: $white
+            margin-right: 15px
+        form
+            margin: 0 auto
+            text-align: center
+            .col-12
+                text-align: center
+                .wpcf7-list-item
+                    margin: 0
+        input[type="checkbox"]
+            margin-right: 5px

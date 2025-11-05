@@ -1,0 +1,221 @@
+@import 'colors.sass'
+#footer
+    background: #EFCF4B
+    mix-blend-mode: multiply
+    .copyright
+        width: 100%
+        position: relative
+        font-family: 'TitilliumWeb-Regular'
+        a
+            display: flex
+            align-items: center
+            justify-content: center
+            gap: 8px
+    .social
+        width: auto !important
+        display: flex
+        gap: 20px
+        justify-content: center
+        margin-top: 20px
+
+        img
+            width: 25px !important
+            height: 25px !important
+
+    .link.direccion
+        label
+            font-weight: 600
+    .custom-logo-link
+        justify-content: center
+    .politicas
+        list-style: none
+        margin-top: 15px
+        margin-left: 0
+        width: 100%
+        margin: 0 auto
+        justify-content: center
+        padding-bottom: 50px
+        ul
+            margin: 0px !important
+            gap: 40px
+            height: 100%
+        li
+        a
+            margin-bottom: 0px
+            text-align: center
+            font-family: 'Duran-Medium' !important
+            font-size: 18px !important
+    .info-footer
+        p
+            margin: 0
+
+    .infofooter
+        display: flex
+        margin: 0 auto
+        padding-left: 0px !important
+        padding-right: 0px !important
+        padding-bottom: 40px !important
+
+    .icon::before
+        font-size: 27px
+        color: $primary
+    .container,.container-fluid
+        z-index: 2
+        position: relative
+    .bgfooter
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        object-fit: cover
+        z-index: 0
+    .custom-logo
+        width: 100%
+        max-width: 483px
+        height: auto
+        object-fit: contain
+    .divinformacion
+        width: 25%
+        display: flex
+        flex-direction: column
+        justify-content: center
+        gap: 15px
+    .columna2divinformacion
+        width: 50%
+        display: flex
+        flex-direction: column
+        justify-content: center
+        gap: 15px
+        align-items: flex-end
+    .logo
+        width: 50%
+        img
+            width: 100%
+            margin: 0 auto
+
+    .columna1divinformacion
+        width: 100%
+        display: flex
+        margin-bottom: 15px
+    .columna2divinformacion
+
+    a
+        color: $primary
+        font-weight: 400
+        display: flex
+        width: auto
+        font-family: 'TitilliumWeb-Regular'
+    .titulo
+        font-size: 22px
+        font-style: normal
+        font-weight: 400
+        line-height: 26px
+        letter-spacing: 1.1px
+        color: $primary
+        margin-bottom: 10px
+        text-transform: uppercase
+        font-family: 'TitilliumWeb-Regular'
+    .icon:not(.icon-logo_negro)
+        color: $green
+        &::before
+            color: $green
+    .logo
+        display: flex
+        align-items: center
+        justify-content: center
+
+    .icon-logo_negro
+        font-size: 60px
+        display: flex
+    .links-contacto
+        .link
+            width: 100%
+            max-width: 275px
+            display: flex
+            flex-wrap: nowrap
+            margin-bottom: 15px
+            a
+                text-align: left
+                font-weight: 18px
+                line-height: normal
+                color: $primary
+                font-weight: 300
+                font-family: 'TitilliumWeb-Regular'
+            svg
+                margin-right: 15px
+@media (max-width:768px)
+    #footer
+        .logo
+            top: 0
+            margin: 50px auto
+    body #footer
+        .subf
+            padding-bottom: 30px
+        .titulo
+            font-size: 18px
+#footer
+    .link
+        font-size: 17px
+        font-weight: 600
+        color: $purple
+        img
+            width: 15px
+        label
+            color: black
+            font-family: 'Duran-Medium'
+            font-weight: 200
+            font-size: 14px
+            line-height: 20px
+            letter-spacing: 2px
+
+    .subf
+        display: flex
+        flex-direction: column
+        color: black
+        padding-left: 0px
+        padding-right: 0px
+        padding-top: 30px
+        padding-bottom: 70px
+
+        .politicas
+            order: 1
+
+        .copyright
+            order: 2
+
+        a
+            color: black
+            font-size: 16px
+            line-height: normal
+            letter-spacing: 2px
+            font-family: 'Duran-Regular'
+
+
+    .columna2
+        margin-top: 80px
+        ul
+            padding: 0
+            display: flex
+            flex-wrap: wrap
+            li
+                width: 20%
+                a
+                    width: 100%
+                    font-size: 17px
+                    color: black
+
+.menufooter
+    list-style-type: none
+    padding: 0
+    margin: 0
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+    margin-bottom: 30px
+    gap: 20px
+
+    a
+        font-family: 'Duran-Medium' !important
+        text-transform: uppercase
+        font-size: 16px

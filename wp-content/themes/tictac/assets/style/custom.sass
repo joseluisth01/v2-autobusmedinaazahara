@@ -1,0 +1,1766 @@
+@import 'colors.sass'
+@import 'animations.sass'
+body
+	.hentry .entry-content a
+		text-decoration: none
+	.hentry .wp-post-image
+		margin-bottom: 0
+	#pojo-a11y-toolbar
+		z-index: 9999999
+	*
+		outline: 0
+		float: unset
+		&:hover,&:focus
+			outline: 0
+	a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[type="button"]:focus, input[type="reset"]:focus, input[type="submit"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="url"]:focus, input[type="password"]:focus, input[type="search"]:focus
+		outline: 0
+	#primary
+		float: unset
+html
+	font-size: $font-normal
+	line-height: normal
+	font-weight: 300
+html body
+	font-family: $font-family
+	font-size: $font-normal
+	line-height: normal
+	color: $text
+	font-weight: 300
+	overflow-x: hidden
+	background: white
+	p b,p strong
+		font-weight: 700
+a.reset_variations
+	color: $black
+.content_page
+	& > strong
+		color: $primary
+		font-weight: 700
+	& > p
+		width: 100%
+		max-width: 1290px
+		margin: 10px auto
+		padding: 0 15px
+		text-align: justify
+		position: relative
+		&:first-child
+			margin-top: 25px
+		&:last-child
+			margin-bottom: 25px
+		strong
+			color: black
+			display: inline-block
+		a:not(.btn)
+			color: $green
+			transition: all .2s linear
+			font-weight: 700
+			&:hover
+				color: $primary
+	& > ul
+		width: 100%
+		max-width: 1290px
+		margin: 15px auto
+		padding: 0 30px
+		text-align: left
+		list-style: none
+		display: grid
+		li
+			margin-bottom: 10px
+			list-style: none
+			display: inline-block
+			color: black
+			&::before
+				content: ""
+				width: 5px
+				height: 5px
+				background: $primary
+				display: inline-flex
+				position: relative
+				margin-right: 10px
+				bottom: 4px
+				border-radius: 50%
+
+.single-post
+	.content_page
+		& > .wp-block-heading
+			margin-top: 25px
+
+body
+	color: $black
+	.nav-links
+		display: inline-flex
+		justify-content: center
+		margin: 25px auto
+		span,a
+			margin: 0 5px
+			width: 25px
+			text-align: center
+			height: 25px
+			background: $primary
+			color: $white
+			&.current
+				background: $green
+			&.prev,&.next,&.prev span,&.next span
+				background: transparent
+				width: auto
+				height: auto
+	.container
+		max-width: 80%
+	#cmplz-document
+		max-width: 1320px
+		margin: 0 auto
+	a
+		text-decoration: none
+	p
+		font-family: 'Duran-Regular' !important
+		font-weight: 400 !important
+		font-size: 16px !important
+		line-height: 26px !important
+		letter-spacing: 2px !important
+		color: #2E2D2C !important
+
+		&:last-child
+			margin-bottom: 0
+	.texto
+		p:first-child
+			margin-top: 0
+	.btn
+		font-size: 23px
+		line-height: normal
+		padding: 8px 20px
+		font-weight: 600
+		border-radius: 5px
+		transition: background .4s linear, border-color .4s linear, color .4s linear
+
+
+		&.custom
+			background: #72C4CD
+			color: black !important
+			text-transform: uppercase
+			width: auto
+			font-size: 16px
+
+			&.white
+				background: $white
+				border: 1px solid $primary
+				color: $primary
+				&:hover
+					background: $primary
+					color: $white
+			&.transparent
+				background: transparent
+				border: 1px solid $white
+				color: $white
+				&:hover
+					background: $white
+					color: $primary
+			&.green
+				background: $green2
+				color: $green
+				&:hover
+					background: $green
+					color: $green2
+			&.red
+				background: $red
+				color: $white
+				&:hover
+					background: $yellow
+					color: $black
+			&.yellow
+				background: $yellow
+				color: $grey
+				&:hover
+					background: $grey
+					color: $yellow
+			&.purple
+				background: $purple50
+				color: $white
+				&:hover
+					background: $yellow
+					color: $grey
+	.enlace_custom
+		a
+			border-radius: 20px
+			font-size: 0.8rem
+			line-height: 1rem
+			padding: 10px 40px
+			font-weight: $bold
+			background: $primary
+			border: 1px solid $primary
+			color: $white
+			text-transform: uppercase
+			width: auto
+			border: 1px solid $blue
+			background: $blue
+			color: $white
+			&:hover
+				background: $white
+				color: $blue
+	.slider_full
+		ul
+			li
+				align-items: center
+			.content
+				.titulo
+					max-width: 100%
+					&,& p
+						text-align: center
+						font-size: 40px
+						line-height: 50px
+						font-weight: $banner-weight
+						margin: 0
+				.link
+					padding-left: 15px
+					padding-top: 15px
+					text-align: center
+				.subtitulo
+					max-width: 100%
+					letter-spacing: -0.03em
+					text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3)
+					&,& p
+						font-size: 25px
+						line-height: 35px
+	.bloque_seo
+		padding: 50px 0
+		.content
+			position: relative
+		.titulo,.titulo p,.titulo h1,.titulo h2,.titulo h3
+			color: black
+			text-align: center
+		.subtitulo,.subtitulo p,.subtitulo h1,.subtitulo h2,.subtitulo h3
+			text-align: center
+			letter-spacing: 0.15em !important
+		.open
+			color: $blue2
+			position: absolute
+			right: 0
+			top: 20px
+			width: auto
+		&.white
+			color: $text
+			p
+				color: $text
+			.titulo p
+				color: $blue2
+				text-align: center
+			.subtitulo,.subtitulo p
+				color: $blue
+				text-align: center
+
+
+	.paginas .icon .img
+		border-color: $primary
+	
+	.mapa
+		background: $white
+		.titulo-destacado
+			color: $grey
+			margin-bottom: 60px
+		.tel a
+			color: $primary
+			font-weight: $bold
+
+	.wpcf7
+		width: 100%
+		form
+			width: 100%
+			overflow: hidden
+			.wpcf7-response-output
+				position: relative
+			.wpcf7-not-valid-tip
+				margin-top: 5px
+				width: auto
+				right: 0
+				pointer-events: none
+			.wpcf7-spinner
+				width: 20px
+				height: 20px
+			label,span,input:not(.wpcf7-submit),textarea
+				width: 100%
+			input:not(.wpcf7-submit),textarea
+				padding: 10px 13px
+				resize: none
+				color: $green
+				font-size: 15px
+				font-style: normal
+				font-weight: 400
+				line-height: 22px
+				background: $white
+				border-radius: 5px
+				margin-top: 20px
+				&::placeholder
+					color: #ACB6B3
+					font-family: 'Duran-Regular'
+					font-size: 17px
+					line-height: 25.86px
+					letter-spacing: 0.03em
+					text-align: left
+
+			.acepto a
+				color: $white
+			.wpcf7-form-control.wpcf7-acceptance
+				width: auto
+				display: inline-block
+				input
+					width: 21px
+					height: 21px
+					background: $white
+					border-radius: 2px
+					position: relative
+					margin: 0px !important
+			.wpcf7-submit
+				border: 0
+				border-radius: 5px
+				background: black
+				color: white
+				font-size:18px
+				font-style: normal
+				font-weight: 600
+				line-height: normal
+				text-transform: uppercase
+				font-family: 'Duran-Bold'
+				padding: 8px 70px
+				display: inline-block
+				width: 100%
+				box-shadow: 0px 2px 2px 0px #00000080
+				transition: all 0.3s
+				&:hover
+					background: white
+					color: black
+			p
+				font-size: 18px
+				color: $white
+				a
+					color: $white
+	.margin
+		position: relative
+		display: flex
+		align-items: center
+		z-index: 2
+		text-align: center
+		position: relative
+		img
+			width: 100%
+			position: absolute
+			bottom: -30px
+			@media (min-width: $md)
+				bottom: -60px
+	.pagebg
+		color: $white
+	figure.size-full
+		background: $white
+		text-align: center
+		margin: 0
+		img
+			max-width: 1290px
+			padding: 0 15px
+			object-fit: contain
+			width: 100%
+			margin: 0
+	.blog
+		.postList
+			width: 80%
+			margin: 0 auto
+			padding: 50px 20px
+			display: flex
+			flex-wrap: wrap
+			.post
+				display: inline-flex
+				width: 100%
+				flex-wrap: wrap
+				text-decoration: none
+				margin-bottom: 25px
+				img
+					width: 30%
+					height: 200px
+					object-fit: cover
+					@media (max-width: 768px)
+						width: 100%
+						margin-bottom: 15px
+				.contenido
+					width: 70%
+					display: flex
+					flex-wrap: wrap
+					padding-left: 30px
+					@media (max-width: 768px)
+						width: 100%
+						padding: 0
+					.titulo
+						width: 100%
+						margin-bottom: 15px
+					.excerpt
+						width: 100%
+						font-size: 15px
+						line-height: 25px
+						margin-bottom: 15px
+						color: black !important
+
+
+.bannertexto
+	.titulo,.titulo p, .titulo h2, .titulo h1
+		color: $white
+.lineaproceso
+	color: $primary
+	.icono_paso
+		border-color: $primary
+		&::before
+			background: $primary
+		.step
+			background: $primary
+	.h3
+		color: $primary
+
+.slider_opiniones
+	.background
+		position: absolute
+		bottom: 0
+		height: 70%
+		background: $gradient
+		width: 100%
+	p
+		color: $white
+		max-width: 1160px
+		margin: 0 auto
+	.datos
+		color: $white
+body
+	.splide__arrow
+		.icon
+			font-size: 45px
+			filter: brightness(100)
+body
+	.fila_formulario
+		.container
+			background: $purple
+			color: $white
+			box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.35)
+			border-radius: 15px
+			p
+				color: $white
+		.titulo
+			color: $yellow
+			p
+				color: $yellow
+		.texto
+			margin-bottom: 20px
+			p
+				text-align: center
+		.content
+			form
+				input[type=text], input[type=email], input[type=tel], textarea
+					background: $white
+					border-radius: 20px
+				input[type=email]
+					margin-top: 0
+		p
+			a
+				color: $white
+		.btn
+			border-radius: 0
+			font-size: 1.2rem
+			line-height: 1rem
+			padding: 10px 40px
+			font-weight: $bold
+			&.custom
+				background: $primary
+				border: 1px solid $primary
+				color: $white
+				text-transform: uppercase
+				width: auto
+				&:hover
+					background: $white
+					color: $primary
+
+.banner_normal
+	color: $white
+	background: linear-gradient(90deg, #3FB38C35 0%, #364E8C35 100%)
+	p
+		color: $white
+
+
+
+body .wp-block-latest-posts__list
+	display: flex
+	flex-wrap: wrap
+	padding: 0 15px !important
+	width: 100%
+	max-width: 1290px
+	margin: 0 auto
+	li
+		display: flex
+		flex-wrap: wrap
+		width: 100%
+		.wp-block-latest-posts__post-title
+			order: 1
+			width: 100%
+			text-align: center
+			margin-bottom: 10px
+			font-weight: 500
+			font-size: 27px
+			line-height: 36px
+			letter-spacing: 0.02em
+			color: $primary
+			text-transform: uppercase
+		.wp-block-latest-posts__featured-image
+			order: 2
+			width: 100%
+			height: 235px
+			margin-bottom: 25px
+			text-align: center
+			img
+				width: 100%
+				height: 100%
+				object-fit: cover
+				filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.35))
+				border-radius: 15px
+		.wp-block-latest-posts__post-excerpt
+			order: 3
+			width: 100%
+			text-align: center
+
+
+body .wp-block-heading
+	padding: 0 15px !important
+	width: 100%
+	max-width: 1290px
+	margin: 0 auto
+	text-align: center
+	color: $primary
+	margin-bottom: 45px
+	font-size: $h1
+	line-height: $h1-line
+	width: 100%
+	font-weight: $bold
+@media (min-width: $md)
+	body
+		.wp-block-latest-posts__list
+			li
+				width: 50%
+	body
+		.wp-block-heading
+			font-size: 40px
+			line-height: normal
+	.slider_opiniones
+		p
+			font-size: 40px
+			line-height: normal
+		.datos
+			color: $black
+
+@media (min-width: $lg)
+	body .slider_full ul .content
+		.subtitulo,.subtitulo p
+			font-size: 35px
+			line-height: normal
+		.titulo,.titulo p
+			font-size: 50px
+			line-height: normal
+
+
+.sticky-header p
+	margin: 0px
+	padding: 0
+
+body .sticky-header
+	display: flex
+	flex-direction: column
+	justify-content: space-between
+	position: fixed
+	height: 240px
+	width: 80px
+	top: 285px
+	right: 0px
+	padding: 10px 0
+	border-radius: 0
+	border-top-left-radius: 10px
+	border-bottom-left-radius: 10px
+	z-index: 999999
+	gap: 10px
+	background-color: #ffffffc4
+	section
+		width: 80px
+		right: 0px
+		position: relative
+	a
+		text-decoration: none
+		margin: 0
+		.icon
+			background: $primary
+			&::before
+				color: #2e2d2c
+	.borde_ext
+		position: relative
+		display: block		
+		width: 80px
+		height: auto
+		margin: 0
+		z-index: 2
+	.borde_int
+		position: relative
+		width: 100%
+		height: auto
+		margin: 0px auto
+		display: flex
+		flex-wrap: wrap
+		justify-content: center
+		align-items: center
+		padding: 0
+		transition: all .2s linear
+		
+		img
+		.icon
+			font-size: 30px
+			width: 100%
+			height: 100%
+			display: inline-flex
+			justify-content: center
+			align-items: center
+		img
+			position: relative
+	p
+		color: $white
+		font-size: 11px
+		line-height: normal
+		font-weight: 700
+		text-transform: uppercase
+		margin-top: 3px
+
+.titular_block
+	.subtitular
+		color: $green2
+	.titular
+		color: $green
+		p,h1,h2,h3,h4
+			color: $green
+			margin: 0
+
+@media (max-width: 768px)
+	body
+		#footer .politicas a
+			justify-content: center
+		#header .top-header .info p, #header .top-header .info h1, #header .top-header .info h2, #header .top-header .info h3
+			padding: 5px 0
+			font-size: 16px
+			letter-spacing: 5px
+		.banner_lateral
+			width: 100%
+			justify-content: center
+			display: flex
+		.sticky-header
+			display: inline-flex
+			flex-direction: unset
+			bottom: 0
+			top: unset
+			left: unset
+			border-radius: 0
+			height: 25px
+			width: 100%
+			justify-content: center
+			section
+				right: 0
+				top: -50px
+				.borde_int
+					margin-top: 0
+				svg
+					width: 50px
+					height: 45px
+
+@media (min-width: 768px)
+	.hidepc
+		display: none
+@media (max-width: 768px)
+	.hidemobile
+		display: none
+	body #searchform
+		max-width: 100%
+
+.wp-block-columns
+	width: 100%
+	max-width: 1240px
+	padding: 0 20px
+	margin: 0 auto
+#searchform
+	position: relative
+	width: 100%
+	max-width: 200px
+	margin: 0
+	padding: 3px
+	background: $gradient
+	input[type="text"]
+		width: 100%
+		border: 0
+		background: $white
+		box-shadow: unset
+		padding: 0 20px 0 40px
+		outline: 0
+	.search_submit
+		position: absolute
+		top: 0
+		left: 0
+		display: inline-flex
+		justify-content: center
+		align-items: center
+		width: 40px
+		height: 100%
+		#searchsubmit
+			padding: 0
+			width: 100%
+			height: 100%
+			position: absolute
+			left: 0
+			background: transparent
+			cursor: pointer
+			outline: 0
+
+body #primary
+	.wc-block-grid
+		width: 100%
+		max-width: 1240px
+		margin: 0 auto
+	ul.products .product .woocommerce-loop-product__link
+		img
+			margin-bottom: 14px
+	.products.columns-3
+		display: flex
+		flex-wrap: wrap
+		del
+			position: absolute
+			top: 0
+			left: 10px
+
+	.wc-block-grid__product-onsale
+		top: 10px
+		right: 10px
+		position: absolute
+	.wc-block-grid__product-title,.woocommerce-loop-product__title
+		font-family: 'MontserratAlternates-Medium' !important
+		font-weight: 500 !important
+		font-size: 17px !important
+		line-height: 100% !important
+		letter-spacing: 5% !important
+		color: black !important
+		text-align: left !important
+		font-style: normal !important
+
+
+	.wc-block-grid__product-price,.woocommerce-Price-amount bdi
+		font-family: 'MontserratAlternates-Medium' !important
+		font-size: 24px
+		font-style: normal
+		font-weight: 400
+		line-height: 40px
+	.wc-block-grid__product-price del
+		font-size: 20px
+		.woocommerce-Price-amount
+			font-size: 20px
+			line-height: 20px
+	.wp-block-button.wc-block-grid__product-add-to-cart
+		width: 100%
+	.add_to_cart_button,.button.product_type_grouped
+		background: white
+		border: 4px solid #D5A940
+		color: #432918
+		padding: 1px
+		font-size: 19px
+		font-style: normal
+		font-weight: 600
+		line-height: normal
+		width: 80%
+		transition: all .2s linear
+		border-radius: 10px
+		margin-top: 15px
+		&:hover
+			background: $white
+
+
+
+	.wp-block-button__link.wp-element-button
+		border-radius: 0
+		font-size: 21px
+		font-style: normal
+		font-weight: 700
+		line-height: normal
+		color: $primary
+		background: $lightgrey
+		border: 1px solid $lightgrey
+		transition: all .2s linear
+		&:hover
+			background: $white
+			
+@media (max-width: 480px)
+	.wc-block-grid.has-4-columns .wc-block-grid__products
+		display: flex
+	.wc-block-grid.has-4-columns .wc-block-grid__product
+		max-width: 50%
+.faqs
+	.container
+		max-width: 1290px
+	.titulo_faq
+		font-size: 23px
+		font-style: normal
+		font-weight: 600
+		color: $purple
+		display: flex
+		align-items: center
+		margin-bottom: 10px
+		font-family: "worksans"
+		svg,img
+			transition: $transition-normal
+		&.activo
+			.icono
+				svg,img
+					transform: rotate(90deg)
+			
+	.respuesta_faq
+		display: none
+		.content
+			background: $white
+			width: 100%
+			padding: 25px 50px
+			margin-bottom: 20px
+			border-radius: 12px
+			-webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2)
+			-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2)
+			box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2)
+			p
+				color: $purple
+				&:first-child
+					margin-top: 0
+	.icono
+		display: inline-flex
+		margin-right: 20px
+		border-radius: 50%
+		svg
+			width: 32px
+			height: 32px
+.fila_iconos.containerxl .container
+	max-width: 1320px
+@media (min-width: 768px)
+	.faqs .respuesta_faq
+		padding-left: 75px
+body .banner_normal
+	.titulo1,.titulo1 p
+		font-size: 40px
+		font-style: normal
+		font-weight: 700
+		line-height: 44px
+		color: $primary
+		display: flex
+		text-align: left
+	.titulo2,.titulo2 p
+		font-size: 32px
+		font-style: normal
+		font-weight: 400
+		line-height: 40px
+		color: $primary
+		display: flex
+		text-align: left
+	.row
+		margin-top: 40px
+
+.content_page > .woocommerce
+	display: flex
+	flex-wrap: wrap
+	width: 100%
+	max-width: 1300px
+	padding: 0 20px
+	margin: 0 auto
+	a
+		color: $primary
+		font-weight: 700
+	ul
+		list-style: none
+	.woocommerce-MyAccount-navigation
+		a
+			color: $primary
+			text-transform: uppercase
+			font-weight: 400
+			padding-bottom: 5px
+			margin-bottom: 5px
+			border-bottom: 2px solid $green
+			display: block
+			&::before
+				color: $green
+				transition: $transition-normal
+body
+	.woocommerce-info
+		border: 2px solid $primary
+		background: $white
+		color: $primary
+		a
+			transition: $transition-normal
+	.woocommerce-message .button:hover, .woocommerce-info .button:hover, .woocommerce-error .button:hover, .woocommerce-noreviews .button:hover, p.no-comments .button:hover
+		color: $green
+	.woocommerce-products-header__title.page-title
+		display: none
+.woocommerce-result-count
+	color: $primary
+	font-size: 22px
+	line-height: normal
+	font-weight: 400
+.lista_categorias
+	.titulo
+		color: #D5A940
+		padding: 8px 12px
+		font-family: 'ReplayPro-Bold'
+		font-size: 42px
+		font-weight: 500
+		line-height: 46.2px
+		text-align: left
+
+	.wc-block-product-categories-list
+		.wc-block-product-categories-list--depth-1
+			display: none
+		.wc-block-product-categories-list-item
+			font-size: 18px
+			font-style: normal
+			font-weight: 400
+			line-height: 34px
+			letter-spacing: 0.9px
+			color: #7C7C7B
+			border: 3px solid $green
+			border-top: 0
+			padding: 8px 12px
+			text-transform: uppercase
+			a
+				color: $primary
+				font-size: 20px
+				font-style: normal
+				font-weight: 500
+				line-height: normal
+			&:first-child
+				border-top: 1px solid $green
+			&:last-child
+				border-bottom-left-radius: 20px
+				border-bottom-right-radius: 20px
+body
+	ul.products li.product
+		img
+			height: 450px
+			object-fit: cover
+			object-position: top
+			width: 90%
+			margin-bottom:15px !important
+		.onsale
+			top: 10px
+			right: 10px
+			position: absolute
+			display: none
+
+		.price,.woocommerce-Price-amount
+			font-family: $font-family
+			font-size: 30px
+			font-style: normal
+			font-weight: 700
+			line-height: 40px
+			color: $green
+		.price del
+			font-size: 20px
+			bdi
+				font-size: 20px
+				line-height: 20px
+		.wp-block-button.wc-block-grid__product-add-to-cart
+			width: 100%
+
+	.storefront-sorting
+		p
+			margin: 0
+body
+	.storefront-sorting
+		display: flex
+		flex-wrap: wrap
+		align-items: center
+		justify-content: space-between
+
+		.woocommerce-ordering
+			margin-bottom: 0
+		.berocket_lgv_widget
+			display: block
+	.berocket_lgv_widget
+		display: none
+
+	.widget.widget_berocket_lgv_widget
+		display: inline-flex
+		margin: 0 10px
+		.berocket_lgv_set
+			background: $green2
+			border: 0
+			box-shadow: unset
+			i
+				color: $white
+			&:hover
+				background: linear-gradient(rgb(220, 220, 220), rgb(255, 255, 255)) rgb(220, 220, 220)
+				i
+					color: $green2
+	.berocket_lgv_set.berocket_lgv_button.berocket_lgv_button_grid.selected i
+		color: #7C7C7B
+
+@media (max-width:768px)
+	body
+		.lista_categorias
+			margin: 20px auto
+			.widget.widget_block
+				margin-bottom: 0
+		.storefront-sorting
+			text-align: center
+			justify-content: center
+	ul.products.columns-3
+		display: flex
+		flex-wrap: wrap
+	.widget_media_image
+		display: none
+	.page-template-template-fullwidth-php .site-main ul.products.columns-3 li.product, .page-template-template-fullwidth-php .header-widget-region ul.products.columns-3 li.product, .page-template-template-homepage-php .site-main ul.products.columns-3 li.product, .page-template-template-homepage-php .header-widget-region ul.products.columns-3 li.product, .storefront-full-width-content .site-main ul.products.columns-3 li.product, .storefront-full-width-content .header-widget-region ul.products.columns-3 li.product
+		width: 45%
+		margin: 0 auto
+	body ul.products li.product .price del bdi
+		display: none
+	body
+		.banner_producto .envio p, .banner_producto .envio h1, .banner_producto .envio h2, .banner_producto .envio h3, .banner_producto .envio h4,
+		.pagebg .envio_gratuito p, .pagebg .envio_gratuito h1, .pagebg .envio_gratuito h2, .pagebg .envio_gratuito h3, .pagebg .envio_gratuito h4
+			font-size: 14px
+			line-height: 20px
+			letter-spacing: 5.25px
+
+.banner_producto
+	width: 100%
+	height: 525px
+	position: relative
+	margin-bottom: 10px
+	display: flex
+	justify-content: center
+	align-items: center
+	.content
+		position: absolute
+		top: 100px
+		.titulo
+			font-size: 50px
+			line-height: normal
+			font-weight: 700
+			color: $white
+			text-align: center
+		.subtitulo
+			font-size: 30px
+			line-height: normal
+			color: $white
+			text-align: center
+	.form-banner
+		width: 100%
+		max-width: 1090px
+		padding: 27px 52px
+		background: rgba(135, 118, 78, 0.9)
+		border-radius: 10px
+		display: flex
+		flex-wrap: wrap
+		justify-content: center
+		margin-top: 30px
+		.titulo
+			width: 100%
+			max-width: 800px
+			text-align: center
+			color: #FFFFFF
+			font-size: 30px
+			font-weight: 700
+			margin-bottom: 20px
+			letter-spacing: 12px
+		form
+			margin: 0
+			color: #FFFFFF
+			p,a
+				color: #FFFFFF
+			input[type="radio"]
+				width: 22px
+				height: 22px
+			.wpcf7-submit
+				width: 100%
+			.wpcf7-acceptance
+				.wpcf7-list-item
+					margin: 0
+					width: auto
+					margin-right: 15px
+			.wpcf7-radio
+				display: flex
+				flex-wrap: wrap
+				.wpcf7-list-item
+					margin: 0
+					display: inline-flex
+					align-items: center
+					input
+						margin-right: 15px
+					&.first
+						width: 50%
+					&.last
+						width: 50%
+	img
+		width: 100%
+		height: 100%
+		object-fit: cover
+		max-height: 365px
+		top: 0
+		left: 0
+		position: absolute
+	.envio
+		position: absolute
+		bottom: 0
+		width: 100%
+		background: rgba(0, 0, 0, 0.7)
+		color: $white
+		font-size: 25px
+		font-style: normal
+		font-weight: 400
+		line-height: 31px
+		letter-spacing: 14.25px
+		text-align: center
+		z-index: 2
+		display: flex
+		align-items: center
+		justify-content: center
+		padding: 9px 20px
+		p,h1,h2,h3,h4
+			margin: 0
+			color: $white
+			font-size: 25px
+			font-style: normal
+			font-weight: 400
+			line-height: 31px
+			letter-spacing: 14.25px
+			strong
+				font-weight: 700
+@media (max-width: 768px)
+	.pagebg,.banner_producto
+		height: 625px
+.rank-math-breadcrumb
+	margin-bottom: 80px
+	text-transform: uppercase
+	a
+		font-size: 16px
+		font-style: normal
+		font-weight: 400
+		line-height: 26px
+		letter-spacing: 0.8px
+		color: #7C7C7B
+	.last
+		color: $primary
+ol.flex-control-nav.flex-control-thumbs
+	display: flex
+body.single-product div.product .woocommerce-product-gallery .flex-viewport
+	margin-bottom: 15px
+body.storefront-full-width-content.single-product div.product .woocommerce-product-gallery.woocommerce-product-gallery--columns-5 .flex-control-thumbs li
+	width: 132px
+	height: 126px
+	margin: 0 auto
+body.single-product
+	.woocommerce-product-details__short-description
+		p
+			//styleName: Menú LA ANNICA;
+			font-family: 'TitilliumWeb-Regular'
+			font-size: 19px
+			font-weight: 400
+			line-height: 28.9px
+			text-align: justify
+			color: #432918
+
+	.flex-viewport
+		height: 560px
+	.woocommerce-product-gallery__image
+		height: 560px
+		& > a
+			display: flex
+			width: 100%
+			height: 100%
+			img
+				width: 100%
+				height: 100%
+				object-fit: cover
+	.product_title,.subtitle_product
+		margin: 0 !important
+		background: rgb(255,255,255)
+		background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(210,174,3,1) 40%, rgba(210,174,3,1) 100%)
+	.subtitle_product
+		padding-top: 20px
+		font-size: 30px
+		line-height: normal
+		font-weight: 400
+		color: $white
+		text-align: center
+	.product_title
+		padding-bottom: 8px
+		font-size: 50px
+		line-height: normal
+		font-weight: 700
+		color: $white
+		text-align: center
+	blockquote
+		border: 0
+		width: 100%
+		max-width: 100%
+		margin-top: 30px
+		padding: 0
+		p
+			text-align: center
+			font-size: 40px
+			font-weight: 600
+			font-style: normal
+	p	
+		text-align: center
+		font-family: 'TitilliumWeb-Regular'
+		font-size: 19px
+		font-weight: 400
+		line-height: 28.9px
+		text-align: left
+		color: #432918
+		margin-top: 0px
+
+	.marca
+		font-size: 22px
+		font-style: normal
+		font-weight: 400
+		line-height: 26px
+		letter-spacing: 1.1px
+		color: $primary
+		text-transform: uppercase
+	div.product .summary.entry-summary form.cart
+		display: flex
+		flex-wrap: wrap
+		align-items: center
+		margin-top: 24px
+		.price
+			margin: 0 auto
+			padding: 10px 0
+		.quantity
+			float: none
+			margin: 0
+			display: inline-flex
+			display: none
+			input
+				display: inline-flex
+				align-content: center
+				align-items: center
+				justify-content: center
+				box-shadow: unset
+				color: $primary
+				background: $white
+				padding-right: 0
+		.minus,.plus
+			background: $green
+			color: $white
+			padding: 10px 15px
+			display: none
+		button[name="add-to-cart"]
+			padding: 5px 20px
+			background: $yellow
+			color: $primary
+			text-transform: uppercase
+			border: 1px solid $yellow
+			border-radius: 10px
+			transition: $transition-normal
+			font-size: 21px
+			font-style: normal
+			font-weight: 400
+			line-height: normal
+			margin: 0 auto
+			margin-top: 10px
+			width: 100%
+			&:hover
+				background: $white
+				color: $yellow
+	.woocommerce-tabs .woocommerce-Tabs-panel
+		width: 100%
+		margin: 0 auto
+		background: $white
+		padding: 50px 100px
+		border-bottom: 2px solid #432918
+		font-family: 'TitilliumWeb-Regular'
+		
+		p
+			text-align: left
+	.woocommerce-tabs.wc-tabs-wrapper
+		.tabs.wc-tabs
+			border-top: 0
+			border-bottom: 2px solid #432918
+			opacity: 70%
+			li
+				border-bottom: 0
+				&::after
+					display: none
+				a
+					font-size: 24px
+					font-style: normal
+					font-weight: 700
+					line-height: 26px
+					letter-spacing: 1.1px
+					color: #432918
+					padding: 9px 20px
+					border-bottom: 0
+					font-family: 'TitilliumWeb-Bold'
+					opacity: 70%
+				&.active a
+					color: red
+					border-bottom: 0
+					border-bottom: 4px solid red
+					opacity: 100%
+	.product_meta
+		font-family: 'TitilliumWeb-Regular'
+		font-size: 19px
+		font-weight: 400
+		line-height: 28.9px
+		text-align: justify
+		color: #432918
+		margin-top: 20px
+		a
+			color: #432918 !important
+			font-weight: bold
+		
+	.site-main section.products
+		ul.products.columns-3
+			display: flex
+			flex-wrap: wrap
+			li.product
+				width: 33.33%
+				margin: 0 auto
+@media (max-width: 768px)
+	body.single-product div.product .summary.entry-summary form.cart button[name=add-to-cart]
+		width: 100%
+		margin-top: 20px
+	body.single-product div.product .summary.entry-summary form.cart .price
+		margin: 0
+		margin-left: 20px
+	body.single-product div.product .summary.entry-summary form.cart
+		justify-content: center
+		margin-top: 20px
+@media (min-width: 768px)
+	.woocommerce-tabs.wc-tabs-wrapper
+		display: flex
+		flex-wrap: wrap
+		.tabs.wc-tabs
+			width: 100%
+			float: unset
+			margin: 0
+			display: flex
+			justify-content: space-evenly
+			li
+				display: inline-flex
+				width: auto
+
+.woocommerce-cart
+	.pagebg
+		margin-bottom: 50px
+
+a.wc-block-grid__product-link
+	width: 100%
+body
+	.woocommerce-cart-form
+		thead
+			th
+				text-transform: uppercase
+				color: $white
+				background: $green
+		.cart_item
+			.product-name
+				a
+					font-weight: 400
+					text-transform: uppercase
+body #primary
+	.wc-proceed-to-checkout
+		width: 100%
+		a.button
+			display: flex
+			justify-content: center
+			align-items: center
+			background: $green
+			color: $white
+			border: 1px solid $green
+			transition: $transition-normal
+			&:hover
+				background: $white
+				color: $green
+	.cart_totals 
+		width: 100%
+		h2
+			display: flex
+			justify-content: center
+			align-items: center
+			padding: 27px 20px
+			background: $primary
+			color: $white
+body.woocommerce-checkout
+	#primary
+		padding-top: 50px
+
+.wp-block-column
+	iframe
+		width: 100%
+		margin-top: 15px	
+
+@media (max-width: 1200px)
+	body #primary
+		.woocommerce-cart-form
+			width: 100%
+		.cart-collaterals
+			width: 100%
+
+body .wp-block-file
+	display: flex
+	flex-wrap: wrap
+	justify-content: center
+	.wp-block-file__embed
+		order: 2
+		margin-top: 15px
+	a:not(.wp-block-file__button)
+		order: 1
+		font-size: 40px
+		line-height: 44px
+		font-weight: 700
+		color: #2e2d2c
+		width: 100%
+		text-align: center
+		text-transform: uppercase
+	.wp-block-file__button
+		order: 3
+		border-radius: 0
+		font-size: 0.8rem
+		line-height: 1rem
+		padding: 10px 40px
+		font-weight: $bold
+		background: $green
+		border: 1px solid $green
+		color: $primary
+		text-transform: uppercase
+		width: auto
+		margin: 0 auto
+		transition: all .2s linear
+		&:hover
+			background: $white
+
+#pum-446
+	background: rgba(0, 0, 0, 0.3)
+	.pum-container
+		background: $green
+		color: $white
+		width: 100%
+		max-width: 954px !important
+		left: 0 !important
+		right: 0 !important
+		margin-left: auto
+		margin-right: auto
+		.pop-up-registro
+			color: $white
+			text-align: center
+			font-size: 40px
+			text-align: center
+			padding: 20px
+			a
+				background: $text
+				color: $white
+				font-size: 20px
+				display: inline-block
+				margin: 20px auto
+				-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75)
+				-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75)
+				box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75)
+				padding: 5px 30px
+			label
+				font-size: 16px
+	.popmake-close
+		background: transparent
+		box-shadow: none
+		font-weight: 600
+		font-size: 18px
+		color: #000000
+@media (max-width: 768px)
+	body.single-product .woocommerce-tabs .woocommerce-Tabs-panel
+		padding: 20px
+	body.single-product .woocommerce-tabs.wc-tabs-wrapper .tabs.wc-tabs
+		li
+			a
+				border-radius: 0
+	.texto-resena
+		font-size: 18px
+		line-height: 21px
+	#pum-446 .pum-container .pop-up-registro
+		font-size: 20px
+	#mi-cuenta .u-column1, #mi-cuenta .u-column2		
+		width: 95%
+
+body
+	.splide__pagination__page
+		width: 9px
+		height: 9px
+		border-radius: 50%
+		opacity: 1
+		background: $white
+		transition: all .1s linear
+		transform: scale(1)
+		&:hover
+			background: $red
+		&.is-active
+			background: $red
+			transform: scale(1)
+
+body
+	&.right-sidebar .content-area
+		width: 100%
+		margin: 0
+
+body.storefront-full-width-content.single-product div.product .woocommerce-product-gallery
+	margin-bottom: 0
+
+.subtitle_product
+	color: $primary
+	text-transform: uppercase
+	font-weight: 500
+	margin-bottom: 5px
+
+.wc-block-grid__product del .woocommerce-Price-amount.amount
+	position: absolute
+	top: 20px
+	left: 10px
+
+.added_to_cart.wc-forward
+	display: none
+
+body#carrito #primary .woocommerce-Price-amount
+	font-size: 30px
+	line-height: normal
+
+@media (min-width: 1200px)
+	.woocommerce-cart-form
+		width: 75%
+	.cart-collaterals
+		width: 25%
+body
+	#gt_float_wrapper
+		.gt_float_switcher
+			display: inline-flex
+			box-shadow: none
+			border-radius: 15px !important
+		.gt-lang-code
+			display: none
+		.gt_options
+			position: absolute
+			background: $white
+			width: 180px
+			max-height: 400px
+			border-radius: 4px
+			overflow: hidden
+			a
+				color: black !important
+				width: 100%
+				transition: all .1s linear
+				font-size: 14px !important
+				&:hover
+					background: $yellow
+					color: $yellow
+
+.wp-block-embed-youtube
+	padding: 75px 20px
+	background: $grey
+	iframe
+		width: 100%
+		max-width: 1320px
+		border-radius: 10px
+		margin: 0 auto
+
+#topbutton
+	z-index: 9998
+	svg
+		fill: $white
+		background: $purple
+		border-radius: 50%
+		path
+			&:nth-last-child(2)
+				fill: $white
+body.single-product div.product .summary.entry-summary form.cart
+	.precio
+		width: 100%
+		text-align: center
+		.price
+			padding: 0
+		span
+			width: 100%
+			text-align: center
+			&.yellow
+				color: $yellow
+
+.fancybox__container
+	z-index: 9999
+body
+	.custom-logo-link
+		display: inline-flex
+		justify-content: center
+		width: auto
+		padding: 20px
+		
+
+.ti-widget.ti-goog
+	margin: 0 auto
+body
+	.ti-widget.ti-goog .ti-review-content
+		font-size: 24px
+		color: $grey
+		line-height: normal
+		font-family: "worksans"
+.font-small,.font-small p
+	font-size: 15px
+	.wpcf7-acceptance input
+		margin-right: 3px
+
+body:not(.home)
+	.texto_imagen .texto
+		align-content: baseline
+	.texto_imagen .texto .titulo::after
+		display: none
+	.texto_imagen .imagen img, .texto_imagen .imagen iframe
+		width: 100%
+		height: 400px
+		object-fit: cover
+		position: relative
+		border-radius: 10px
+		object-position: center center
+	.texto_imagen .texto p
+		text-align: justify
+
+body .bloque_precios
+	& > .wp-block-column
+		display: flex
+		flex-wrap: wrap
+	.precio,.precio p
+		width: 100%
+		text-align: center
+		color: $black
+		font-size: 35px
+		font-family: "worksans"
+	figure
+		margin: 0 auto
+		img
+			padding: 0
+			width: 100%
+			border-radius: 8px
+	.btn.custom
+		width: 100%
+		margin-top: 40px
+		font-weight: 600
+.btn_coleccion
+	display: flex
+	width: 100%
+	justify-content: space-between
+	border: 2px solid $green2
+	border-radius: 8px
+	padding-left: 20px
+	.text
+		font-size: 32px
+		font-weight: 400
+		font-family: "worksans"
+		text-transform: uppercase
+		color: $black
+		padding: 8px 0 5px 0
+		letter-spacing: 4px
+	.icon
+		background: $green2
+		width: 60px
+		display: inline-flex
+		justify-content: center
+		align-items: center
+		img
+			width: 100%
+			max-width: 15.71px
+			filter: brightness(0) invert(1)
+body #primary
+	.container-img
+		max-width: 1320px
+		margin: 0 auto
+		padding: 0 20px
+		figure,img
+			width: 100%
+	.container-img-double
+		width: 100%
+		max-width: 1320px
+		padding: 0 20px
+		figure,img
+			width: 100%
+			padding: 0
+
+body
+	.slider_full ul .content .titulo,.slider_full ul .content .titulo p,
+	.titular_block .titular p, .titular_block .titular h1, .titular_block .titular h2,
+	.titular_block .titular h3, .titular_block .titular h4,.pagebg .content .title
+		font-family: "worksans"
+		font-weight: 700
+	.content_page p.has-text-align-left
+		text-align: left
+.content_page > p
+	&.forcewhite
+		margin-top: 0
+		margin-bottom: 0
+		padding: 0 10px
+.forcewhite
+	&::before
+		content: ""
+		height: 100%
+		background: white
+		display: flex
+		position: absolute
+		left: 0
+		left: 50%
+		right: 50%
+		margin-left: -50vw
+		margin-right: -50vw
+		width: 100vw
+		z-index: -1
+.bwhite
+	background: $white
+
+@media (max-width: 1100px)
+	.contacto-header
+		display: none
+	.contacto_block .container
+		padding: 0
+		margin-bottom: 20px
+		.tab-btn
+			width: 100% !important
+			border-radius: 0
+@media (max-width: 768px)
+	body #topbutton
+		bottom: 100px
+	.pagebg
+		margin-bottom: 60px
+	body #primary .texto_imagen ol
+		padding-left: 35px
+	body .texto_imagen .imagen
+		height: auto
+	body .titulo, body .titulo p, body .titulo, body h1, body .h1, body .titulo h1, body .titulo h2
+		font-size: 1.1rem
+		line-height: normal
+	body h2, body .h2, body .subtitulo, body .subtitulo p, body .subtitulo h2, body .subtitulo h1
+		font-size: 1rem
+		line-height: normal
+	body .bloque_seo .open
+		right: 5px
+	.contacto_block .tab-contents > .content
+		padding: 0 20px
+	.pagebg .form-banner .titulo
+		font-size: 23px
+		letter-spacing: 2px
+	.pagebg .content .title
+		font-size: 30px
+		letter-spacing: 1px
+	.texto_imagen > .container > .imagen
+		height: 100%
+		margin-bottom: 20px
+	.texto_texto
+		.box_texto
+			&:first-child
+				margin-bottom: 10px
+	.galeria_slider_child
+		display: none
+
+
+
+.link img
+	object-fit: contain
+
+.woocommerce-shop .container
+	max-width: 80% !important
+
+
+.ti-widget.ti-goog .ti-review-item>.ti-inner
+	border-radius: 20px

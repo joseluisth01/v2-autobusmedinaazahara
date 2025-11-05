@@ -1,0 +1,105 @@
+
+$white: #FFFFFF
+$black: #2E2D2C
+$background-invert: #000000
+$color-invert: #ffffff
+$text-black: #1f1f1f
+$primary: #2E2D2C
+$green:#404521
+$green2: #867B2F
+$blue: #0B9DDA
+$blue2: #005C9A
+$yellow: #F8AE4B
+$brown: #87764E
+$red: #E25252
+$orange: #F8AE4B
+$gradient: linear-gradient(90deg, rgba(0,91,153,1) 0%, rgba(11,157,218,1) 100%)
+$grey: #797979
+$lightgrey: #D0D0D0
+$text: #797979
+$grey2: #CAC9C9
+.fila_formulario_imagen
+    padding: 45px
+    position: relative
+    .image-box
+        position: absolute
+        top: 0
+        left: 0
+        padding: 0
+        width: 100%
+        height: 100%
+        z-index: -1
+        img
+            border-radius: 0
+    p,a
+        color: $white
+    img,iframe
+        width: 100%
+        height: 100%
+        object-fit: cover
+        max-height: 100%
+        border-radius: 20px
+    .form-box
+        //background: rgba(1, 1, 1, 0.75)
+    .subtitulo
+        font-size: 18px
+        line-height: 25px
+        font-weight: 400
+        color: $green
+        text-align: center
+    .titulo
+        font-size: 32px
+        line-height: normal
+        font-weight: 500
+        color: $green
+        margin-bottom: 20px
+        text-align: center
+        letter-spacing: 12px
+        padding-bottom: 12px
+        &::after
+            content: ""
+            width: 100%
+            position: absolute
+            height: 2.5px
+            background: $white
+            display: flex
+            left: -5px
+            margin-top: 20px
+    .acepto
+        color: $green
+        font-size: 16px
+        line-height: 26px
+    .titulo1
+        color: $green
+        font-size: 40px
+        font-style: normal
+        font-weight: 700
+        line-height: 44px
+        display: flex
+        text-align: left
+        p
+            color: $green
+            font-size: 40px
+            font-style: normal
+            font-weight: 700
+            line-height: 44px
+            display: flex
+            text-align: left
+    .titulo2
+        color: $green
+        font-size: 32px
+        font-style: normal
+        font-weight: 400
+        line-height: 40px
+        display: flex
+        text-align: left
+        p
+            color: $green
+            font-size: 32px
+            font-style: normal
+            font-weight: 400
+            line-height: 40px
+            display: flex
+            text-align: left
+body .fila_formulario_imagen .wpcf7 form
+    margin: 0 auto

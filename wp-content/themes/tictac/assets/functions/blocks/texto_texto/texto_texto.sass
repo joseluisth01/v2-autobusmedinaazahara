@@ -1,0 +1,86 @@
+
+$white: #FFFFFF
+$black: #000000
+$background-invert: #000000
+$color-invert: #ffffff
+$text-black: #000000
+$primary: #2E2D2C
+$green:#404521
+$green2: #867B2F
+$blue: #7879B7
+$blue2: #7879B7
+$purple: #7879B7
+$purple20: #F0F0F8
+$purple50: rgba(120, 121, 183, 0.50)
+$yellow: #FBD6BD
+$yellow50: rgba(251, 214, 189, 0.50)
+$brown: #87764E
+$red: #E25252
+$orange: #F8AE4B
+$gradient: linear-gradient(90deg, rgba(0,91,153,1) 0%, rgba(11,157,218,1) 100%)
+$grey: #4F4E4E
+$lightgrey: #D0D0D0
+$text: #565790
+$grey2: #CAC9C9
+.texto_texto
+    .box_texto
+        display: flex
+        align-items: center
+        justify-content: center
+        &:nth-child(1)
+            background: $purple
+            .content
+                .titulo
+                    font-size: 40px
+                    color: $yellow
+                .texto
+                    color: $white
+                    p
+                        color: $white
+                        font-size: 25px
+                        text-align: center
+        &:nth-child(2)
+            background: $yellow
+            .content
+                .titulo
+                    font-size: 40px
+                    color: $purple
+                .texto
+                    color: $purple
+                    p
+                        color: $purple
+                        font-size: 25px
+                        text-align: center
+        .content
+            padding: 20px
+            text-align: center
+
+@media (min-width: 768px)
+    .texto_texto
+        justify-content: space-between
+        .box_texto
+            max-width: 49%
+            &:nth-child(1)
+                border-top-right-radius: 20px
+                border-bottom-right-radius: 20px
+                display: flex
+                justify-content: flex-end
+            &:nth-child(2)
+                border-top-left-radius: 20px
+                border-bottom-left-radius: 20px
+                display: flex
+                justify-content: flex-start
+            .content
+                max-width: 520px
+                .titulo
+                    margin-bottom: 20px
+
+@media (min-width: 1200px)
+    .texto_texto
+        .box_texto
+            &:nth-child(1)
+                padding-right: 120px
+            &:nth-child(2)
+                padding-left: 120px
+            .content
+                padding: 40px 20px

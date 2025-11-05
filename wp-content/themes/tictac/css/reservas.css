@@ -1,0 +1,286 @@
+/* Estilos para el sistema de reservas */
+.reserva-contenedor {
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+.reserva-encabezado {
+    background-color: #6fbfb5;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+}
+
+.reserva-contenido {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+}
+
+.reserva-pasos {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.reserva-paso {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reserva-paso.activo {
+    background-color: #6fbfb5;
+    color: white;
+}
+
+.reserva-paso.completado {
+    background-color: #a8e6df;
+}
+
+.reserva-formulario {
+    margin-top: 20px;
+}
+
+.reserva-servicios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.reserva-servicio {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: calc(33% - 10px);
+    transition: all 0.3s ease;
+}
+
+.reserva-servicio:hover {
+    border-color: #6fbfb5;
+}
+
+.reserva-servicio.seleccionado {
+    background-color: #6fbfb5;
+    color: white;
+    border-color: #6fbfb5;
+}
+
+.reserva-calendario {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.reserva-calendario-dias {
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.reserva-calendario-horas {
+    flex: 1;
+    margin-left: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.reserva-calendario-mes {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.reserva-calendario-semana {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.reserva-calendario-dia-nombre {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+}
+
+.reserva-calendario-dias-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.reserva-calendario-dia {
+    text-align: center;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reserva-calendario-dia.no-disponible {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.reserva-calendario-dia.seleccionado {
+    background-color: #6fbfb5;
+    color: white;
+}
+
+.reserva-horas-lista {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.reserva-hora {
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reserva-hora.no-disponible {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.reserva-hora.seleccionada {
+    background-color: #6fbfb5;
+    color: white;
+}
+
+.reserva-persona-selector {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.reserva-persona-selector label {
+    margin-right: 10px;
+    flex: 1;
+}
+
+.reserva-persona-contador {
+    display: flex;
+    align-items: center;
+}
+
+.reserva-persona-contador button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    background-color: #f1f1f1;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.reserva-persona-contador input {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin: 0 5px;
+}
+
+.reserva-campo {
+    margin-bottom: 15px;
+}
+
+.reserva-campo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.reserva-campo input, .reserva-campo textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.reserva-botones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.reserva-boton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.reserva-boton-primario {
+    background-color: #6fbfb5;
+    color: white;
+}
+
+.reserva-boton-secundario {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.reserva-mensaje-importante {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.reserva-mensaje-exito {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .reserva-servicio {
+        width: calc(50% - 10px);
+    }
+    
+    .reserva-calendario {
+        flex-direction: column;
+    }
+    
+    .reserva-calendario-horas {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+    
+    .reserva-horas-lista {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .reserva-servicio {
+        width: 100%;
+    }
+    
+    .reserva-horas-lista {
+        grid-template-columns: 1fr;
+    }
+}

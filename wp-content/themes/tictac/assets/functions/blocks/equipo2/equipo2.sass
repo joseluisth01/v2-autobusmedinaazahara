@@ -1,0 +1,92 @@
+
+$white: #FFFFFF
+$black: #000000
+$background-invert: #000000
+$color-invert: #ffffff
+$text-black: #000000
+$primary: #2E2D2C
+$green:#404521
+$green2: #867B2F
+$blue: #0B9DDA
+$blue2: #005C9A
+$yellow: #F8AE4B
+$brown: #87764E
+$red: #E25252
+$orange: #F8AE4B
+$gradient: linear-gradient(90deg, rgba(0,91,153,1) 0%, rgba(11,157,218,1) 100%)
+$grey: #797979
+$lightgrey: #D0D0D0
+$text: #000000
+$grey2: #CAC9C9
+.equipo
+    position: relative
+    .fondo_fila
+        position: absolute
+        width: 100%
+        height: 100%
+        object-fit: cover
+        top: 0
+        left: 0
+        z-index: 1
+    .container
+        z-index: 2
+        position: relative
+    .titulo-destacado
+        text-align: center
+        margin-bottom: 25px
+    .descripcion
+        text-align: center
+        margin-top: 10px
+        font-size: 16px
+        font-weight: 300
+        color: #072B24
+        p
+            font-size: 16px
+            font-weight: 300
+            color: #072B24
+    .personal
+        margin-bottom: 60px
+        .persona
+            display: inline-block
+            width: 100%
+            max-width: 100%
+        .img
+            width: 100%
+            max-width: 100%
+            height: auto
+            text-align: center
+            overflow: hidden
+            img
+                width: 100%
+                height: 100%
+                object-fit: cover
+            @media (min-width: 768px)
+                height: 395px
+        .nombre
+            margin-top: 3px
+            display: flex
+            align-items: center
+            justify-content: center
+            text-align: center
+            font-weight: 700
+            background: $green
+            color: $white
+            font-size: 25px
+            padding: 6px 20px
+        .puesto
+            font-weight: 700
+            color: $white
+            background: $green2
+            font-size: 20px
+            text-align: center
+            margin-top: 3px
+            padding: 9px 20px
+            a
+                color: $white
+                font-size: 20px
+                text-align: center
+@media (min-width: 768px)
+    .equipo .personal .col-md-6 .persona
+        width: 100%
+        .img
+            max-width: 100%

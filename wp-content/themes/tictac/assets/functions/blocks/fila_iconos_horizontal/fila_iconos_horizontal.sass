@@ -1,0 +1,55 @@
+$green:#27A953
+$green2: #94C353
+$blue: #1570B8
+$yellow: #FCC00D
+$purple: #B866A5
+$red: #E52520
+.fila_iconos_horizontal
+    .row-icono
+        width: 25% !important
+        display: flex !important
+        flex-wrap: nowrap !important
+        justify-content: flex-start !important
+        margin-top: 30px
+    .icono
+        height: 75px
+        img
+            height: 100%
+            max-width: 200px
+            -o-object-fit: contain
+            object-fit: contain
+            object-position: bottom
+    .titulo_icono
+        font-family: "Duran-Bold"
+        font-weight: 500
+        font-size: 18px
+        letter-spacing: 0%
+        text-align: left !important
+        margin-left: 30px
+        margin-top: 20px
+        line-height: 110%
+        letter-spacing: .1em
+        text-transform: uppercase
+        .m
+            color: #C0AE96
+        .a
+            color: #92D0D0
+
+    .row .col-12:last-child
+        margin-bottom: 0 !important
+    .row-icono
+        &:nth-child(2)
+            .titulo_icono
+                color: $red
+        &:nth-child(3)
+            .titulo_icono
+                color: $green
+        &:nth-child(4)
+            .titulo_icono
+                color: $yellow
+        &:nth-child(5)
+            .titulo_icono
+                color: $purple
+@media (max-width: 768px)
+    .fila_iconos_horizontal .titulo_icono
+        width: 100%
