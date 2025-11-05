@@ -221,81 +221,68 @@ class ReservasAgencyServicesFrontend
     }
 
 
-    /**
-     * ✅ CALCULAR PRECIO SEGURO (SERVIDOR) - VERSIÓN CORREGIDA
-     */
     public function calculate_visita_price_secure()
-    {
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'reservas_nonce')) {
-            wp_send_json_error('Error de seguridad');
-            return;
-        }
+{
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'reservas_nonce')) {
+        wp_send_json_error('Error de seguridad');
+        return;
+    }
 
-        $service_id = intval($_POST['service_id'] ?? 0);
-        $adultos = max(0, intval($_POST['adultos'] ?? 0));
-        $ninos = max(0, intval($_POST['ninos'] ?? 0));
-        $ninos_menores = max(0, intval($_POST['ninos_menores'] ?? 0));
+    $service_id = intval($_POST['service_id'] ?? 0);
+    $adultos = max(0, intval($_POST['adultos'] ?? 0));
+    $ninos = max(0, intval($_POST['ninos'] ?? 0));
+    $ninos_menores = max(0, intval($_POST['ninos_menores'] ?? 0));
 
-        if ($service_id <= 0) {
-            wp_send_json_error('Service ID inválido');
-            return;
-        }
+    if ($service_id <= 0) {
+        wp_send_json_error('Service ID inválido');
+        return;
+    }
 
-        global $wpdb;
-        $table_services = $wpdb->prefix . 'reservas_agency_services';
+    global $wpdb;
+    $table_services = $wpdb->prefix . 'reservas_agency_services';
 
-        $servicio = $wpdb->get_row($wpdb->prepare(
-            "SELECT precio_adulto, precio_nino, precio_nino_menor 
+    $servicio = $wpdb->get_row($wpdb->prepare(
+        "SELECT precio_adulto, precio_nino, precio_nino_menor 
          FROM $table_services 
          WHERE id = %d AND servicio_activo = 1",
-            $service_id
-        ));
+        $service_id
+    ));
 
-        if (!$servicio) {
-            wp_send_json_error('Servicio no encontrado');
-            return;
-        }
-
-        // ✅ CALCULAR PRECIO EN EL SERVIDOR
-        $precio_adulto = floatval($servicio->precio_adulto);
-        $precio_nino = floatval($servicio->precio_nino);
-        $precio_nino_menor = floatval($servicio->precio_nino_menor);
-
-        $precio_final = ($adultos * $precio_adulto) +
-            ($ninos * $precio_nino) +
-            ($ninos_menores * $precio_nino_menor);
-
-        // ✅ GENERAR FIRMA DIGITAL CON CLAVE SECRETA ESPECÍFICA
-        $secret_key = 'reservas_visitas_secret_' . wp_salt('auth');
-
-        $timestamp = time();
-
-        $firma_data = array(
-            'service_id' => $service_id,
-            'adultos' => $adultos,
-            'ninos' => $ninos,
-            'ninos_menores' => $ninos_menores,
-            'precio_final' => round($precio_final, 2),
-            'timestamp' => $timestamp
-        );
-
-        $firma = hash_hmac('sha256', json_encode($firma_data), $secret_key);
-
-        wp_send_json_success(array(
-            'precio_final' => round($precio_final, 2),
-            'firma' => $firma,
-            'firma_data' => $firma_data,
-            'timestamp' => $timestamp,
-            'debug' => array(
-                'adultos' => $adultos,
-                'ninos' => $ninos,
-                'ninos_menores' => $ninos_menores,
-                'precio_adulto' => $precio_adulto,
-                'precio_nino' => $precio_nino,
-                'precio_nino_menor' => $precio_nino_menor
-            )
-        ));
+    if (!$servicio) {
+        wp_send_json_error('Servicio no encontrado');
+        return;
     }
+
+    $precio_adulto = floatval($servicio->precio_adulto);
+    $precio_nino = floatval($servicio->precio_nino);
+    $precio_nino_menor = floatval($servicio->precio_nino_menor);
+
+    $precio_final = ($adultos * $precio_adulto) +
+                   ($ninos * $precio_nino) +
+                   ($ninos_menores * $precio_nino_menor);
+
+    // ✅ GENERAR FIRMA DIGITAL
+    $secret_key = 'reservas_visitas_secret_' . wp_salt('auth');
+    $timestamp = time();
+
+    $firma_data = array(
+        'service_id' => $service_id,
+        'adultos' => $adultos,
+        'ninos' => $ninos,
+        'ninos_menores' => $ninos_menores,
+        'precio_final' => round($precio_final, 2),
+        'timestamp' => $timestamp
+    );
+
+    $firma = hash_hmac('sha256', json_encode($firma_data), $secret_key);
+
+    wp_send_json_success(array(
+        'precio_final' => round($precio_final, 2),
+        'firma' => $firma,
+        'firma_data' => $firma_data,
+        'timestamp' => $timestamp
+    ));
+}
 
     /**
      * Renderizar página de confirmación de reserva de visita
@@ -615,9 +602,8 @@ class ReservasAgencyServicesFrontend
     header('Content-Type: application/json');
 
     try {
-        error_log('=== INICIANDO PROCESS_VISITA_RESERVATION ===');
+        error_log('=== INICIANDO PROCESS_VISITA_RESERVATION CON REDSYS ===');
 
-        // Verificar nonce
         if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'reservas_nonce')) {
             wp_send_json_error('Error de seguridad');
             return;
@@ -636,9 +622,41 @@ class ReservasAgencyServicesFrontend
         $telefono = sanitize_text_field($_POST['telefono']);
         $idioma = sanitize_text_field($_POST['idioma'] ?? 'español');
 
-        error_log('Datos recibidos: service_id=' . $service_id . ', adultos=' . $adultos . ', ninos=' . $ninos . ', ninos_menores=' . $ninos_menores);
+        // ✅ VERIFICAR FIRMA DIGITAL
+        if (!isset($_POST['precio_calculado']) || !is_array($_POST['precio_calculado'])) {
+            wp_send_json_error('Error: Precio no validado');
+            return;
+        }
 
-        // Validar datos básicos
+        $precio_calculado = $_POST['precio_calculado'];
+        
+        if (!isset($precio_calculado['firma']) || !isset($precio_calculado['firma_data'])) {
+            wp_send_json_error('Error: Firma digital no encontrada');
+            return;
+        }
+
+        $firma_recibida = $precio_calculado['firma'];
+        $firma_data = $precio_calculado['firma_data'];
+
+        // Recalcular firma para verificar
+        $secret_key = 'reservas_visitas_secret_' . wp_salt('auth');
+        $firma_calculada = hash_hmac('sha256', json_encode($firma_data), $secret_key);
+
+        if ($firma_recibida !== $firma_calculada) {
+            error_log('❌ INTENTO DE MANIPULACIÓN: Firma no coincide');
+            wp_send_json_error('Error de seguridad: precio manipulado');
+            return;
+        }
+
+        // Verificar timestamp (máximo 30 minutos)
+        if ((time() - $firma_data['timestamp']) > 1800) {
+            wp_send_json_error('La sesión ha expirado. Por favor, vuelve a calcular el precio.');
+            return;
+        }
+
+        error_log('✅ Firma verificada correctamente');
+
+        // Validaciones básicas
         if ($adultos < 1) {
             wp_send_json_error('Debe haber al menos un adulto en la reserva');
             return;
@@ -649,16 +667,15 @@ class ReservasAgencyServicesFrontend
             return;
         }
 
+        // Obtener datos del servicio
         global $wpdb;
         $table_services = $wpdb->prefix . 'reservas_agency_services';
 
-        // Obtener datos del servicio
         $servicio = $wpdb->get_row($wpdb->prepare(
-            "SELECT s.*, a.agency_name, a.email as agency_email, a.inicial_localizador,
-                a.cif, a.razon_social, a.domicilio_fiscal, a.phone, a.contact_person
-         FROM $table_services s
-         INNER JOIN {$wpdb->prefix}reservas_agencies a ON s.agency_id = a.id
-         WHERE s.id = %d AND s.servicio_activo = 1",
+            "SELECT s.*, a.agency_name, a.email as agency_email, a.inicial_localizador
+             FROM $table_services s
+             INNER JOIN {$wpdb->prefix}reservas_agencies a ON s.agency_id = a.id
+             WHERE s.id = %d AND s.servicio_activo = 1",
             $service_id
         ));
 
@@ -667,92 +684,38 @@ class ReservasAgencyServicesFrontend
             return;
         }
 
-        // ✅ CALCULAR PRECIO EN EL SERVIDOR
-        $precio_adulto = floatval($servicio->precio_adulto);
-        $precio_nino = floatval($servicio->precio_nino);
-        $precio_nino_menor = floatval($servicio->precio_nino_menor);
+        $precio_total = floatval($precio_calculado['precio_final']);
 
-        $total_calculado = ($adultos * $precio_adulto) + 
-                          ($ninos * $precio_nino) + 
-                          ($ninos_menores * $precio_nino_menor);
-
-        error_log('Precio calculado: ' . $total_calculado . '€');
-
-        // ✅ GENERAR LOCALIZADOR
-        $localizador = $this->generar_localizador_visita($agency_id, $servicio->inicial_localizador);
-
-        $table_visitas = $wpdb->prefix . 'reservas_visitas';
-
-        $insert_data = array(
-            'localizador' => $localizador,
+        // ✅ PREPARAR DATOS PARA REDSYS
+        $reservation_data = array(
             'service_id' => $service_id,
             'agency_id' => $agency_id,
             'fecha' => $fecha,
             'hora' => $hora,
+            'adultos' => $adultos,
+            'ninos' => $ninos,
+            'ninos_menores' => $ninos_menores,
             'nombre' => $nombre,
             'apellidos' => $apellidos,
             'email' => $email,
             'telefono' => $telefono,
-            'adultos' => $adultos,
-            'ninos' => $ninos,
-            'ninos_menores' => $ninos_menores,
-            'total_personas' => $adultos + $ninos + $ninos_menores,
             'idioma' => $idioma,
-            'precio_total' => $total_calculado,
-            'estado' => 'confirmada',
-            'metodo_pago' => 'pendiente_tpv',
-            'created_at' => current_time('mysql')
+            'precio_total' => $precio_total,
+            'precio_calculado' => $precio_calculado,
+            'is_visita' => true
         );
 
-        $result = $wpdb->insert($table_visitas, $insert_data);
+        error_log('Datos de reserva preparados para Redsys: ' . print_r($reservation_data, true));
 
-        if ($result === false) {
-            error_log('Error insertando reserva: ' . $wpdb->last_error);
-            wp_send_json_error('Error guardando la reserva: ' . $wpdb->last_error);
-            return;
+        // ✅ GENERAR FORMULARIO REDSYS
+        if (!function_exists('generar_formulario_redsys')) {
+            require_once RESERVAS_PLUGIN_PATH . 'includes/class-redsys-handler.php';
         }
 
-        $reserva_id = $wpdb->insert_id;
-        error_log('✅ Reserva guardada con ID: ' . $reserva_id);
+        $formulario_html = generar_formulario_redsys($reservation_data);
 
-        // Preparar datos completos para emails
-        $reserva_completa = array_merge($insert_data, array(
-            'id' => $reserva_id,
-            'precio_adulto' => $servicio->precio_adulto,
-            'precio_nino' => $servicio->precio_nino,
-            'precio_nino_menor' => $servicio->precio_nino_menor,
-            'agency_name' => $servicio->agency_name,
-            'is_visita' => true,
-            'agency_logo_url' => $servicio->logo_url,
-            'agency_cif' => $servicio->cif ?? '',
-            'agency_razon_social' => $servicio->razon_social ?? '',
-            'agency_domicilio_fiscal' => $servicio->domicilio_fiscal ?? '',
-            'agency_email' => $servicio->agency_email ?? '',
-            'agency_phone' => $servicio->phone ?? '',
-            'idioma' => $idioma
-        ));
+        wp_send_json_success($formulario_html);
 
-        // Enviar email de confirmación
-        $this->enviar_email_confirmacion_visita($reserva_completa);
-
-        // Construir URL de confirmación
-        $current_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : home_url();
-        $parsed_url = parse_url($current_url);
-        $path_parts = explode('/', trim($parsed_url['path'], '/'));
-
-        if (count($path_parts) > 0 && !empty($path_parts[0]) && $path_parts[0] !== 'confirmacion-reserva-visita') {
-            $redirect_url = home_url('/' . $path_parts[0] . '/confirmacion-reserva-visita/?localizador=' . $localizador);
-        } else {
-            $redirect_url = home_url('/confirmacion-reserva-visita/?localizador=' . $localizador);
-        }
-
-        wp_send_json_success(array(
-            'mensaje' => 'Reserva procesada correctamente',
-            'redirect_url' => $redirect_url,
-            'localizador' => $localizador,
-            'reserva_id' => $reserva_id,
-            'precio_total' => $total_calculado
-        ));
     } catch (Exception $e) {
         error_log('ERROR procesando reserva visita: ' . $e->getMessage());
         wp_send_json_error('Error interno: ' . $e->getMessage());

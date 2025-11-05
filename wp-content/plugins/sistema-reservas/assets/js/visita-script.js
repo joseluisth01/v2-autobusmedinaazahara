@@ -282,24 +282,36 @@ function calculateTotalPrice() {
         return;
     }
 
-    // ✅ CÁLCULO SIMPLE EN EL CLIENTE
-    const precio_adulto = parseFloat(serviceData.precio_adulto) || 0;
-    const precio_nino = parseFloat(serviceData.precio_nino) || 0;
-    const precio_nino_menor = parseFloat(serviceData.precio_nino_menor) || 0;
-
-    const precio_final = (adultos * precio_adulto) + (ninos * precio_nino) + (ninosMenores * precio_nino_menor);
-
-    jQuery('#total-visita').text(formatPrice(precio_final));
-
-    // ✅ GUARDAR DATOS SIMPLES
-    window.precioCalculado = {
-        precio_final: precio_final,
-        adultos: adultos,
-        ninos: ninos,
-        ninos_menores: ninosMenores
-    };
-
-    console.log('✅ Precio calculado:', precio_final + '€');
+    // ✅ LLAMAR AL BACKEND PARA CALCULAR CON FIRMA
+    jQuery.ajax({
+        url: reservasVisitaAjax.ajax_url,
+        type: 'POST',
+        data: {
+            action: 'calculate_visita_price_secure',
+            nonce: reservasVisitaAjax.nonce,
+            service_id: serviceData.id,
+            adultos: adultos,
+            ninos: ninos,
+            ninos_menores: ninosMenores
+        },
+        success: function(response) {
+            if (response.success) {
+                const precio = response.data;
+                jQuery('#total-visita').text(formatPrice(precio.precio_final));
+                
+                // ✅ GUARDAR PRECIO VALIDADO CON FIRMA
+                window.precioCalculado = precio;
+                console.log('✅ Precio calculado con firma:', precio);
+            } else {
+                console.error('Error calculando precio:', response);
+                jQuery('#total-visita').text('0,00€');
+            }
+        },
+        error: function(error) {
+            console.error('Error AJAX:', error);
+            jQuery('#total-visita').text('0,00€');
+        }
+    });
 }
 
 
@@ -367,7 +379,7 @@ function autoFillPersonasFromBusReservation() {
  * Procesar reserva de visita
  */
 function processVisitaReservation() {
-    console.log('=== PROCESANDO RESERVA DE VISITA ===');
+    console.log('=== PROCESANDO RESERVA DE VISITA CON REDSYS ===');
 
     // Validar política de privacidad
     const privacyCheckbox = document.getElementById('privacy-policy-visita');
@@ -420,7 +432,15 @@ function processVisitaReservation() {
         return;
     }
 
-    // ✅ PREPARAR DATOS SIN VALIDACIÓN DE FIRMA
+    // ✅ VERIFICAR QUE TENEMOS PRECIO VALIDADO CON FIRMA
+    if (!window.precioCalculado || !window.precioCalculado.firma) {
+        alert('Error: Precio no validado. Por favor, vuelve a seleccionar el número de personas.');
+        return;
+    }
+
+    console.log('✅ Precio validado con firma');
+
+    // ✅ PREPARAR DATOS PARA REDSYS
     const reservationData = {
         action: 'process_visita_reservation',
         nonce: reservasVisitaAjax.nonce,
@@ -435,17 +455,18 @@ function processVisitaReservation() {
         apellidos: apellidos,
         email: email,
         telefono: telefono,
-        idioma: idiomaSeleccionado
+        idioma: idiomaSeleccionado,
+        precio_calculado: window.precioCalculado
     };
 
-    console.log('📤 Datos a enviar:', reservationData);
+    console.log('📤 Datos a enviar a Redsys:', reservationData);
 
-    // Deshabilitar botón y mostrar estado de carga
+    // Deshabilitar botón
     const processBtn = jQuery('.complete-btn');
     const originalText = processBtn.text();
     processBtn.prop('disabled', true).text('Procesando...');
 
-    // Enviar solicitud AJAX
+    // ✅ ENVIAR SOLICITUD PARA GENERAR FORMULARIO REDSYS
     jQuery.ajax({
         url: reservasVisitaAjax.ajax_url,
         type: 'POST',
@@ -454,34 +475,18 @@ function processVisitaReservation() {
             console.log('📡 Respuesta del servidor:', response);
 
             if (response.success) {
-                console.log('✅ Reserva procesada correctamente');
-
-                // Guardar datos para la página de confirmación
-                sessionStorage.setItem('visitaConfirmationData', JSON.stringify({
-                    localizador: response.data.localizador,
-                    fecha: serviceData.fecha,
-                    hora: serviceData.hora,
-                    adultos: adultos,
-                    ninos: ninos,
-                    ninos_menores: ninosMenores,
-                    total: response.data.precio_total,
-                    nombre: nombre,
-                    apellidos: apellidos,
-                    email: email
-                }));
-
-                // Redirigir a página de confirmación
-                window.location.href = response.data.redirect_url;
+                console.log('✅ Formulario Redsys generado');
+                // Insertar y ejecutar formulario
+                document.body.insertAdjacentHTML('beforeend', response.data);
             } else {
-                console.error('❌ Error en la respuesta:', response.data);
-                alert('Error: ' + (response.data || 'Error desconocido al procesar la reserva'));
+                console.error('❌ Error:', response.data);
+                alert('Error: ' + (response.data || 'Error desconocido'));
                 processBtn.prop('disabled', false).text(originalText);
             }
         },
         error: function(xhr, status, error) {
             console.error('❌ Error AJAX:', error);
-            console.error('Response:', xhr.responseText);
-            alert('Error de conexión al procesar la reserva. Por favor, inténtalo de nuevo.');
+            alert('Error de conexión. Por favor, inténtalo de nuevo.');
             processBtn.prop('disabled', false).text(originalText);
         }
     });

@@ -7,7 +7,6 @@ function generar_formulario_redsys($reserva_data) {
     
     $miObj = new RedsysAPI();
 
-    // ✅ CONFIGURACIÓN PARA PRUEBAS
     if (is_production_environment()) {
         $clave = 'Q+2780shKFbG3vkPXS2+kY6RWQLQnWD9';
         $codigo_comercio = '014591697';
@@ -20,20 +19,57 @@ function generar_formulario_redsys($reserva_data) {
         error_log('🟡 USANDO CONFIGURACIÓN DE PRUEBAS');
     }
     
-    $total_price = null;
-    if (isset($reserva_data['total_price'])) {
-        $total_price = $reserva_data['total_price'];
-    } elseif (isset($reserva_data['precio_final'])) {
-        $total_price = $reserva_data['precio_final'];
+    // ✅ DETERMINAR SI ES VISITA O AUTOBÚS
+    $is_visita = isset($reserva_data['is_visita']) && $reserva_data['is_visita'];
+    
+    // ✅ VERIFICAR FIRMA DIGITAL
+    if ($is_visita) {
+        if (!isset($reserva_data['precio_calculado']) || !isset($reserva_data['precio_calculado']['firma'])) {
+            error_log('❌ INTENTO DE MANIPULACIÓN: No hay firma digital en visita');
+            throw new Exception('Error de seguridad: precio no validado');
+        }
+        
+        $firma_recibida = $reserva_data['precio_calculado']['firma'];
+        $firma_data = $reserva_data['precio_calculado']['firma_data'];
+        
+        $secret_key = 'reservas_visitas_secret_' . wp_salt('auth');
+        $firma_calculada = hash_hmac('sha256', json_encode($firma_data), $secret_key);
+        
+        if ($firma_recibida !== $firma_calculada) {
+            error_log('❌ INTENTO DE MANIPULACIÓN: Firma digital no coincide en visita');
+            throw new Exception('Error de seguridad: precio manipulado');
+        }
+        
+        $total_price = floatval($reserva_data['precio_calculado']['precio_final']);
+        
+    } else {
+        // Lógica existente para autobuses
+        if (!isset($reserva_data['calculo_completo']) || !isset($reserva_data['calculo_completo']['firma'])) {
+            error_log('❌ INTENTO DE MANIPULACIÓN: No hay firma digital');
+            throw new Exception('Error de seguridad: precio no validado');
+        }
+        
+        $firma_recibida = $reserva_data['calculo_completo']['firma'];
+        $firma_data = $reserva_data['calculo_completo']['firma_data'];
+        
+        $firma_calculada = hash_hmac('sha256', json_encode($firma_data), wp_salt('nonce'));
+        
+        if ($firma_recibida !== $firma_calculada) {
+            error_log('❌ INTENTO DE MANIPULACIÓN: Firma digital no coincide');
+            throw new Exception('Error de seguridad: precio manipulado');
+        }
+        
+        if ((time() - $firma_data['timestamp']) > 1800) {
+            throw new Exception('La sesión ha expirado');
+        }
+        
+        $total_price = floatval($reserva_data['calculo_completo']['precio_final']);
     }
     
-    if ($total_price) {
-        $total_price = str_replace(['€', ' ', ','], ['', '', '.'], $total_price);
-        $total_price = floatval($total_price);
-    }
+    error_log('✅ Firma verificada correctamente. Precio validado: ' . $total_price . '€');
     
     if (!$total_price || $total_price <= 0) {
-        throw new Exception('El importe debe ser mayor que 0. Recibido: ' . $total_price);
+        throw new Exception('El importe debe ser mayor que 0');
     }
     
     $importe = intval($total_price * 100);
@@ -56,11 +92,17 @@ function generar_formulario_redsys($reserva_data) {
     $base_url = home_url();
     $miObj->setParameter("DS_MERCHANT_MERCHANTURL", $base_url . '/wp-admin/admin-ajax.php?action=redsys_notification');
     
-    // ✅ CAMBIAR URLS PARA INCLUIR ORDER_ID (ya que aún no tenemos localizador)
-    $miObj->setParameter("DS_MERCHANT_URLOK", $base_url . '/confirmacion-reserva/?status=ok&order=' . $pedido);
-    $miObj->setParameter("DS_MERCHANT_URLKO", $base_url . '/error-pago/?status=ko&order=' . $pedido);
+    // ✅ URLS DIFERENTES SEGÚN TIPO
+    if ($is_visita) {
+        $miObj->setParameter("DS_MERCHANT_URLOK", $base_url . '/confirmacion-reserva-visita/?status=ok&order=' . $pedido);
+        $miObj->setParameter("DS_MERCHANT_URLKO", $base_url . '/error-pago/?status=ko&order=' . $pedido);
+        $descripcion = "Visita Guiada - " . ($reserva_data['fecha'] ?? date('Y-m-d'));
+    } else {
+        $miObj->setParameter("DS_MERCHANT_URLOK", $base_url . '/confirmacion-reserva/?status=ok&order=' . $pedido);
+        $miObj->setParameter("DS_MERCHANT_URLKO", $base_url . '/error-pago/?status=ko&order=' . $pedido);
+        $descripcion = "Reserva Medina Azahara - " . ($reserva_data['fecha'] ?? date('Y-m-d'));
+    }
     
-    $descripcion = "Reserva Medina Azahara - " . ($reserva_data['fecha'] ?? date('Y-m-d'));
     $miObj->setParameter("DS_MERCHANT_PRODUCTDESCRIPTION", $descripcion);
     
     if (isset($reserva_data['nombre']) && isset($reserva_data['apellidos'])) {
@@ -75,7 +117,6 @@ function generar_formulario_redsys($reserva_data) {
         'https://sis.redsys.es/sis/realizarPago' :
         'https://sis-t.redsys.es:25443/sis/realizarPago';
 
-    // ✅ FORMULARIO CORREGIDO SIN CARACTERES PROBLEMÁTICOS
     $html = '<div id="redsys-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:99999;">';
     $html .= '<div style="background:white;padding:30px;border-radius:10px;text-align:center;max-width:400px;">';
     $html .= '<h3 style="margin:0 0 20px 0;color:#333;">Redirigiendo al banco...</h3>';
@@ -105,36 +146,29 @@ function is_production_environment() {
 function process_successful_payment($order_id, $params) {
     error_log('=== PROCESANDO PAGO EXITOSO CON REDSYS ===');
     error_log("Order ID: $order_id");
-    error_log("Params: " . print_r($params, true));
     
-    // ✅ ASEGURAR QUE LA SESIÓN ESTÉ ACTIVA
     if (!session_id()) {
         session_start();
     }
     
-    // ✅ RECUPERAR DATOS DE MÚLTIPLES FUENTES
-    $reservation_data = null;
+    global $wpdb;
     
-    // 1. Intentar desde transient
-    $reservation_data = get_transient('redsys_order_' . $order_id);
-    if ($reservation_data) {
-        error_log('✅ Datos encontrados en transient');
-    }
-    
-    // 2. Si no, intentar desde sesión
-    if (!$reservation_data && isset($_SESSION['pending_orders'][$order_id])) {
-        $reservation_data = $_SESSION['pending_orders'][$order_id];
-        error_log('✅ Datos encontrados en sesión');
-    }
+    // ✅ VERIFICAR SI ES VISITA O AUTOBÚS
+    $reservation_data = recuperar_datos_pedido($order_id);
     
     if (!$reservation_data) {
-        error_log('❌ No se encontraron datos de reserva para pedido: ' . $order_id);
+        error_log('❌ No se encontraron datos para order: ' . $order_id);
+        send_lost_payment_alert($order_id, $params);
         return false;
     }
-
-    try {
-        // ✅ VERIFICAR QUE NO SE HAYA PROCESADO YA
-        global $wpdb;
+    
+    $is_visita = isset($reservation_data['is_visita']) && $reservation_data['is_visita'];
+    
+    if ($is_visita) {
+        error_log('✅ Procesando pago de VISITA GUIADA');
+        return process_visita_payment($order_id, $reservation_data, $params);
+    } else {
+        error_log('✅ Procesando pago de AUTOBÚS');
         $table_reservas = $wpdb->prefix . 'reservas_reservas';
         
         $existing = $wpdb->get_var($wpdb->prepare(
@@ -143,18 +177,16 @@ function process_successful_payment($order_id, $params) {
         ));
 
         if ($existing) {
-            error_log("⚠️ Reserva ya procesada para order_id: $order_id (ID: $existing)");
-            return true; // No es error, ya está procesada
+            error_log("⚠️ Reserva ya procesada para order_id: $order_id");
+            return true;
         }
 
-        // ✅ PROCESAR LA RESERVA USANDO EL SISTEMA EXISTENTE
         if (!class_exists('ReservasProcessor')) {
             require_once RESERVAS_PLUGIN_PATH . 'includes/class-reservas-processor.php';
         }
 
         $processor = new ReservasProcessor();
         
-        // ✅ PREPARAR DATOS CORRECTAMENTE PARA EL PROCESADOR
         $processed_data = array(
             'nombre' => $reservation_data['nombre'] ?? '',
             'apellidos' => $reservation_data['apellidos'] ?? '',
@@ -166,50 +198,252 @@ function process_successful_payment($order_id, $params) {
             'order_id' => $order_id
         );
 
-        error_log('✅ Datos preparados para el procesador: ' . print_r($processed_data, true));
-
-        // ✅ PROCESAR LA RESERVA
         $result = $processor->process_reservation_payment($processed_data);
         
         if ($result['success']) {
-            error_log('✅ Reserva procesada exitosamente: ' . $result['data']['localizador']);
+            error_log('✅ Reserva de autobús procesada: ' . $result['data']['localizador']);
             
-            // ✅ GUARDAR DATOS PARA LA PÁGINA DE CONFIRMACIÓN
-            if (!session_id()) {
-                session_start();
-            }
-            
-            // Guardar de múltiples formas para asegurar disponibilidad
             $_SESSION['confirmed_reservation'] = $result['data'];
             set_transient('confirmed_reservation_' . $order_id, $result['data'], 3600);
             set_transient('confirmed_reservation_loc_' . $result['data']['localizador'], $result['data'], 3600);
-            update_option('temp_reservation_' . $order_id, $result['data'], false);
-            update_option('temp_reservation_loc_' . $result['data']['localizador'], $result['data'], false);
-            
-            // ✅ NUEVO: GUARDAR RELACIÓN ORDER_ID -> LOCALIZADOR PARA REDIRECCIÓN
             set_transient('order_to_localizador_' . $order_id, $result['data']['localizador'], 3600);
             
-            error_log('✅ Datos de confirmación guardados');
-            error_log('- Localizador: ' . $result['data']['localizador']);
-            error_log('- Order ID: ' . $order_id);
-            
-            // Limpiar datos temporales
             delete_transient('redsys_order_' . $order_id);
+            delete_option('pending_order_' . $order_id);
             if (isset($_SESSION['pending_orders'][$order_id])) {
                 unset($_SESSION['pending_orders'][$order_id]);
             }
             
             return true;
         } else {
-            error_log('❌ Error procesando reserva: ' . $result['message']);
+            error_log('❌ Error procesando reserva autobús: ' . $result['message']);
+            send_lost_payment_alert($order_id, $params, $reservation_data);
             return false;
         }
+    }
+}
+
+
+function process_visita_payment($order_id, $reservation_data, $params) {
+    global $wpdb;
+    $table_visitas = $wpdb->prefix . 'reservas_visitas';
+    
+    // Verificar si ya existe
+    $existing = $wpdb->get_var($wpdb->prepare(
+        "SELECT id FROM $table_visitas WHERE redsys_order_id = %s",
+        $order_id
+    ));
+
+    if ($existing) {
+        error_log("⚠️ Visita ya procesada para order_id: $order_id");
+        return true;
+    }
+
+    try {
+        // Generar localizador
+        $localizador = generar_localizador_visita_simple($reservation_data['agency_id']);
         
+        $insert_data = array(
+            'localizador' => $localizador,
+            'redsys_order_id' => $order_id,
+            'service_id' => $reservation_data['service_id'],
+            'agency_id' => $reservation_data['agency_id'],
+            'fecha' => $reservation_data['fecha'],
+            'hora' => $reservation_data['hora'],
+            'nombre' => $reservation_data['nombre'],
+            'apellidos' => $reservation_data['apellidos'],
+            'email' => $reservation_data['email'],
+            'telefono' => $reservation_data['telefono'],
+            'adultos' => $reservation_data['adultos'],
+            'ninos' => $reservation_data['ninos'],
+            'ninos_menores' => $reservation_data['ninos_menores'],
+            'total_personas' => $reservation_data['adultos'] + $reservation_data['ninos'] + $reservation_data['ninos_menores'],
+            'idioma' => $reservation_data['idioma'] ?? 'español',
+            'precio_total' => $reservation_data['precio_total'],
+            'estado' => 'confirmada',
+            'metodo_pago' => 'redsys',
+            'transaction_id' => $params['Ds_AuthorisationCode'] ?? '',
+            'created_at' => current_time('mysql')
+        );
+
+        $result = $wpdb->insert($table_visitas, $insert_data);
+
+        if ($result === false) {
+            throw new Exception('Error insertando visita: ' . $wpdb->last_error);
+        }
+
+        $reserva_id = $wpdb->insert_id;
+        error_log('✅ Visita guardada con ID: ' . $reserva_id . ' y localizador: ' . $localizador);
+
+        // Preparar datos completos para email
+        $table_services = $wpdb->prefix . 'reservas_agency_services';
+        $servicio = $wpdb->get_row($wpdb->prepare(
+            "SELECT s.*, a.agency_name, a.inicial_localizador, a.cif, a.razon_social, 
+                    a.domicilio_fiscal, a.email as agency_email, a.phone
+             FROM $table_services s
+             INNER JOIN {$wpdb->prefix}reservas_agencies a ON s.agency_id = a.id
+             WHERE s.id = %d",
+            $reservation_data['service_id']
+        ));
+
+        $reserva_completa = array_merge($insert_data, array(
+            'id' => $reserva_id,
+            'precio_adulto' => $servicio->precio_adulto,
+            'precio_nino' => $servicio->precio_nino,
+            'precio_nino_menor' => $servicio->precio_nino_menor,
+            'agency_name' => $servicio->agency_name,
+            'is_visita' => true,
+            'agency_logo_url' => $servicio->logo_url,
+            'agency_cif' => $servicio->cif ?? '',
+            'agency_razon_social' => $servicio->razon_social ?? '',
+            'agency_domicilio_fiscal' => $servicio->domicilio_fiscal ?? '',
+            'agency_email' => $servicio->agency_email ?? '',
+            'agency_phone' => $servicio->phone ?? ''
+        ));
+
+        // Enviar emails
+        enviar_email_confirmacion_visita($reserva_completa);
+
+        // Guardar en sesión para página de confirmación
+        if (!session_id()) {
+            session_start();
+        }
+        
+        $_SESSION['confirmed_visita'] = array(
+            'localizador' => $localizador,
+            'reserva_id' => $reserva_id,
+            'detalles' => array(
+                'fecha' => $reservation_data['fecha'],
+                'hora' => $reservation_data['hora'],
+                'personas' => $insert_data['total_personas'],
+                'precio_total' => $reservation_data['precio_total']
+            )
+        );
+
+        // Guardar en transients también
+        set_transient('confirmed_visita_' . $order_id, array(
+            'localizador' => $localizador,
+            'reserva_id' => $reserva_id
+        ), 3600);
+        
+        set_transient('confirmed_visita_loc_' . $localizador, array(
+            'localizador' => $localizador,
+            'reserva_id' => $reserva_id
+        ), 3600);
+        
+        set_transient('order_to_localizador_visita_' . $order_id, $localizador, 3600);
+
+        // Limpiar datos temporales del pedido
+        delete_transient('redsys_order_' . $order_id);
+        delete_option('pending_order_' . $order_id);
+        if (isset($_SESSION['pending_orders'][$order_id])) {
+            unset($_SESSION['pending_orders'][$order_id]);
+        }
+
+        error_log('✅ Visita procesada exitosamente: ' . $localizador);
+        return true;
+
     } catch (Exception $e) {
-        error_log('❌ Excepción procesando pago exitoso: ' . $e->getMessage());
+        error_log('❌ Error procesando visita: ' . $e->getMessage());
+        send_lost_payment_alert($order_id, $params, $reservation_data);
         return false;
     }
 }
+
+
+function generar_localizador_visita_simple($agency_id) {
+    global $wpdb;
+    $table_visitas = $wpdb->prefix . 'reservas_visitas';
+    $table_config = $wpdb->prefix . 'reservas_configuration';
+    $table_agencies = $wpdb->prefix . 'reservas_agencies';
+
+    // Obtener inicial de la agencia
+    $agency = $wpdb->get_row($wpdb->prepare(
+        "SELECT inicial_localizador FROM $table_agencies WHERE id = %d",
+        $agency_id
+    ));
+
+    if (!$agency) {
+        throw new Exception('Agencia no encontrada para generar localizador');
+    }
+
+    $inicial_agencia = $agency->inicial_localizador;
+    $año_actual = date('Y');
+    $config_key = "ultimo_localizador_visita_{$agency_id}_{$año_actual}";
+
+    // Obtener el último número
+    $ultimo_numero = $wpdb->get_var($wpdb->prepare(
+        "SELECT config_value FROM $table_config WHERE config_key = %s",
+        $config_key
+    ));
+
+    if ($ultimo_numero === null) {
+        $nuevo_numero = 1;
+
+        $wpdb->insert(
+            $table_config,
+            array(
+                'config_key' => $config_key,
+                'config_value' => '1',
+                'config_group' => 'localizadores_visitas',
+                'description' => "Último localizador de visita para agencia $agency_id en $año_actual"
+            )
+        );
+    } else {
+        $nuevo_numero = intval($ultimo_numero) + 1;
+
+        $wpdb->update(
+            $table_config,
+            array('config_value' => $nuevo_numero),
+            array('config_key' => $config_key)
+        );
+    }
+
+    // Formato: VIS + INICIAL_AGENCIA + NÚMERO (6 dígitos)
+    $localizador = 'VIS' . strtoupper($inicial_agencia) . str_pad($nuevo_numero, 6, '0', STR_PAD_LEFT);
+
+    // Verificar que no exista
+    $existe = $wpdb->get_var($wpdb->prepare(
+        "SELECT COUNT(*) FROM $table_visitas WHERE localizador = %s",
+        $localizador
+    ));
+
+    if ($existe > 0) {
+        // Si ya existe, buscar el siguiente disponible recursivamente
+        return generar_localizador_visita_simple($agency_id);
+    }
+
+    error_log("✅ Localizador visita generado: $localizador");
+    return $localizador;
+}
+
+
+
+function enviar_email_confirmacion_visita($reserva_data) {
+    if (!class_exists('ReservasEmailService')) {
+        require_once RESERVAS_PLUGIN_PATH . 'includes/class-email-service.php';
+    }
+
+    // Enviar email al cliente CON PDF
+    $customer_result = ReservasEmailService::send_customer_confirmation($reserva_data);
+
+    if ($customer_result['success']) {
+        error_log('✅ Email enviado al cliente de visita guiada: ' . $reserva_data['email']);
+    } else {
+        error_log('❌ Error enviando email al cliente de visita: ' . $customer_result['message']);
+    }
+
+    // Enviar email al administrador
+    $admin_result = ReservasEmailService::send_admin_notification($reserva_data);
+
+    if ($admin_result['success']) {
+        error_log('✅ Email enviado al admin sobre visita guiada');
+    } else {
+        error_log('❌ Error enviando email al admin: ' . $admin_result['message']);
+    }
+}
+
+
 
 function get_reservation_data_for_confirmation() {
     error_log('=== INTENTANDO RECUPERAR DATOS DE CONFIRMACIÓN ===');

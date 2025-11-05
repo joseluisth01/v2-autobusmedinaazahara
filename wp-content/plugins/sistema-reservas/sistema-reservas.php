@@ -3308,6 +3308,102 @@ function force_create_visitas_table()
 }
 
 
+// ✅ AÑADIR CAMPO REDSYS_ORDER_ID A TABLA DE VISITAS
+add_action('admin_init', 'add_redsys_order_id_to_visitas');
+
+function add_redsys_order_id_to_visitas() {
+    global $wpdb;
+    $table_visitas = $wpdb->prefix . 'reservas_visitas';
+
+    // Verificar si el campo existe
+    $field_exists = $wpdb->get_results("SHOW COLUMNS FROM $table_visitas LIKE 'redsys_order_id'");
+
+    if (empty($field_exists)) {
+        $wpdb->query("ALTER TABLE $table_visitas ADD COLUMN redsys_order_id VARCHAR(20) NULL AFTER localizador");
+        $wpdb->query("ALTER TABLE $table_visitas ADD INDEX redsys_order_id (redsys_order_id)");
+        error_log('✅ Campo redsys_order_id añadido a tabla de visitas');
+    }
+}
+
+// ✅ PROCESAR RETORNO DE REDSYS PARA VISITAS
+add_action('template_redirect', 'check_redsys_return_url_visitas');
+
+function check_redsys_return_url_visitas() {
+    // Solo ejecutar en la página de confirmación de visitas
+    if (!is_page('confirmacion-reserva-visita')) {
+        return;
+    }
+
+    $status = $_GET['status'] ?? '';
+    $order = $_GET['order'] ?? '';
+
+    error_log('=== VERIFICANDO URL DE RETORNO REDSYS VISITA ===');
+    error_log('Status: ' . $status);
+    error_log('Order: ' . $order);
+
+    if ($status === 'ok' && !empty($order)) {
+        global $wpdb;
+        $table_visitas = $wpdb->prefix . 'reservas_visitas';
+
+        // Verificar si ya procesamos esta visita
+        $existing = $wpdb->get_var($wpdb->prepare(
+            "SELECT id FROM $table_visitas WHERE redsys_order_id = %s",
+            $order
+        ));
+
+        if (!$existing) {
+            error_log('🔄 Visita no encontrada, procesando desde URL...');
+
+            // Cargar datos guardados del pedido
+            if (!function_exists('recuperar_datos_pedido')) {
+                require_once RESERVAS_PLUGIN_PATH . 'includes/class-redsys-handler.php';
+            }
+            
+            $reserva_data = recuperar_datos_pedido($order);
+
+            if (!$reserva_data || !isset($reserva_data['is_visita'])) {
+                error_log('❌ No se encontraron datos de visita para order: ' . $order);
+                return;
+            }
+
+            error_log('✅ Datos de visita recuperados para order: ' . $order);
+
+            // Procesar la visita
+            $params = array('Ds_AuthorisationCode' => 'URL_RETURN');
+            $result = process_visita_payment($order, $reserva_data, $params);
+
+            if ($result) {
+                $localizador = get_transient('order_to_localizador_visita_' . $order);
+                
+                if ($localizador) {
+                    error_log("✅ Visita procesada desde URL con localizador: $localizador");
+                    $redirect_url = add_query_arg('localizador', $localizador, home_url('/confirmacion-reserva-visita/'));
+                    wp_redirect($redirect_url);
+                    exit;
+                }
+            } else {
+                error_log("❌ Error procesando visita desde URL para order: $order");
+            }
+        } else {
+            error_log("ℹ️ Visita ya existe para order: $order (ID: $existing)");
+
+            // Obtener localizador y redirigir
+            $localizador = $wpdb->get_var($wpdb->prepare(
+                "SELECT localizador FROM $table_visitas WHERE id = %d",
+                $existing
+            ));
+
+            if ($localizador && !isset($_GET['localizador'])) {
+                error_log("🔄 Redirigiendo con localizador: $localizador");
+                $redirect_url = add_query_arg('localizador', $localizador, home_url('/confirmacion-reserva-visita/'));
+                wp_redirect($redirect_url);
+                exit;
+            }
+        }
+    }
+}
+
+
 // ✅ FUNCIÓN TEMPORAL PARA ACTUALIZAR TABLA
 add_action('wp_ajax_force_update_services_table', 'force_update_services_table_manual');
 function force_update_services_table_manual()
