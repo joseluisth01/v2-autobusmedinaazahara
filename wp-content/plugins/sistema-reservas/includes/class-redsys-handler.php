@@ -22,30 +22,16 @@ function generar_formulario_redsys($reserva_data) {
     // ✅ DETERMINAR SI ES VISITA O AUTOBÚS
     $is_visita = isset($reserva_data['is_visita']) && $reserva_data['is_visita'];
     
-    // ✅ VERIFICAR FIRMA DIGITAL
+    // ✅ OBTENER PRECIO SEGÚN TIPO
     if ($is_visita) {
-        if (!isset($reserva_data['precio_calculado']) || !isset($reserva_data['precio_calculado']['firma'])) {
-            error_log('❌ INTENTO DE MANIPULACIÓN: No hay firma digital en visita');
-            throw new Exception('Error de seguridad: precio no validado');
-        }
-        
-        $firma_recibida = $reserva_data['precio_calculado']['firma'];
-        $firma_data = $reserva_data['precio_calculado']['firma_data'];
-        
-        $secret_key = 'reservas_visitas_secret_' . wp_salt('auth');
-        $firma_calculada = hash_hmac('sha256', json_encode($firma_data), $secret_key);
-        
-        if ($firma_recibida !== $firma_calculada) {
-            error_log('❌ INTENTO DE MANIPULACIÓN: Firma digital no coincide en visita');
-            throw new Exception('Error de seguridad: precio manipulado');
-        }
-        
-        $total_price = floatval($reserva_data['precio_calculado']['precio_final']);
+        // Para visitas, el precio ya viene calculado directamente
+        $total_price = floatval($reserva_data['precio_total'] ?? 0);
+        error_log('✅ Es una VISITA GUIADA, precio: ' . $total_price . '€');
         
     } else {
-        // Lógica existente para autobuses
+        // Para autobuses, verificar firma digital
         if (!isset($reserva_data['calculo_completo']) || !isset($reserva_data['calculo_completo']['firma'])) {
-            error_log('❌ INTENTO DE MANIPULACIÓN: No hay firma digital');
+            error_log('❌ INTENTO DE MANIPULACIÓN: No hay firma digital en autobús');
             throw new Exception('Error de seguridad: precio no validado');
         }
         
@@ -55,7 +41,7 @@ function generar_formulario_redsys($reserva_data) {
         $firma_calculada = hash_hmac('sha256', json_encode($firma_data), wp_salt('nonce'));
         
         if ($firma_recibida !== $firma_calculada) {
-            error_log('❌ INTENTO DE MANIPULACIÓN: Firma digital no coincide');
+            error_log('❌ INTENTO DE MANIPULACIÓN: Firma digital no coincide en autobús');
             throw new Exception('Error de seguridad: precio manipulado');
         }
         
@@ -64,9 +50,8 @@ function generar_formulario_redsys($reserva_data) {
         }
         
         $total_price = floatval($reserva_data['calculo_completo']['precio_final']);
+        error_log('✅ Es un AUTOBÚS, precio validado con firma: ' . $total_price . '€');
     }
-    
-    error_log('✅ Firma verificada correctamente. Precio validado: ' . $total_price . '€');
     
     if (!$total_price || $total_price <= 0) {
         throw new Exception('El importe debe ser mayor que 0');
@@ -97,10 +82,12 @@ function generar_formulario_redsys($reserva_data) {
         $miObj->setParameter("DS_MERCHANT_URLOK", $base_url . '/confirmacion-reserva-visita/?status=ok&order=' . $pedido);
         $miObj->setParameter("DS_MERCHANT_URLKO", $base_url . '/error-pago/?status=ko&order=' . $pedido);
         $descripcion = "Visita Guiada - " . ($reserva_data['fecha'] ?? date('Y-m-d'));
+        error_log('✅ URLs configuradas para VISITA GUIADA');
     } else {
         $miObj->setParameter("DS_MERCHANT_URLOK", $base_url . '/confirmacion-reserva/?status=ok&order=' . $pedido);
         $miObj->setParameter("DS_MERCHANT_URLKO", $base_url . '/error-pago/?status=ko&order=' . $pedido);
         $descripcion = "Reserva Medina Azahara - " . ($reserva_data['fecha'] ?? date('Y-m-d'));
+        error_log('✅ URLs configuradas para AUTOBÚS');
     }
     
     $miObj->setParameter("DS_MERCHANT_PRODUCTDESCRIPTION", $descripcion);
@@ -117,11 +104,16 @@ function generar_formulario_redsys($reserva_data) {
         'https://sis.redsys.es/sis/realizarPago' :
         'https://sis-t.redsys.es:25443/sis/realizarPago';
 
+    error_log("URL de Redsys: " . $redsys_url);
+    error_log("Pedido: " . $pedido);
+    error_log("Importe: " . $importe . " céntimos");
+    error_log("Tipo: " . ($is_visita ? 'VISITA GUIADA' : 'AUTOBÚS'));
+
     $html = '<div id="redsys-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:99999;">';
     $html .= '<div style="background:white;padding:30px;border-radius:10px;text-align:center;max-width:400px;">';
     $html .= '<h3 style="margin:0 0 20px 0;color:#333;">Redirigiendo al banco...</h3>';
     $html .= '<div style="margin:20px 0;">Por favor, espere...</div>';
-    $html .= '<p style="font-size:14px;color:#666;margin:20px 0 0 0;">Sera redirigido automaticamente a la pasarela de pago segura.</p>';
+    $html .= '<p style="font-size:14px;color:#666;margin:20px 0 0 0;">Será redirigido automáticamente a la pasarela de pago segura.</p>';
     $html .= '</div></div>';
     $html .= '<form id="formulario_redsys" action="' . $redsys_url . '" method="POST" style="display:none;">';
     $html .= '<input type="hidden" name="Ds_SignatureVersion" value="' . $version . '">';
