@@ -602,7 +602,7 @@ class ReservasAgencyServicesFrontend
     header('Content-Type: application/json');
 
     try {
-        error_log('=== INICIANDO PROCESS_VISITA_RESERVATION CON REDSYS ===');
+        error_log('=== INICIANDO PROCESS_VISITA_RESERVATION SIN VALIDACIÓN DE FIRMA ===');
 
         if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'reservas_nonce')) {
             wp_send_json_error('Error de seguridad');
@@ -622,39 +622,26 @@ class ReservasAgencyServicesFrontend
         $telefono = sanitize_text_field($_POST['telefono']);
         $idioma = sanitize_text_field($_POST['idioma'] ?? 'español');
 
-        // ✅ VERIFICAR FIRMA DIGITAL
-        if (!isset($_POST['precio_calculado']) || !is_array($_POST['precio_calculado'])) {
-            wp_send_json_error('Error: Precio no validado');
+        // ✅ CALCULAR PRECIO DIRECTAMENTE EN EL SERVIDOR (SIN VALIDACIÓN DE FIRMA)
+        global $wpdb;
+        $table_services = $wpdb->prefix . 'reservas_agency_services';
+
+        $servicio = $wpdb->get_row($wpdb->prepare(
+            "SELECT precio_adulto, precio_nino, precio_nino_menor FROM $table_services WHERE id = %d",
+            $service_id
+        ));
+
+        if (!$servicio) {
+            wp_send_json_error('Servicio no encontrado');
             return;
         }
 
-        $precio_calculado = $_POST['precio_calculado'];
-        
-        if (!isset($precio_calculado['firma']) || !isset($precio_calculado['firma_data'])) {
-            wp_send_json_error('Error: Firma digital no encontrada');
-            return;
-        }
+        // Calcular precio total
+        $precio_total = ($adultos * floatval($servicio->precio_adulto)) +
+                       ($ninos * floatval($servicio->precio_nino)) +
+                       ($ninos_menores * floatval($servicio->precio_nino_menor));
 
-        $firma_recibida = $precio_calculado['firma'];
-        $firma_data = $precio_calculado['firma_data'];
-
-        // Recalcular firma para verificar
-        $secret_key = 'reservas_visitas_secret_' . wp_salt('auth');
-        $firma_calculada = hash_hmac('sha256', json_encode($firma_data), $secret_key);
-
-        if ($firma_recibida !== $firma_calculada) {
-            error_log('❌ INTENTO DE MANIPULACIÓN: Firma no coincide');
-            wp_send_json_error('Error de seguridad: precio manipulado');
-            return;
-        }
-
-        // Verificar timestamp (máximo 30 minutos)
-        if ((time() - $firma_data['timestamp']) > 1800) {
-            wp_send_json_error('La sesión ha expirado. Por favor, vuelve a calcular el precio.');
-            return;
-        }
-
-        error_log('✅ Firma verificada correctamente');
+        error_log("✅ Precio calculado: $precio_total €");
 
         // Validaciones básicas
         if ($adultos < 1) {
@@ -666,25 +653,6 @@ class ReservasAgencyServicesFrontend
             wp_send_json_error('Email no válido');
             return;
         }
-
-        // Obtener datos del servicio
-        global $wpdb;
-        $table_services = $wpdb->prefix . 'reservas_agency_services';
-
-        $servicio = $wpdb->get_row($wpdb->prepare(
-            "SELECT s.*, a.agency_name, a.email as agency_email, a.inicial_localizador
-             FROM $table_services s
-             INNER JOIN {$wpdb->prefix}reservas_agencies a ON s.agency_id = a.id
-             WHERE s.id = %d AND s.servicio_activo = 1",
-            $service_id
-        ));
-
-        if (!$servicio) {
-            wp_send_json_error('Servicio no encontrado');
-            return;
-        }
-
-        $precio_total = floatval($precio_calculado['precio_final']);
 
         // ✅ PREPARAR DATOS PARA REDSYS
         $reservation_data = array(
@@ -701,7 +669,6 @@ class ReservasAgencyServicesFrontend
             'telefono' => $telefono,
             'idioma' => $idioma,
             'precio_total' => $precio_total,
-            'precio_calculado' => $precio_calculado,
             'is_visita' => true
         );
 

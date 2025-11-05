@@ -298,6 +298,22 @@ function process_visita_payment($order_id, $reservation_data, $params) {
         // Generar localizador
         $localizador = generar_localizador_visita_simple($reservation_data['agency_id']);
         
+        // ✅ CALCULAR PRECIO DIRECTAMENTE (SIN VALIDACIÓN)
+        $table_services = $wpdb->prefix . 'reservas_agency_services';
+        
+        $servicio = $wpdb->get_row($wpdb->prepare(
+            "SELECT precio_adulto, precio_nino, precio_nino_menor FROM $table_services WHERE id = %d",
+            $reservation_data['service_id']
+        ));
+        
+        if (!$servicio) {
+            throw new Exception('Servicio no encontrado');
+        }
+        
+        $precio_total = ($reservation_data['adultos'] * floatval($servicio->precio_adulto)) +
+                       ($reservation_data['ninos'] * floatval($servicio->precio_nino)) +
+                       ($reservation_data['ninos_menores'] * floatval($servicio->precio_nino_menor));
+        
         $insert_data = array(
             'localizador' => $localizador,
             'redsys_order_id' => $order_id,
@@ -314,7 +330,7 @@ function process_visita_payment($order_id, $reservation_data, $params) {
             'ninos_menores' => $reservation_data['ninos_menores'],
             'total_personas' => $reservation_data['adultos'] + $reservation_data['ninos'] + $reservation_data['ninos_menores'],
             'idioma' => $reservation_data['idioma'] ?? 'español',
-            'precio_total' => $reservation_data['precio_total'],
+            'precio_total' => $precio_total,
             'estado' => 'confirmada',
             'metodo_pago' => 'redsys',
             'transaction_id' => $params['Ds_AuthorisationCode'] ?? '',
@@ -371,7 +387,7 @@ function process_visita_payment($order_id, $reservation_data, $params) {
                 'fecha' => $reservation_data['fecha'],
                 'hora' => $reservation_data['hora'],
                 'personas' => $insert_data['total_personas'],
-                'precio_total' => $reservation_data['precio_total']
+                'precio_total' => $precio_total
             )
         );
 
