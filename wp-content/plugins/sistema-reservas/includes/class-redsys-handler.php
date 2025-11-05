@@ -7,6 +7,7 @@ function generar_formulario_redsys($reserva_data) {
     
     $miObj = new RedsysAPI();
 
+    // ✅ CONFIGURACIÓN PARA PRUEBAS
     if (is_production_environment()) {
         $clave = 'Q+2780shKFbG3vkPXS2+kY6RWQLQnWD9';
         $codigo_comercio = '014591697';
@@ -19,35 +20,17 @@ function generar_formulario_redsys($reserva_data) {
         error_log('🟡 USANDO CONFIGURACIÓN DE PRUEBAS');
     }
     
-    // ✅ VERIFICAR FIRMA DIGITAL ANTES DE PROCEDER
-    if (!isset($reserva_data['calculo_completo']) || !isset($reserva_data['calculo_completo']['firma'])) {
-        error_log('❌ INTENTO DE MANIPULACIÓN: No hay firma digital');
-        throw new Exception('Error de seguridad: precio no validado');
+    $total_price = null;
+    if (isset($reserva_data['total_price'])) {
+        $total_price = $reserva_data['total_price'];
+    } elseif (isset($reserva_data['precio_final'])) {
+        $total_price = $reserva_data['precio_final'];
     }
     
-    $firma_recibida = $reserva_data['calculo_completo']['firma'];
-    $firma_data = $reserva_data['calculo_completo']['firma_data'];
-    
-    // ✅ RECALCULAR FIRMA PARA VERIFICAR
-    $firma_calculada = hash_hmac('sha256', json_encode($firma_data), wp_salt('nonce'));
-    
-    if ($firma_recibida !== $firma_calculada) {
-        error_log('❌ INTENTO DE MANIPULACIÓN: Firma digital no coincide');
-        error_log('Firma recibida: ' . $firma_recibida);
-        error_log('Firma calculada: ' . $firma_calculada);
-        throw new Exception('Error de seguridad: precio manipulado');
+    if ($total_price) {
+        $total_price = str_replace(['€', ' ', ','], ['', '', '.'], $total_price);
+        $total_price = floatval($total_price);
     }
-    
-    // ✅ VERIFICAR TIMESTAMP (máximo 30 minutos)
-    if ((time() - $firma_data['timestamp']) > 1800) {
-        error_log('❌ Firma expirada');
-        throw new Exception('La sesión ha expirado. Por favor, vuelve a calcular el precio.');
-    }
-    
-    // ✅ USAR PRECIO FIRMADO, NO EL QUE VIENE EN total_price
-    $total_price = floatval($reserva_data['calculo_completo']['precio_final']);
-    
-    error_log('✅ Firma verificada correctamente. Precio validado: ' . $total_price . '€');
     
     if (!$total_price || $total_price <= 0) {
         throw new Exception('El importe debe ser mayor que 0. Recibido: ' . $total_price);
@@ -72,6 +55,8 @@ function generar_formulario_redsys($reserva_data) {
     
     $base_url = home_url();
     $miObj->setParameter("DS_MERCHANT_MERCHANTURL", $base_url . '/wp-admin/admin-ajax.php?action=redsys_notification');
+    
+    // ✅ CAMBIAR URLS PARA INCLUIR ORDER_ID (ya que aún no tenemos localizador)
     $miObj->setParameter("DS_MERCHANT_URLOK", $base_url . '/confirmacion-reserva/?status=ok&order=' . $pedido);
     $miObj->setParameter("DS_MERCHANT_URLKO", $base_url . '/error-pago/?status=ko&order=' . $pedido);
     
@@ -90,6 +75,7 @@ function generar_formulario_redsys($reserva_data) {
         'https://sis.redsys.es/sis/realizarPago' :
         'https://sis-t.redsys.es:25443/sis/realizarPago';
 
+    // ✅ FORMULARIO CORREGIDO SIN CARACTERES PROBLEMÁTICOS
     $html = '<div id="redsys-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:99999;">';
     $html .= '<div style="background:white;padding:30px;border-radius:10px;text-align:center;max-width:400px;">';
     $html .= '<h3 style="margin:0 0 20px 0;color:#333;">Redirigiendo al banco...</h3>';
@@ -113,7 +99,7 @@ function generar_formulario_redsys($reserva_data) {
 }
 
 function is_production_environment() {
-    return true;
+    return true; // PRUEBAS
 }
 
 function process_successful_payment($order_id, $params) {
@@ -121,64 +107,54 @@ function process_successful_payment($order_id, $params) {
     error_log("Order ID: $order_id");
     error_log("Params: " . print_r($params, true));
     
+    // ✅ ASEGURAR QUE LA SESIÓN ESTÉ ACTIVA
     if (!session_id()) {
         session_start();
     }
     
-    global $wpdb;
-    $table_reservas = $wpdb->prefix . 'reservas_reservas';
-    
-    $existing = $wpdb->get_var($wpdb->prepare(
-        "SELECT id FROM $table_reservas WHERE redsys_order_id = %s",
-        $order_id
-    ));
-
-    if ($existing) {
-        error_log("⚠️ Reserva ya procesada para order_id: $order_id (ID: $existing)");
-        return true;
-    }
-
     // ✅ RECUPERAR DATOS DE MÚLTIPLES FUENTES
     $reservation_data = null;
     
-    // 1. Desde transient
+    // 1. Intentar desde transient
     $reservation_data = get_transient('redsys_order_' . $order_id);
     if ($reservation_data) {
         error_log('✅ Datos encontrados en transient');
     }
     
-    // 2. Desde sesión
+    // 2. Si no, intentar desde sesión
     if (!$reservation_data && isset($_SESSION['pending_orders'][$order_id])) {
         $reservation_data = $_SESSION['pending_orders'][$order_id];
         error_log('✅ Datos encontrados en sesión');
     }
     
-    // 3. Desde option
-    if (!$reservation_data) {
-        $reservation_data = get_option('pending_order_' . $order_id);
-        if ($reservation_data) {
-            error_log('✅ Datos encontrados en option (backup)');
-        }
-    }
-    
-    // 4. Último intento: buscar por timestamp
     if (!$reservation_data) {
         error_log('❌ No se encontraron datos de reserva para pedido: ' . $order_id);
-        $reservation_data = find_reservation_by_timestamp($order_id);
-        if (!$reservation_data) {
-            // ✅ ENVIAR ALERTA AL ADMIN
-            send_lost_payment_alert($order_id, $params);
-            return false;
-        }
+        return false;
     }
 
     try {
+        // ✅ VERIFICAR QUE NO SE HAYA PROCESADO YA
+        global $wpdb;
+        $table_reservas = $wpdb->prefix . 'reservas_reservas';
+        
+        $existing = $wpdb->get_var($wpdb->prepare(
+            "SELECT id FROM $table_reservas WHERE redsys_order_id = %s",
+            $order_id
+        ));
+
+        if ($existing) {
+            error_log("⚠️ Reserva ya procesada para order_id: $order_id (ID: $existing)");
+            return true; // No es error, ya está procesada
+        }
+
+        // ✅ PROCESAR LA RESERVA USANDO EL SISTEMA EXISTENTE
         if (!class_exists('ReservasProcessor')) {
             require_once RESERVAS_PLUGIN_PATH . 'includes/class-reservas-processor.php';
         }
 
         $processor = new ReservasProcessor();
         
+        // ✅ PREPARAR DATOS CORRECTAMENTE PARA EL PROCESADOR
         $processed_data = array(
             'nombre' => $reservation_data['nombre'] ?? '',
             'apellidos' => $reservation_data['apellidos'] ?? '',
@@ -190,19 +166,35 @@ function process_successful_payment($order_id, $params) {
             'order_id' => $order_id
         );
 
+        error_log('✅ Datos preparados para el procesador: ' . print_r($processed_data, true));
+
+        // ✅ PROCESAR LA RESERVA
         $result = $processor->process_reservation_payment($processed_data);
         
         if ($result['success']) {
             error_log('✅ Reserva procesada exitosamente: ' . $result['data']['localizador']);
             
-            if (!session_id()) session_start();
+            // ✅ GUARDAR DATOS PARA LA PÁGINA DE CONFIRMACIÓN
+            if (!session_id()) {
+                session_start();
+            }
+            
+            // Guardar de múltiples formas para asegurar disponibilidad
             $_SESSION['confirmed_reservation'] = $result['data'];
             set_transient('confirmed_reservation_' . $order_id, $result['data'], 3600);
             set_transient('confirmed_reservation_loc_' . $result['data']['localizador'], $result['data'], 3600);
+            update_option('temp_reservation_' . $order_id, $result['data'], false);
+            update_option('temp_reservation_loc_' . $result['data']['localizador'], $result['data'], false);
+            
+            // ✅ NUEVO: GUARDAR RELACIÓN ORDER_ID -> LOCALIZADOR PARA REDIRECCIÓN
             set_transient('order_to_localizador_' . $order_id, $result['data']['localizador'], 3600);
             
+            error_log('✅ Datos de confirmación guardados');
+            error_log('- Localizador: ' . $result['data']['localizador']);
+            error_log('- Order ID: ' . $order_id);
+            
+            // Limpiar datos temporales
             delete_transient('redsys_order_' . $order_id);
-            delete_option('pending_order_' . $order_id);
             if (isset($_SESSION['pending_orders'][$order_id])) {
                 unset($_SESSION['pending_orders'][$order_id]);
             }
@@ -210,145 +202,41 @@ function process_successful_payment($order_id, $params) {
             return true;
         } else {
             error_log('❌ Error procesando reserva: ' . $result['message']);
-            send_lost_payment_alert($order_id, $params, $reservation_data);
             return false;
         }
         
     } catch (Exception $e) {
         error_log('❌ Excepción procesando pago exitoso: ' . $e->getMessage());
-        send_lost_payment_alert($order_id, $params, $reservation_data);
         return false;
-    }
-}
-
-// ✅ FUNCIÓN AUXILIAR: Buscar reserva por timestamp
-function find_reservation_by_timestamp($order_id) {
-    error_log('🔍 Buscando reserva por timestamp cercano a order_id: ' . $order_id);
-    
-    if (strlen($order_id) >= 12) {
-        $timestamp_str = substr($order_id, 0, 12);
-        
-        try {
-            $year = '20' . substr($timestamp_str, 0, 2);
-            $month = substr($timestamp_str, 2, 2);
-            $day = substr($timestamp_str, 4, 2);
-            $hour = substr($timestamp_str, 6, 2);
-            $min = substr($timestamp_str, 8, 2);
-            $sec = substr($timestamp_str, 10, 2);
-            
-            $datetime = "$year-$month-$day $hour:$min:$sec";
-            error_log('📅 Timestamp extraído: ' . $datetime);
-            
-            global $wpdb;
-            $options = $wpdb->get_results(
-                "SELECT option_name, option_value 
-                 FROM $wpdb->options 
-                 WHERE option_name LIKE 'pending_order_%'
-                 AND option_name != 'pending_order_$order_id'
-                 LIMIT 20"
-            );
-            
-            foreach ($options as $option) {
-                $data = maybe_unserialize($option->option_value);
-                if (is_array($data) && isset($data['email'])) {
-                    error_log('✅ Encontrada reserva pendiente: ' . $option->option_name);
-                    return $data;
-                }
-            }
-        } catch (Exception $e) {
-            error_log('❌ Error parseando timestamp: ' . $e->getMessage());
-        }
-    }
-    
-    return null;
-}
-
-// ✅ FUNCIÓN AUXILIAR: Enviar alerta de pago perdido
-function send_lost_payment_alert($order_id, $params, $reservation_data = null) {
-    error_log('🚨 ENVIANDO ALERTA DE PAGO PERDIDO');
-    
-    if (!class_exists('ReservasConfigurationAdmin')) {
-        require_once RESERVAS_PLUGIN_PATH . 'includes/class-configuration-admin.php';
-    }
-    
-    $admin_email = ReservasConfigurationAdmin::get_config('email_reservas', get_option('admin_email'));
-    
-    $subject = '🚨 ALERTA: Pago Redsys sin reserva - Order: ' . $order_id;
-    
-    $message = "Se ha detectado un pago exitoso en Redsys pero NO se pudo crear la reserva.\n\n";
-    $message .= "⚠️ ACCIÓN REQUERIDA: Crear reserva manualmente desde el dashboard\n\n";
-    $message .= "═══════════════════════════════════════\n";
-    $message .= "DATOS DEL PAGO:\n";
-    $message .= "═══════════════════════════════════════\n";
-    $message .= "Order ID: $order_id\n";
-    $message .= "Código autorización: " . ($params['Ds_AuthorisationCode'] ?? 'N/A') . "\n";
-    $message .= "Fecha/Hora: " . date('d/m/Y H:i:s') . "\n\n";
-    
-    if ($reservation_data) {
-        $message .= "═══════════════════════════════════════\n";
-        $message .= "DATOS DEL CLIENTE:\n";
-        $message .= "═══════════════════════════════════════\n";
-        $message .= "Nombre: " . ($reservation_data['nombre'] ?? 'N/A') . " " . ($reservation_data['apellidos'] ?? '') . "\n";
-        $message .= "Email: " . ($reservation_data['email'] ?? 'N/A') . "\n";
-        $message .= "Teléfono: " . ($reservation_data['telefono'] ?? 'N/A') . "\n\n";
-        
-        $message .= "═══════════════════════════════════════\n";
-        $message .= "DATOS DEL SERVICIO:\n";
-        $message .= "═══════════════════════════════════════\n";
-        $message .= "Fecha: " . ($reservation_data['fecha'] ?? 'N/A') . "\n";
-        $message .= "Hora: " . ($reservation_data['hora_ida'] ?? 'N/A') . "\n";
-        $message .= "Adultos: " . ($reservation_data['adultos'] ?? 0) . "\n";
-        $message .= "Residentes: " . ($reservation_data['residentes'] ?? 0) . "\n";
-        $message .= "Niños (5-12): " . ($reservation_data['ninos_5_12'] ?? 0) . "\n";
-        $message .= "Niños menores: " . ($reservation_data['ninos_menores'] ?? 0) . "\n";
-        $message .= "Importe: " . ($reservation_data['total_price'] ?? 'N/A') . "€\n\n";
-    } else {
-        $message .= "⚠️ NO SE ENCONTRARON DATOS DE RESERVA\n";
-        $message .= "Contacta con el cliente para obtener los datos.\n\n";
-    }
-    
-    $message .= "═══════════════════════════════════════\n";
-    $message .= "ACCIONES A REALIZAR:\n";
-    $message .= "═══════════════════════════════════════\n";
-    $message .= "1. Accede al dashboard: " . home_url('/reservas-admin/') . "\n";
-    $message .= "2. Ve a 'Reserva Rápida' para crear la reserva manualmente\n";
-    $message .= "3. Contacta con el cliente para confirmar los datos\n";
-    $message .= "4. El cliente ya ha pagado - NO cobrar de nuevo\n\n";
-    
-    $message .= "Este email se envió automáticamente por el sistema de alertas.\n";
-    
-    $headers = array('Content-Type: text/plain; charset=UTF-8');
-    
-    $sent = wp_mail($admin_email, $subject, $message, $headers);
-    
-    if ($sent) {
-        error_log('✅ Alerta enviada al administrador: ' . $admin_email);
-    } else {
-        error_log('❌ Error enviando alerta al administrador');
     }
 }
 
 function get_reservation_data_for_confirmation() {
     error_log('=== INTENTANDO RECUPERAR DATOS DE CONFIRMACIÓN ===');
     
+    // ✅ Método 1: Desde URL (order_id)
     if (isset($_GET['order']) && !empty($_GET['order'])) {
         $order_id = sanitize_text_field($_GET['order']);
         error_log('Order ID desde URL: ' . $order_id);
         
+        // Buscar en transients
         $data = get_transient('confirmed_reservation_' . $order_id);
         if ($data) {
             error_log('✅ Datos encontrados en transient por order_id');
             return $data;
         }
         
+        // Buscar en options temporales
         $data = get_option('temp_reservation_' . $order_id);
         if ($data) {
             error_log('✅ Datos encontrados en options por order_id');
+            // Limpiar después de usar
             delete_option('temp_reservation_' . $order_id);
             return $data;
         }
     }
     
+    // ✅ Método 2: Desde sesión
     if (!session_id()) {
         session_start();
     }
@@ -356,10 +244,12 @@ function get_reservation_data_for_confirmation() {
     if (isset($_SESSION['confirmed_reservation'])) {
         error_log('✅ Datos encontrados en sesión');
         $data = $_SESSION['confirmed_reservation'];
+        // Limpiar sesión después de usar
         unset($_SESSION['confirmed_reservation']);
         return $data;
     }
     
+    // ✅ Método 3: Buscar la reserva más reciente del último minuto
     global $wpdb;
     $table_reservas = $wpdb->prefix . 'reservas_reservas';
     
@@ -394,18 +284,22 @@ function guardar_datos_pedido($order_id, $reserva_data) {
     error_log('=== GUARDANDO DATOS DEL PEDIDO ===');
     error_log("Order ID: $order_id");
     
+    // ✅ INICIALIZAR SESIÓN SI NO ESTÁ ACTIVA
     if (!session_id()) {
         session_start();
     }
     
+    // ✅ INICIALIZAR ARRAY SI NO EXISTE
     if (!isset($_SESSION['pending_orders'])) {
         $_SESSION['pending_orders'] = array();
     }
     
+    // ✅ GUARDAR DATOS DEL PEDIDO
     $_SESSION['pending_orders'][$order_id] = $reserva_data;
     
-    set_transient('redsys_order_' . $order_id, $reserva_data, 7200);
-    update_option('pending_order_' . $order_id, $reserva_data, false);
+    // ✅ TAMBIÉN GUARDAR EN TRANSIENT COMO BACKUP
+    set_transient('redsys_order_' . $order_id, $reserva_data, 3600); // 1 hora
     
-    error_log("✅ Datos guardados en 3 ubicaciones para order: $order_id");
+    error_log("✅ Datos del pedido $order_id guardados correctamente");
+    error_log("Datos guardados: " . print_r($reserva_data, true));
 }

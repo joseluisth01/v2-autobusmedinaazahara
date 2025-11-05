@@ -1,7 +1,7 @@
 <?php
 /*include("blocks/slider/slider.php");
 EqaaaEEinclude("blocks/titulo_subtitulo/titulo_subtitulo.php");
-include("blocks/paginas/paginas.php");
+oalainclude("blocks/paginas/paginas.php");
 include("blocks/empresa_colaboradora/empresa_colaboradora.php");
 include("blocks/texto/texto.php");
 //include("blocks/galeria/galeria.php");

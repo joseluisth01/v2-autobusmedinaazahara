@@ -387,61 +387,65 @@ jQuery(document).ready(function ($) {
     }
 
     function calculateTotalPrice() {
-    if (!selectedServiceId) {
-        clearPricing();
-        return;
-    }
+        if (!selectedServiceId) {
+            clearPricing();
+            return;
+        }
 
-    const adultos = parseInt($('#adultos').val()) || 0;
-    const residentes = parseInt($('#residentes').val()) || 0;
-    const ninos512 = parseInt($('#ninos-5-12').val()) || 0;
-    const ninosMenores = parseInt($('#ninos-menores').val()) || 0;
+        const adultos = parseInt($('#adultos').val()) || 0;
+        const residentes = parseInt($('#residentes').val()) || 0;
+        const ninos512 = parseInt($('#ninos-5-12').val()) || 0;
+        const ninosMenores = parseInt($('#ninos-menores').val()) || 0;
 
-    const totalPersonas = adultos + residentes + ninos512 + ninosMenores;
+        const totalPersonas = adultos + residentes + ninos512 + ninosMenores;
 
-    if (totalPersonas === 0) {
-        $('#total-discount').text('');
-        $('#total-price').text('0€');
-        $('#discount-row').hide();
-        $('#discount-message').removeClass('show');
-        console.log('No hay personas seleccionadas - mostrando 0€');
-        return;
-    }
+        // ✅ CAMBIO: Si no hay personas, mostrar 0€ en lugar de limpiar
+        if (totalPersonas === 0) {
+            $('#total-discount').text('');
+            $('#total-price').text('0€'); // ✅ Mostrar 0€ siempre
+            $('#discount-row').hide();
+            $('#discount-message').removeClass('show');
+            console.log('No hay personas seleccionadas - mostrando 0€');
+            return;
+        }
 
-    const formData = new FormData();
-    formData.append('action', 'calculate_price_secure'); // ✅ CAMBIO: usar versión segura
-    formData.append('service_id', selectedServiceId);
-    formData.append('adultos', adultos);
-    formData.append('residentes', residentes);
-    formData.append('ninos_5_12', ninos512);
-    formData.append('ninos_menores', ninosMenores);
-    formData.append('nonce', reservasAjax.nonce);
+        // Resto de la función igual...
+        const formData = new FormData();
+        formData.append('action', 'calculate_price');
+        formData.append('service_id', selectedServiceId);
+        formData.append('adultos', adultos);
+        formData.append('residentes', residentes);
+        formData.append('ninos_5_12', ninos512);
+        formData.append('ninos_menores', ninosMenores);
+        formData.append('nonce', reservasAjax.nonce);
 
-    fetch(reservasAjax.ajax_url, {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const result = data.data;
-                updatePricingDisplay(result);
-            } else {
-                console.error('Error calculando precio:', data);
+        fetch(reservasAjax.ajax_url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const result = data.data;
+                    updatePricingDisplay(result);
+                } else {
+                    console.error('Error calculando precio:', data);
+                    // ✅ CAMBIO: En caso de error, mostrar 0€
+                    $('#total-price').text('0€');
+                    $('#total-discount').text('');
+                    $('#discount-row').hide();
+                    $('#discount-message').removeClass('show');
+                }
+            })
+            .catch(error => {
+                console.error('Error calculando precio:', error);
+                // ✅ CAMBIO: En caso de error, mostrar 0€
                 $('#total-price').text('0€');
                 $('#total-discount').text('');
                 $('#discount-row').hide();
                 $('#discount-message').removeClass('show');
-            }
-        })
-        .catch(error => {
-            console.error('Error calculando precio:', error);
-            $('#total-price').text('0€');
-            $('#total-discount').text('');
-            $('#discount-row').hide();
-            $('#discount-message').removeClass('show');
-        });
-}
+            });
+    }
 
     function clearPricing() {
         $('#total-discount').text('');
@@ -452,83 +456,79 @@ jQuery(document).ready(function ($) {
     }
 
     function updatePricingDisplay(result) {
-    console.log('Datos recibidos del servidor:', result);
+        console.log('Datos recibidos del servidor:', result);
 
-    // ✅ GUARDAR CÁLCULO COMPLETO GLOBALMENTE CON FIRMA
-    window.lastPriceCalculation = {
-        precio_base: result.precio_base,
-        descuento_residentes: result.descuento_residentes,
-        descuento_ninos: result.descuento_ninos,
-        descuento_grupo: result.descuento_grupo,
-        descuento_servicio: result.descuento_servicio,
-        precio_final: result.precio_final,
-        firma: result.firma,
-        firma_data: result.firma_data
-    };
+        // Calcular descuento total para mostrar
+        const descuentoTotal = (result.descuento_grupo || 0) + (result.descuento_servicio || 0);
 
-    // Calcular descuento total para mostrar
-    const descuentoTotal = (result.descuento_grupo || 0) + (result.descuento_servicio || 0);
-
-    // Manejar descuentos totales
-    if (descuentoTotal > 0) {
-        $('#total-discount').text('-' + descuentoTotal.toFixed(2) + '€');
-        $('#discount-row').show();
-    } else {
-        $('#discount-row').hide();
-    }
-
-    let mensajeDescuento = '';
-
-    if (result.regla_descuento_aplicada && result.regla_descuento_aplicada.rule_name && result.descuento_grupo > 0) {
-        const regla = result.regla_descuento_aplicada;
-        mensajeDescuento = `Descuento del ${regla.discount_percentage}% por ${regla.rule_name.toLowerCase()}`;
-    }
-
-    if (result.servicio_con_descuento && result.servicio_con_descuento.descuento_aplicado && result.descuento_servicio > 0) {
-        const servicio = result.servicio_con_descuento;
-        let mensajeServicio = '';
-
-        if (servicio.descuento_tipo === 'fijo') {
-            mensajeServicio = `Descuento del ${servicio.porcentaje_descuento}% aplicado a este servicio`;
-        } else if (servicio.descuento_tipo === 'por_grupo') {
-            mensajeServicio = `Descuento del ${servicio.porcentaje_descuento}% por alcanzar ${servicio.descuento_minimo_personas} personas`;
+        // Manejar descuentos totales
+        if (descuentoTotal > 0) {
+            $('#total-discount').text('-' + descuentoTotal.toFixed(2) + '€');
+            $('#discount-row').show();
+        } else {
+            $('#discount-row').hide();
         }
 
-        if (mensajeDescuento && mensajeServicio) {
-            if (servicio.descuento_acumulable == '1') {
-                mensajeDescuento += ` + ${mensajeServicio}`;
-            } else {
-                const prioridad = servicio.descuento_prioridad || 'servicio';
-                if (prioridad === 'servicio') {
-                    mensajeDescuento = mensajeServicio;
-                }
+        // ✅ LÓGICA MEJORADA PARA MENSAJES DE DESCUENTO
+        let mensajeDescuento = '';
+
+        // Si hay descuento por grupo (reglas globales)
+        if (result.regla_descuento_aplicada && result.regla_descuento_aplicada.rule_name && result.descuento_grupo > 0) {
+            const regla = result.regla_descuento_aplicada;
+            mensajeDescuento = `Descuento del ${regla.discount_percentage}% por ${regla.rule_name.toLowerCase()}`;
+        }
+
+        // Si hay descuento específico del servicio aplicado
+        if (result.servicio_con_descuento && result.servicio_con_descuento.descuento_aplicado && result.descuento_servicio > 0) {
+            const servicio = result.servicio_con_descuento;
+            let mensajeServicio = '';
+
+            if (servicio.descuento_tipo === 'fijo') {
+                mensajeServicio = `Descuento del ${servicio.porcentaje_descuento}% aplicado a este servicio`;
+            } else if (servicio.descuento_tipo === 'por_grupo') {
+                mensajeServicio = `Descuento del ${servicio.porcentaje_descuento}% por alcanzar ${servicio.descuento_minimo_personas} personas`;
             }
-        } else if (mensajeServicio) {
-            mensajeDescuento = mensajeServicio;
+
+            // ✅ COMBINAR MENSAJES SI HAY AMBOS DESCUENTOS
+            if (mensajeDescuento && mensajeServicio) {
+                if (servicio.descuento_acumulable == '1') {
+                    mensajeDescuento += ` + ${mensajeServicio}`;
+                } else {
+                    // Mostrar solo el que tiene prioridad
+                    const prioridad = servicio.descuento_prioridad || 'servicio';
+                    if (prioridad === 'servicio') {
+                        mensajeDescuento = mensajeServicio;
+                    }
+                    // Si prioridad es 'grupo', ya tenemos el mensaje del grupo
+                }
+            } else if (mensajeServicio) {
+                mensajeDescuento = mensajeServicio;
+            }
         }
+
+        // Mostrar mensaje final
+        if (mensajeDescuento) {
+            $('#discount-text').text(mensajeDescuento);
+            $('#discount-message').addClass('show');
+            console.log('Mensaje de descuento mostrado:', mensajeDescuento);
+        } else {
+            $('#discount-message').removeClass('show');
+        }
+
+        window.lastDiscountRule = result.regla_descuento_aplicada;
+
+        // Actualizar precio total
+        const totalPrice = parseFloat(result.total) || 0;
+        $('#total-price').text(totalPrice.toFixed(2) + '€');
+
+        console.log('Precios actualizados:', {
+            descuento_grupo: result.descuento_grupo,
+            descuento_servicio: result.descuento_servicio,
+            descuento_total: descuentoTotal,
+            total: totalPrice,
+            debug: result.debug
+        });
     }
-
-    if (mensajeDescuento) {
-        $('#discount-text').text(mensajeDescuento);
-        $('#discount-message').addClass('show');
-        console.log('Mensaje de descuento mostrado:', mensajeDescuento);
-    } else {
-        $('#discount-message').removeClass('show');
-    }
-
-    window.lastDiscountRule = result.regla_descuento_aplicada;
-
-    const totalPrice = parseFloat(result.precio_final) || 0;
-    $('#total-price').text(totalPrice.toFixed(2) + '€');
-
-    console.log('Precios actualizados:', {
-        descuento_grupo: result.descuento_grupo,
-        descuento_servicio: result.descuento_servicio,
-        descuento_total: descuentoTotal,
-        total: totalPrice,
-        firma: result.firma ? 'PRESENTE' : 'AUSENTE'
-    });
-}
 
     function validatePersonSelection() {
         const adultos = parseInt($('#adultos').val()) || 0;
@@ -654,80 +654,85 @@ jQuery(document).ready(function ($) {
     };
 
     window.proceedToDetails = function () {
-    console.log('=== INICIANDO proceedToDetails CON REDSYS ===');
+        console.log('=== INICIANDO proceedToDetails CON REDSYS ===');
 
-    if (!selectedDate || !selectedServiceId) {
-        alert('Error: No hay fecha o servicio seleccionado');
-        return;
-    }
+        if (!selectedDate || !selectedServiceId) {
+            alert('Error: No hay fecha o servicio seleccionado');
+            return;
+        }
 
-    const service = findServiceById(selectedServiceId);
-    if (!service) {
-        alert('Error: No se encontraron datos del servicio');
-        return;
-    }
+        const service = findServiceById(selectedServiceId);
+        if (!service) {
+            alert('Error: No se encontraron datos del servicio');
+            return;
+        }
 
-    const adultos = parseInt($('#adultos').val()) || 0;
-    const residentes = parseInt($('#residentes').val()) || 0;
-    const ninos_5_12 = parseInt($('#ninos-5-12').val()) || 0;
-    const ninos_menores = parseInt($('#ninos-menores').val()) || 0;
+        const adultos = parseInt($('#adultos').val()) || 0;
+        const residentes = parseInt($('#residentes').val()) || 0;
+        const ninos_5_12 = parseInt($('#ninos-5-12').val()) || 0;
+        const ninos_menores = parseInt($('#ninos-menores').val()) || 0;
 
-    // ✅ VERIFICAR QUE TENEMOS EL CÁLCULO CON FIRMA
-    if (!window.lastPriceCalculation || !window.lastPriceCalculation.firma) {
-        alert('Error: Precio no validado. Por favor, vuelve a seleccionar el número de personas.');
-        console.error('No hay cálculo de precio válido:', window.lastPriceCalculation);
-        return;
-    }
+        let totalPrice = '0';
+        try {
+            const totalPriceElement = $('#total-price');
+            if (totalPriceElement.length > 0) {
+                const totalPriceText = totalPriceElement.text();
+                totalPrice = totalPriceText.replace('€', '').trim();
+            }
+        } catch (error) {
+            console.error('Error obteniendo precio total:', error);
+        }
 
-    console.log('✅ Cálculo de precio validado con firma');
+        const reservationData = {
+            fecha: selectedDate,
+            service_id: selectedServiceId,
+            hora_ida: service.hora,
+            hora_vuelta: service.hora_vuelta || '',
+            adultos: adultos,
+            residentes: residentes,
+            ninos_5_12: ninos_5_12,
+            ninos_menores: ninos_menores,
+            precio_adulto: service.precio_adulto,
+            precio_nino: service.precio_nino,
+            precio_residente: service.precio_residente,
+            total_price: totalPrice,
+            descuento_grupo: $('#total-discount').text().includes('€') ?
+                parseFloat($('#total-discount').text().replace('€', '').replace('-', '')) : 0,
+            regla_descuento_aplicada: window.lastDiscountRule || null
+        };
 
-    const reservationData = {
-        fecha: selectedDate,
-        service_id: selectedServiceId,
-        hora_ida: service.hora,
-        hora_vuelta: service.hora_vuelta || '',
-        adultos: adultos,
-        residentes: residentes,
-        ninos_5_12: ninos_5_12,
-        ninos_menores: ninos_menores,
-        precio_adulto: service.precio_adulto,
-        precio_nino: service.precio_nino,
-        precio_residente: service.precio_residente,
-        calculo_completo: window.lastPriceCalculation,
-        regla_descuento_aplicada: window.lastDiscountRule || null
-    };
+        console.log('Datos de reserva preparados:', reservationData);
 
-    console.log('Datos de reserva preparados:', reservationData);
+        try {
+            const dataString = JSON.stringify(reservationData);
+            sessionStorage.setItem('reservationData', dataString);
+            console.log('Datos guardados en sessionStorage exitosamente');
+        } catch (error) {
+            console.error('Error guardando en sessionStorage:', error);
+            alert('Error guardando los datos de la reserva: ' + error.message);
+            return;
+        }
 
-    try {
-        const dataString = JSON.stringify(reservationData);
-        sessionStorage.setItem('reservationData', dataString);
-        console.log('Datos guardados en sessionStorage exitosamente');
-    } catch (error) {
-        console.error('Error guardando en sessionStorage:', error);
-        alert('Error guardando los datos de la reserva: ' + error.message);
-        return;
-    }
+        // ✅ CALCULAR URL DESTINO DE FORMA MEJORADA
+        let targetUrl;
+        const currentPath = window.location.pathname;
 
-    let targetUrl;
-    const currentPath = window.location.pathname;
-
-    if (currentPath.includes('/bravo/')) {
-        targetUrl = window.location.origin + '/bravo/detalles-reserva/';
-    } else if (currentPath.includes('/')) {
-        const pathParts = currentPath.split('/').filter(part => part !== '');
-        if (pathParts.length > 0 && pathParts[0] !== 'detalles-reserva') {
-            targetUrl = window.location.origin + '/' + pathParts[0] + '/detalles-reserva/';
+        if (currentPath.includes('/bravo/')) {
+            targetUrl = window.location.origin + '/bravo/detalles-reserva/';
+        } else if (currentPath.includes('/')) {
+            const pathParts = currentPath.split('/').filter(part => part !== '');
+            if (pathParts.length > 0 && pathParts[0] !== 'detalles-reserva') {
+                targetUrl = window.location.origin + '/' + pathParts[0] + '/detalles-reserva/';
+            } else {
+                targetUrl = window.location.origin + '/detalles-reserva/';
+            }
         } else {
             targetUrl = window.location.origin + '/detalles-reserva/';
         }
-    } else {
-        targetUrl = window.location.origin + '/detalles-reserva/';
-    }
 
-    console.log('Redirigiendo a:', targetUrl);
-    window.location.href = targetUrl;
-};
+        console.log('Redirigiendo a:', targetUrl);
+        window.location.href = targetUrl;
+    };
 
     window.selectDate = selectDate;
     window.findServiceById = findServiceById;
@@ -789,12 +794,6 @@ function processReservation() {
         return;
     }
 
-    // ✅ VERIFICAR FIRMA DIGITAL
-    if (!reservationData.calculo_completo || !reservationData.calculo_completo.firma) {
-        alert("Error: Precio no validado. Por favor, vuelve al paso anterior.");
-        return;
-    }
-
     // ✅ AÑADIR DATOS PERSONALES A LA RESERVA
     reservationData.nombre = nombre;
     reservationData.apellidos = apellidos;
@@ -808,7 +807,7 @@ function processReservation() {
     if (processBtn) {
         const originalText = processBtn.textContent;
         processBtn.disabled = true;
-        processBtn.textContent = "Procesando...";
+        processBtn.textContent = "Redirigiendo al banco...";
 
         // Función para rehabilitar botón
         window.enableProcessButton = function () {
@@ -817,7 +816,7 @@ function processReservation() {
         };
     }
 
-    // ✅ GENERAR FORMULARIO DE REDSYS
+    // ✅ ENVIAR A REDSYS
     const requestData = {
         action: "generar_formulario_pago_redsys",
         nonce: reservasAjax.nonce,
@@ -826,7 +825,7 @@ function processReservation() {
 
     console.log("Enviando datos a Redsys:", requestData);
 
-    // Enviar solicitud AJAX para generar formulario Redsys
+    // Enviar solicitud AJAX para generar formulario de Redsys
     fetch(reservasAjax.ajax_url, {
         method: "POST",
         headers: {
@@ -850,14 +849,37 @@ function processReservation() {
             if (window.enableProcessButton) window.enableProcessButton();
 
             if (data && data.success) {
-                console.log("✅ Formulario Redsys generado correctamente");
-                
-                // ✅ INSERTAR Y EJECUTAR FORMULARIO REDSYS
-                document.body.insertAdjacentHTML('beforeend', data.data);
-                console.log("✅ Formulario insertado en el DOM");
+                console.log("✅ Formulario de Redsys generado correctamente");
+
+                // ✅ INSERTAR FORMULARIO Y EJECUTAR INMEDIATAMENTE
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = data.data;
+                document.body.appendChild(tempDiv);
+
+                console.log("🏦 Formulario insertado en DOM");
+
+                // ✅ VERIFICAR QUE EL FORMULARIO SE INSERTÓ CORRECTAMENTE
+                const insertedForm = document.getElementById('formulario_redsys');
+                const insertedOverlay = document.getElementById('redsys-overlay');
+
+                if (insertedForm && insertedOverlay) {
+                    console.log("✅ Elementos encontrados, formulario debe ejecutarse automáticamente");
+
+                    // ✅ BACKUP: Si no se ejecuta automáticamente en 3 segundos, forzar envío
+                    setTimeout(() => {
+                        if (document.getElementById('redsys-overlay')) {
+                            console.log("⚠️ Ejecutando envío manual de respaldo...");
+                            insertedForm.submit();
+                        }
+                    }, 3000);
+                } else {
+                    console.error("❌ No se encontraron elementos del formulario después de insertar");
+                    alert("Error procesando el pago. Por favor, inténtalo de nuevo.");
+                }
+
             } else {
                 console.error("❌ Error generando formulario Redsys:", data);
-                const errorMsg = data && data.data ? data.data : "Error generando el formulario de pago";
+                const errorMsg = data && data.data ? data.data : "Error generando formulario de pago";
                 alert("Error: " + errorMsg);
             }
         })
@@ -867,7 +889,7 @@ function processReservation() {
             // Rehabilitar botón
             if (window.enableProcessButton) window.enableProcessButton();
 
-            let errorMessage = "Error de conexión al procesar la reserva.";
+            let errorMessage = "Error de conexión al generar el formulario de pago.";
             if (error.message.includes('403')) {
                 errorMessage += " (Error 403: Acceso denegado)";
             } else if (error.message.includes('404')) {
