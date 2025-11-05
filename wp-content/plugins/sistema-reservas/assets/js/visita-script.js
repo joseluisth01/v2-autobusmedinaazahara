@@ -387,7 +387,7 @@ function autoFillPersonasFromBusReservation() {
 }
 
 function processVisitaReservation() {
-    console.log('=== PROCESANDO RESERVA DE VISITA (SIN VALIDACIÓN FIRMA) ===');
+    console.log('=== PROCESANDO RESERVA DE VISITA ===');
 
     // Validar política de privacidad
     const privacyCheckbox = document.getElementById('privacy-policy-visita');
@@ -442,7 +442,7 @@ function processVisitaReservation() {
 
     console.log('✅ Todas las validaciones pasadas, preparando datos...');
 
-    // ✅ PREPARAR DATOS PARA REDSYS (SIN FIRMA)
+    // Preparar datos para Redsys
     const reservationData = {
         action: 'process_visita_reservation',
         nonce: reservasVisitaAjax.nonce,
@@ -467,7 +467,7 @@ function processVisitaReservation() {
     const originalText = processBtn.text();
     processBtn.prop('disabled', true).text('Procesando...');
 
-    // ✅ ENVIAR SOLICITUD PARA GENERAR FORMULARIO REDSYS
+    // ✅ ENVIAR SOLICITUD AJAX
     jQuery.ajax({
         url: reservasVisitaAjax.ajax_url,
         type: 'POST',
@@ -477,8 +477,34 @@ function processVisitaReservation() {
 
             if (response.success) {
                 console.log('✅ Formulario Redsys generado');
-                // Insertar y ejecutar formulario
+                
+                // ✅ INSERTAR FORMULARIO CORRECTAMENTE EN EL DOM
                 document.body.insertAdjacentHTML('beforeend', response.data);
+
+                console.log('🏦 Formulario insertado en DOM');
+
+                // ✅ VERIFICAR QUE SE INSERTÓ CORRECTAMENTE
+                const insertedForm = document.getElementById('formulario_redsys');
+                const insertedOverlay = document.getElementById('redsys-overlay');
+
+                if (insertedForm && insertedOverlay) {
+                    console.log('✅ Elementos encontrados en el DOM');
+                    
+                    // ✅ VERIFICAR QUE EL SCRIPT SE EJECUTÓ
+                    setTimeout(() => {
+                        if (document.getElementById('redsys-overlay')) {
+                            console.log('⚠️ El formulario sigue visible, forzando envío manual...');
+                            insertedForm.submit();
+                        } else {
+                            console.log('✅ El formulario se envió automáticamente');
+                        }
+                    }, 2000);
+                } else {
+                    console.error('❌ No se encontraron elementos del formulario después de insertar');
+                    alert('Error procesando el pago. Por favor, inténtalo de nuevo.');
+                    processBtn.prop('disabled', false).text(originalText);
+                }
+
             } else {
                 console.error('❌ Error en la respuesta:', response.data);
                 alert('Error: ' + (response.data || 'Error desconocido'));
@@ -489,7 +515,19 @@ function processVisitaReservation() {
             console.error('❌ Error AJAX:', error);
             console.error('Status:', status);
             console.error('Response:', xhr.responseText);
-            alert('Error de conexión. Por favor, inténtalo de nuevo.');
+            
+            let errorMessage = 'Error de conexión al generar el formulario de pago.';
+            if (xhr.status === 403) {
+                errorMessage += ' (Error 403: Acceso denegado)';
+            } else if (xhr.status === 404) {
+                errorMessage += ' (Error 404: URL no encontrada)';
+            } else if (xhr.status === 500) {
+                errorMessage += ' (Error 500: Error interno del servidor)';
+            }
+            
+            errorMessage += '\n\nPor favor, inténtalo de nuevo.';
+            alert(errorMessage);
+            
             processBtn.prop('disabled', false).text(originalText);
         }
     });

@@ -602,7 +602,7 @@ class ReservasAgencyServicesFrontend
     header('Content-Type: application/json');
 
     try {
-        error_log('=== INICIANDO PROCESS_VISITA_RESERVATION SIN VALIDACIÓN DE FIRMA ===');
+        error_log('=== INICIANDO PROCESS_VISITA_RESERVATION ===');
 
         if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'reservas_nonce')) {
             wp_send_json_error('Error de seguridad');
@@ -622,7 +622,7 @@ class ReservasAgencyServicesFrontend
         $telefono = sanitize_text_field($_POST['telefono']);
         $idioma = sanitize_text_field($_POST['idioma'] ?? 'español');
 
-        // ✅ CALCULAR PRECIO DIRECTAMENTE EN EL SERVIDOR (SIN VALIDACIÓN DE FIRMA)
+        // ✅ CALCULAR PRECIO DIRECTAMENTE EN EL SERVIDOR
         global $wpdb;
         $table_services = $wpdb->prefix . 'reservas_agency_services';
 
@@ -680,6 +680,9 @@ class ReservasAgencyServicesFrontend
         }
 
         $formulario_html = generar_formulario_redsys($reservation_data);
+        
+        // ✅ LOG ADICIONAL PARA VERIFICAR
+        error_log('✅ HTML generado (primeros 200 caracteres): ' . substr($formulario_html, 0, 200));
 
         wp_send_json_success($formulario_html);
 
